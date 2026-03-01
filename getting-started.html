@@ -125,52 +125,7 @@ summary(fe_model)</code></pre>
     <li><code>cpp_item_scores_codebook.csv</code> &mdash; documentation for all derived factor scores.</li>
   </ul>
 
-  <h2>Common Pitfalls</h2>
-
-  <div class="faq-item">
-    <h3>1. Nursery feeding is not long-term breastfeeding</h3>
-    <p><code>bf_days</code> and <code>bf_ever</code> capture only in-hospital nursery feeding during the first few days of life. In the 1960s U.S., nursery breastfeeding was more common among lower-SES women&mdash;the opposite of today&rsquo;s pattern.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>2. Sex = 3 means fetal loss</h3>
-    <p>804 records with <code>sex=3</code> are early fetal losses, not live births with ambiguous sex. Filter to <code>sex %in% c(1, 2)</code> for live-birth analyses.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>3. Leading zeros in IDs</h3>
-    <p>Always read <code>case_id</code> and <code>mother_id</code> as character/string to preserve leading zeros. See the code examples above.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>4. Two codebook files</h3>
-    <p><code>CPP_Codebook.csv</code> (1,239 entries) is the curated version&mdash;use this one. <code>cppvar_codebook.csv</code> (1,140 entries) is the raw auto-parsed version, retained for reproducibility.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>5. Sentinel values</h3>
-    <p>The CPP uses all-9 sentinel values (9, 99, 999, 9999) for &ldquo;unknown.&rdquo; The analysis-ready files have most of these recoded to <code>NA</code>, but the raw CPPVAR extraction (<code>cppvar_all_columns.csv</code>) retains original values. Check the <code>missing_codes</code> column in the codebook.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>6. Race categories are historical</h3>
-    <p>The CPP race variable uses 1960s classifications: White, Black, Puerto Rican, Oriental, and Other. These do not map cleanly to modern OMB categories. The &ldquo;Oriental&rdquo; category combines East Asian, Southeast Asian, and Pacific Islander groups. &ldquo;Puerto Rican&rdquo; was coded as a separate racial category, not an ethnic overlay.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>7. Performance subtests have lower N</h3>
-    <p>Three WISC Performance subtests (Picture Arrangement, Block Design, Coding) plus WRAT Spelling, WRAT Arithmetic, and Goodenough Draw-a-Person have <em>N</em> &asymp; 31,400 rather than the ~40,000 of other WISC measures. These were extracted from CPPMASTER card 31300, which has lower coverage than the CPPVAR summary fields. Analyses using the broad 11-measure battery will have ~22% fewer cases than those using WISC Verbal subtests alone.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>8. No maternal cognitive measures</h3>
-    <p>The CPP did not administer IQ or cognitive tests to mothers. Maternal education (years of schooling) and the Duncan Socioeconomic Index (SEI) are the best available proxies for maternal ability, but they are imperfect. This limits the extent to which genetic confounding can be assessed in observational analyses.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>9. No data beyond age 7&ndash;8</h3>
-    <p>The public-use CPP files cover only the prenatal period through the 7-year assessment. Several site-specific follow-ups were conducted later (most notably the Johns Hopkins &ldquo;Pathways to Adulthood&rdquo; study, which tracked the Baltimore cohort through age 33), but these data are held separately by the individual sites and are not part of this release. See the <a href="faq.html">FAQ</a> for more details.</p>
-  </div>
+  <p>See the <a href="faq.html">FAQ</a> for common pitfalls, known limitations, and answers to frequently asked questions about the CPP data.</p>
 
 </div>
 
