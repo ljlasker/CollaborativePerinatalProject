@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Convert CPP_Codebook.csv to a JavaScript file for the codebook browser."""
+"""Convert CPP codebooks to JavaScript files for the codebook browser."""
 
 import csv
 import json
 import os
 
-CODEBOOK_CSV = os.path.join("..", "..", "clean", "CPP_Codebook.csv")
-OUTPUT_JS = os.path.join("js", "codebook_data.js")
+CLEAN = os.path.join("..", "..", "clean")
 
+# --- 1. CPPVAR Codebook (1,239 variables) ---
+CODEBOOK_CSV = os.path.join(CLEAN, "CPP_Codebook.csv")
 rows = []
 with open(CODEBOOK_CSV, encoding="utf-8") as f:
     reader = csv.DictReader(f)
@@ -24,9 +25,32 @@ with open(CODEBOOK_CSV, encoding="utf-8") as f:
             "col_to": row["col_to"],
         })
 
-with open(OUTPUT_JS, "w", encoding="utf-8") as f:
+with open(os.path.join("js", "codebook_data.js"), "w", encoding="utf-8") as f:
     f.write("const CODEBOOK_DATA = ")
     json.dump(rows, f, ensure_ascii=False)
     f.write(";\n")
+print(f"CPPVAR codebook: {len(rows)} entries")
 
-print(f"Wrote {len(rows)} entries to {OUTPUT_JS}")
+# --- 2. Unified Manifest (4,862 variables) ---
+MANIFEST_CSV = os.path.join(CLEAN, "cpp_unified_manifest.csv")
+manifest = []
+with open(MANIFEST_CSV, encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        manifest.append({
+            "varname": row["variable_name"],
+            "source": row["source"],
+            "original_name": row["original_name"],
+            "label": row["label"],
+            "n": int(row["N_nonmissing"]),
+            "pct_missing": float(row["pct_missing"]),
+            "is_numeric": row["is_numeric"] == "TRUE",
+            "mean": row["mean"],
+            "sd": row["sd"],
+        })
+
+with open(os.path.join("js", "manifest_data.js"), "w", encoding="utf-8") as f:
+    f.write("const MANIFEST_DATA = ")
+    json.dump(manifest, f, ensure_ascii=False)
+    f.write(";\n")
+print(f"Unified manifest: {len(manifest)} entries")

@@ -6,6 +6,19 @@
   <title>Codebook Browser &mdash; CPP Data Repository</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+  <style>
+    .tab-bar { display: flex; gap: 0; margin-bottom: 0; border-bottom: 2px solid #dee2e6; }
+    .tab-btn {
+      padding: 10px 20px; cursor: pointer; border: none; background: #f0f0f0;
+      font-size: 0.95em; font-weight: 600; color: #666;
+      border-radius: 6px 6px 0 0; margin-bottom: -2px; border: 2px solid transparent;
+      border-bottom: none;
+    }
+    .tab-btn:hover { background: #e8e8e8; color: #333; }
+    .tab-btn.active { background: #fff; color: #2C6FAC; border-color: #dee2e6; }
+    .tab-panel { display: none; padding-top: 16px; }
+    .tab-panel.active { display: block; }
+  </style>
 </head>
 <body>
 
@@ -25,36 +38,50 @@
 <div class="container">
 
   <div class="page-header">
-    <h1>CPPVAR Codebook Browser</h1>
-    <p class="subtitle">1,239 variables from the CPP Variable File. Click any row to expand full details.</p>
+    <h1>Codebook Browser</h1>
+    <p class="subtitle">Browse all documented variables. Click any row to expand full details.</p>
   </div>
 
-  <div class="filter-bar">
-    <div class="filter-group">
-      <label for="section-filter">Section:</label>
-      <select id="section-filter">
-        <option value="">All Sections</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label for="type-filter">Type:</label>
-      <select id="type-filter">
-        <option value="">All Types</option>
-      </select>
-    </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="cppvar">CPPVAR Codebook (1,239)</button>
+    <button class="tab-btn" data-tab="unified">Unified Manifest (4,862)</button>
   </div>
 
-  <table id="codebook-table" class="display" style="width:100%">
-    <thead>
-      <tr>
-        <th>Variable</th>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Section</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-  </table>
+  <!-- CPPVAR Tab -->
+  <div id="tab-cppvar" class="tab-panel active">
+    <p>Variables from the CPPVAR summary file, with types, value codes, and topical sections. Used by <code>cppvar_all_columns.csv</code>.</p>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="section-filter">Section:</label>
+        <select id="section-filter"><option value="">All Sections</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="type-filter">Type:</label>
+        <select id="type-filter"><option value="">All Types</option></select>
+      </div>
+    </div>
+    <table id="codebook-table" class="display" style="width:100%">
+      <thead>
+        <tr><th>Variable</th><th>Label</th><th>Type</th><th>Section</th><th>Description</th></tr>
+      </thead>
+    </table>
+  </div>
+
+  <!-- Unified Manifest Tab -->
+  <div id="tab-unified" class="tab-panel">
+    <p>All 4,862 variables in the unified wide dataset (<code>cpp_unified_wide</code>), drawn from CPPVAR, CPPMASTER cards, and standalone datasets. Includes coverage and summary statistics.</p>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="source-filter">Source:</label>
+        <select id="source-filter"><option value="">All Sources</option></select>
+      </div>
+    </div>
+    <table id="manifest-table" class="display" style="width:100%">
+      <thead>
+        <tr><th>Variable</th><th>Label</th><th>Source</th><th>N</th><th>% Missing</th><th>Mean</th><th>SD</th></tr>
+      </thead>
+    </table>
+  </div>
 
 </div>
 
@@ -67,6 +94,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="js/codebook_data.js"></script>
+<script src="js/manifest_data.js"></script>
 <script src="js/codebook.js"></script>
 
 </body>
