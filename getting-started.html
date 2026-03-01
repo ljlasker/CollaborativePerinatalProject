@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started &mdash; CPP Data Repository</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">CPP Data Repository</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="codebook.html">Codebook</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="getting-started.html" class="active">Getting Started</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Getting Started</h1>
+    <p class="subtitle">How to load, explore, and analyze the CPP data.</p>
+  </div>
+
+  <h2>Quick Start</h2>
+
+  <p>For most analyses, download <code>cpp_clean_v3.csv</code> (29 MB, 59,391 rows &times; 185 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, corrected WISC VIQ/PIQ, and 51 additional variables from the 7-year psychological battery.</p>
+
+  <p>For sibling and twin analyses, also download <code>cpp_kinship_links.csv</code> (14,208 pairwise links with relatedness coefficients).</p>
+
+  <h2>Loading the Data</h2>
+
+  <h3>R</h3>
+
+  <span class="code-label">R</span>
+  <pre><code>library(data.table)
+
+# Load analysis-ready dataset
+d &lt;- fread("cpp_clean_v3.csv")       # 59,391 x 185
+d[, case_id := as.character(case_id)]
+
+# Load kinship links for sibling/twin analyses
+links &lt;- fread("cpp_kinship_links.csv",
+               colClasses = c(id_1="character", id_2="character"))
+
+# Load precomputed g factor scores
+g &lt;- fread("cpp_g_factors.csv",
+           colClasses = c(case_id="character"))
+d &lt;- merge(d, g, by = "case_id", all.x = TRUE)
+
+# Basic analysis: IQ by race
+d[, .(mean_iq = mean(wisc_fsiq, na.rm=TRUE),
+      sd_iq = sd(wisc_fsiq, na.rm=TRUE),
+      n = sum(!is.na(wisc_fsiq))), by = race]</code></pre>
+
+  <h3>Python</h3>
+
+  <span class="code-label">Python</span>
+  <pre><code>import pandas as pd
+
+d = pd.read_csv("cpp_clean_v3.csv",
+                 dtype={"case_id": str, "mother_id": str})
+links = pd.read_csv("cpp_kinship_links.csv",
+                     dtype={"id_1": str, "id_2": str})</code></pre>
+
+  <h3>Stata</h3>
+
+  <span class="code-label">Stata</span>
+  <pre><code>import delimited "cpp_clean_v3.csv", clear
+tostring case_id mother_id, replace</code></pre>
+
+  <h2>Key Identifiers</h2>
+
+  <p><code>case_id</code> uniquely identifies each pregnancy/child (a 7&ndash;8 digit number combining institution code, family number, and pregnancy sequence). <code>mother_id</code> identifies the biological mother&mdash;children sharing a <code>mother_id</code> are siblings. Both should always be read as strings, not integers, to preserve leading zeros.</p>
+
+  <h2>Applying Survey Weights</h2>
+
+  <span class="code-label">R</span>
+  <pre><code>library(data.table)
+
+# Load data and weights
+d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
+wt &lt;- fread("cpp_weights.csv", colClasses = c(case_id = "character"))
+d &lt;- merge(d, wt, by = "case_id")
+
+# Weighted mean IQ (corrects for attrition + population non-representativeness)
+weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
+
+  <h2>Within-Family Analyses</h2>
+
+  <p>The CPP is well-suited for within-family designs because 8,772 mothers contributed two or more children. The recommended workflow:</p>
+
+  <ol>
+    <li>Load <code>cpp_clean_v3.csv</code> and restrict to the outcome of interest (e.g., <code>!is.na(wisc_fsiq)</code>).</li>
+    <li>Identify families with 2+ children using <code>mother_id</code>.</li>
+    <li>Use <code>fixest::feols()</code> in R or <code>xtreg, fe</code> in Stata with <code>mother_id</code> as the panel variable.</li>
+    <li>For behavior genetic analyses, merge with <code>cpp_kinship_links.csv</code> to obtain relatedness-classified sibling pairs.</li>
+  </ol>
+
+  <span class="code-label">R</span>
+  <pre><code>library(data.table)
+library(fixest)
+
+d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
+
+# Mother fixed effects: breastfeeding and IQ
+fe_model &lt;- feols(wisc_fsiq ~ bf_ever + birth_wt_g + gest_age + sex | mother_id,
+                   data = d)
+summary(fe_model)</code></pre>
+
+  <h2>Codebooks</h2>
+
+  <p>Every file in the release has a companion codebook:</p>
+  <ul>
+    <li><code>CPP_Codebook.csv</code> (1,239 entries) &mdash; primary codebook covering every CPPVAR column. Also browseable on the <a href="codebook.html">Codebook</a> page.</li>
+    <li><code>cpp_unified_manifest.csv</code> (4,862 entries) &mdash; documentation for the unified wide file.</li>
+    <li><code>master/parsed/card_XXXXX_fields.csv</code> &mdash; per-card field documentation for CPPMASTER cards.</li>
+    <li><code>cpp_item_scores_codebook.csv</code> &mdash; documentation for all derived factor scores.</li>
+  </ul>
+
+  <h2>Common Pitfalls</h2>
+
+  <div class="faq-item">
+    <h3>1. Nursery feeding is not long-term breastfeeding</h3>
+    <p><code>bf_days</code> and <code>bf_ever</code> capture only in-hospital nursery feeding during the first few days of life. In the 1960s U.S., nursery breastfeeding was more common among lower-SES women&mdash;the opposite of today&rsquo;s pattern.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>2. Sex = 3 means fetal loss</h3>
+    <p>804 records with <code>sex=3</code> are early fetal losses, not live births with ambiguous sex. Filter to <code>sex %in% c(1, 2)</code> for live-birth analyses.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>3. Leading zeros in IDs</h3>
+    <p>Always read <code>case_id</code> and <code>mother_id</code> as character/string to preserve leading zeros. See the code examples above.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>4. Two codebook files</h3>
+    <p><code>CPP_Codebook.csv</code> (1,239 entries) is the curated version&mdash;use this one. <code>cppvar_codebook.csv</code> (1,140 entries) is the raw auto-parsed version, retained for reproducibility.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>5. Sentinel values</h3>
+    <p>The CPP uses all-9 sentinel values (9, 99, 999, 9999) for &ldquo;unknown.&rdquo; The analysis-ready files have most of these recoded to <code>NA</code>, but the raw CPPVAR extraction (<code>cppvar_all_columns.csv</code>) retains original values. Check the <code>missing_codes</code> column in the codebook.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    CPP Data Repository. Hosted on GitHub Pages.
+  </div>
+</footer>
+
+</body>
+</html>

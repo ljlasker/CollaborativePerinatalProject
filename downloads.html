@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads &mdash; CPP Data Repository</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">CPP Data Repository</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="codebook.html">Codebook</a>
+      <a href="downloads.html" class="active">Downloads</a>
+      <a href="getting-started.html">Getting Started</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Downloads</h1>
+    <p class="subtitle">All files are hosted on Dropbox. CSV files can be opened in R, Python, Stata, or any spreadsheet application. RDS files are R binary format.</p>
+  </div>
+
+  <p><strong>Quick download:</strong> For most users, start with <code>cpp_clean_v3.csv</code> (29 MB). For everything in one archive, download <code>CPP_Data_Release.zip</code> (547 MB).</p>
+
+  <!-- Tier 1 -->
+  <div class="tier-section">
+    <h3>Tier 1: Analysis-Ready Core</h3>
+    <p>The starting point for most analyses. Key demographics, IQ scores, breastfeeding, birth outcomes, and SES variables, cleaned and labeled.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Rows</th><th>Cols</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr class="recommended">
+          <td><code>cpp_clean_v3.csv</code></td>
+          <td>Analysis-ready dataset, v3 (corrected WISC + expanded)</td>
+          <td>59,391</td>
+          <td>185</td>
+          <td>29 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_clean_v3.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_v3.rds</code></td>
+          <td>R binary format with factor labels</td>
+          <td>59,391</td>
+          <td>185</td>
+          <td>5.6 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_clean_v3.rds?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_v2.csv</code></td>
+          <td>Legacy v2 (uncorrected WISC VIQ/PIQ)</td>
+          <td>59,391</td>
+          <td>107</td>
+          <td>20 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_clean_v2.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_v2_full.csv</code></td>
+          <td>Legacy v2, full version with raw values</td>
+          <td>59,391</td>
+          <td>132</td>
+          <td>23 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_clean_v2_full.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_v2_codebook.csv</code></td>
+          <td>Codebook for the v2 variables</td>
+          <td>107</td>
+          <td>&mdash;</td>
+          <td>10 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_clean_v2_codebook.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tier 2 -->
+  <div class="tier-section">
+    <h3>Tier 2: Full CPPVAR Extraction</h3>
+    <p>Every documented variable from the CPPVAR summary file, with complete codebook documentation.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Rows</th><th>Cols</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cppvar_all_columns.csv</code></td>
+          <td>Every documented column from CPPVAR.ASC</td>
+          <td>59,391</td>
+          <td>1,236</td>
+          <td>164 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cppvar_all_columns.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>CPP_Codebook.csv</code></td>
+          <td>Publication-quality codebook (1,239 entries)</td>
+          <td>1,239</td>
+          <td>&mdash;</td>
+          <td>278 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/CPP_Codebook.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cppvar_codebook.csv</code></td>
+          <td>Raw auto-parsed codebook (retained for reproducibility)</td>
+          <td>1,140</td>
+          <td>&mdash;</td>
+          <td>208 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cppvar_codebook.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tier 3 -->
+  <div class="tier-section">
+    <h3>Tier 3: Complete CPPMASTER Card Data</h3>
+    <p>All 309 punch card types from the 6.1-million-record master file, parsed into named-column CSVs with per-card codebooks.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>CPPMASTER_Data_Dictionary.csv</code></td>
+          <td>Complete field-level data dictionary (16,295 fields)</td>
+          <td>2.5 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/CPPMASTER_Data_Dictionary.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>CPPMASTER_Codebook.csv</code></td>
+          <td>Consolidated field-level codebook (6,280+ fields)</td>
+          <td>588 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/CPPMASTER_Codebook.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_comprehensive.csv</code></td>
+          <td>All 309 card types merged into one wide file</td>
+          <td>1.4 GB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_comprehensive.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>vol3b_crossref.csv</code></td>
+          <td>CPPVAR-to-CPPMASTER cross-reference (906 mappings)</td>
+          <td>70 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/vol3b_crossref.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>SAS_Variable_Catalog.csv</code></td>
+          <td>Authoritative field definitions from 24 JHU SAS programs</td>
+          <td>1.1 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/SAS_Variable_Catalog.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tier 4 -->
+  <div class="tier-section">
+    <h3>Tier 4: Unified Wide Dataset</h3>
+    <p>Every child crossed with every variable from every card, merged into a single wide table.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Rows</th><th>Cols</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cpp_unified_wide.rds</code></td>
+          <td>All card + standalone data merged per child (R binary)</td>
+          <td>64,834</td>
+          <td>4,862</td>
+          <td>133 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_unified_wide.rds?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_unified_wide.csv</code></td>
+          <td>Same, CSV format</td>
+          <td>64,834</td>
+          <td>4,862</td>
+          <td>674 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_unified_wide.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_unified_manifest.csv</code></td>
+          <td>Variable manifest with missingness and summary statistics</td>
+          <td>4,862</td>
+          <td>&mdash;</td>
+          <td>288 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_unified_manifest.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tier 5 -->
+  <div class="tier-section">
+    <h3>Tier 5: Family Structure</h3>
+    <p>Pairwise kinship links with relatedness coefficients and twin zygosity classification.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Rows</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cpp_kinship_links.csv</code></td>
+          <td>Pairwise kinship links with R coefficients</td>
+          <td>14,208</td>
+          <td>1.8 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_kinship_links.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_twin_zygosity.csv</code></td>
+          <td>Twin pair zygosity classification (5-tier evidence schema)</td>
+          <td>640</td>
+          <td>115 KB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_twin_zygosity.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tier 6 -->
+  <div class="tier-section">
+    <h3>Tier 6: Derived Variables</h3>
+    <p>Pre-computed files for common analytical tasks.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cpp_g_factors.csv</code></td>
+          <td>10 g factor scores per child (PCA, PAF, CFA, IRT)</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_g_factors.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_growth_trajectories.csv</code></td>
+          <td>755,739 longitudinal physical measurements for 55,443 children</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_growth_trajectories.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_birthweight_zscores.csv</code></td>
+          <td>Sex- and gestational-age-specific z-scores for 54,223 children</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_birthweight_zscores.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_ses_detailed.csv</code></td>
+          <td>Merged registration and 7-year SES data</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_ses_detailed.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_cognitive_scores.csv</code></td>
+          <td>Raw scores, z-scores, and latent g for 11 cognitive measures</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_cognitive_scores.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_item_scores.csv</code></td>
+          <td>PCA and IRT factor scores from 5 developmental/behavioral batteries</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_item_scores.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_sb_items_reconstructed.csv</code></td>
+          <td>Stanford-Binet reconstructed item responses for 37,820 children</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_sb_items_reconstructed.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_disability_discordance.csv</code></td>
+          <td>10 disability criteria and composite flags for 53,640 children</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_disability_discordance.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_discordant_pairs.csv</code></td>
+          <td>11,539 sibling/twin pairs flagged for discordance</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_discordant_pairs.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Survey Weights -->
+  <div class="tier-section">
+    <h3>Survey Weights</h3>
+    <p>Inverse-probability attrition weights and Census population weights enabling nationally representative estimation.</p>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>cpp_weights.csv</code></td>
+          <td>Survey weights for all 59,391 children</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_weights.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_weights_codebook.csv</code></td>
+          <td>Documentation for weight variables</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/cpp_weights_codebook.csv?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Full Archive -->
+  <div class="tier-section">
+    <h3>Full Release Archive</h3>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th>Size</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr class="recommended">
+          <td><code>CPP_Data_Release.zip</code></td>
+          <td>Everything in one download</td>
+          <td>547 MB</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/CPP_Data_Release.zip?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Documentation -->
+  <div class="tier-section">
+    <h3>Documentation</h3>
+    <table class="info-table">
+      <thead>
+        <tr><th>File</th><th>Description</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>README.md</code></td>
+          <td>Getting started guide, file selection, common pitfalls</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/README.md?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>RELEASE_NOTES.md</code></td>
+          <td>Dataset overview, tier inventory, data quality notes</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/RELEASE_NOTES.md?dl=1" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>METHODOLOGY.md</code></td>
+          <td>Technical pipeline, OCR process, validation methodology</td>
+          <td><a href="https://www.dropbox.com/scl/fi/PLACEHOLDER/METHODOLOGY.md?dl=1" class="btn-download">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    CPP Data Repository. Hosted on GitHub Pages.
+  </div>
+</footer>
+
+</body>
+</html>

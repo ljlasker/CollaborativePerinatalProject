@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codebook Browser &mdash; CPP Data Repository</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">CPP Data Repository</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="codebook.html" class="active">Codebook</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="getting-started.html">Getting Started</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>CPPVAR Codebook Browser</h1>
+    <p class="subtitle">1,239 variables from the CPP Variable File. Click any row to expand full details.</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label for="section-filter">Section:</label>
+      <select id="section-filter">
+        <option value="">All Sections</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="type-filter">Type:</label>
+      <select id="type-filter">
+        <option value="">All Types</option>
+      </select>
+    </div>
+  </div>
+
+  <table id="codebook-table" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Label</th>
+        <th>Type</th>
+        <th>Section</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+  </table>
+
+</div>
+
+<footer>
+  <div class="container">
+    CPP Data Repository. Hosted on GitHub Pages.
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="js/codebook_data.js"></script>
+<script src="js/codebook.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPP Data Repository</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">CPP Data Repository</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="codebook.html">Codebook</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="getting-started.html">Getting Started</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Collaborative Perinatal Project Data Repository</h1>
+    <p class="subtitle">A modern, researcher-ready release of the CPP/NCPP dataset (1959&ndash;1974)</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="stat-number">~60,000</div>
+      <div class="stat-label">Pregnancies enrolled</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">12</div>
+      <div class="stat-label">U.S. medical centers</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">1,239</div>
+      <div class="stat-label">Documented variables</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">1959&ndash;74</div>
+      <div class="stat-label">Enrollment period</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">640</div>
+      <div class="stat-label">Twin pairs</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">14,208</div>
+      <div class="stat-label">Kinship links</div>
+    </div>
+  </div>
+
+  <h2>About the CPP</h2>
+
+  <p>The Collaborative Perinatal Project (CPP), also known as the National Collaborative Perinatal Project (NCPP), was a landmark prospective birth cohort study conducted from 1959 to 1974 under the auspices of the National Institute of Neurological Diseases and Stroke (NINDS). Twelve university-affiliated medical centers across the United States enrolled approximately 60,000 pregnancies and followed children from the prenatal period through age 7&ndash;8, producing one of the most comprehensive developmental datasets ever assembled.</p>
+
+  <p>The study collected detailed information on maternal health, prenatal care, labor and delivery, neonatal outcomes, and child development. Its cognitive testing battery was exceptionally thorough: children received the Stanford-Binet IQ test at age 4 and the full Wechsler Intelligence Scale for Children (WISC) at age 7, along with the Wide Range Achievement Test (WRAT), Bender Gestalt, and Auditory-Vocal Association tests. The dataset also includes extensive family structure, with 8,772 mothers contributing two or more children, yielding 19,966 children in sibling families and 640 twin pairs suitable for behavior-genetic and within-family designs.</p>
+
+  <p>The CPP produced foundational publications in developmental psychology and perinatal epidemiology and has been called a &ldquo;national treasure&rdquo; for perinatal epidemiology (Hardy, 2003).</p>
+
+  <h2>About This Release</h2>
+
+  <p>Despite its extraordinary scope, the CPP has been severely underutilized in modern research because the only documentation was scanned microfiche of 1970s-era typewritten codebooks&mdash;over 5,000 pages with no digital index&mdash;and the data is stored in archaic fixed-width and punch-card formats with no variable names or metadata.</p>
+
+  <p>This release is a comprehensive rescue and modernization of the CPP dataset. It provides:</p>
+  <ul>
+    <li>Machine-readable versions of every documented variable from both source files</li>
+    <li>Named-column CSVs for all 309 master card types (6.1 million records)</li>
+    <li>31 standalone datasets (1,515,805 records) parsed from the NARA/NBER Johns Hopkins collection</li>
+    <li>Publication-quality codebooks at the variable and field level</li>
+    <li>OCR transcriptions of all 19 documentation volumes (~5,000 pages)</li>
+    <li>NLSYLinks-style kinship tables with twin zygosity classification</li>
+    <li>Pre-computed derived variables for common analytical tasks</li>
+    <li>Discovery and correction of five errors in the original codebook</li>
+    <li>Survey weights enabling nationally representative estimation</li>
+  </ul>
+
+  <h2>Collaborating Institutions</h2>
+
+  <ul class="institution-list">
+    <li><span class="site-code">05</span> Harvard Medical School / Boston Lying-In Hospital, Boston, MA</li>
+    <li><span class="site-code">10</span> University of Buffalo / Children's Hospital, Buffalo, NY</li>
+    <li><span class="site-code">15</span> Charity Hospital / Tulane &amp; LSU, New Orleans, LA</li>
+    <li><span class="site-code">31</span> Columbia University / Presbyterian Medical Center, New York, NY</li>
+    <li><span class="site-code">37</span> Johns Hopkins University / Hospital, Baltimore, MD</li>
+    <li><span class="site-code">45</span> Virginia Commonwealth / Medical College of Virginia, Richmond, VA</li>
+    <li><span class="site-code">50</span> University of Minnesota Hospital, Minneapolis, MN</li>
+    <li><span class="site-code">55</span> New York Medical College / Metropolitan Hospital, New York, NY</li>
+    <li><span class="site-code">60</span> University of Oregon Medical School, Portland, OR</li>
+    <li><span class="site-code">66</span> University of Pennsylvania / Children's Hospital, Philadelphia, PA</li>
+    <li><span class="site-code">71</span> Brown University Child Study Center, Providence, RI</li>
+    <li><span class="site-code">82</span> University of Tennessee / Gailor Hospital, Memphis, TN</li>
+  </ul>
+
+  <h2>Key Publications</h2>
+
+  <ul>
+    <li>Niswander, K. R. &amp; Gordon, M. (1972). <em>The Women and Their Pregnancies.</em> W. B. Saunders.</li>
+    <li>Broman, S. H., Nichols, P. L., &amp; Kennedy, W. A. (1975). <em>Preschool IQ: Prenatal and Early Developmental Correlates.</em> Erlbaum.</li>
+    <li>Broman, S. H., Nichols, P. L., Shaughnessy, P., &amp; Kennedy, W. (1987). <em>Retardation in Young Children.</em> Erlbaum.</li>
+    <li>Hardy, J. B. (2003). The Collaborative Perinatal Project: Lessons and legacy. <em>Annals of Epidemiology, 13</em>(5), 303&ndash;311.</li>
+  </ul>
+
+</div>
+
+<footer>
+  <div class="container">
+    CPP Data Repository. Hosted on GitHub Pages.
+  </div>
+</footer>
+
+</body>
+</html>
