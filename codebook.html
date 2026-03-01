@@ -45,6 +45,7 @@
   <div class="tab-bar">
     <button class="tab-btn active" data-tab="cppvar">CPPVAR Codebook (1,239)</button>
     <button class="tab-btn" data-tab="unified">Unified Manifest (4,862)</button>
+    <button class="tab-btn" data-tab="supp">Supplementary (2,534)</button>
   </div>
 
   <!-- CPPVAR Tab -->
@@ -83,6 +84,26 @@
     </table>
   </div>
 
+  <!-- Supplementary Tab -->
+  <div id="tab-supp" class="tab-panel">
+    <p>2,534 sparse variables (&lt;1% coverage) from the unified dataset, stored separately in <code>cpp_unified_supplementary.csv</code>. These can be merged back into the main dataset by <code>case_id</code>. Includes high-sequence pregnancy cards, 3rd/4th pregnancy forms, rare clinical variables, and duplicate codebook entries.</p>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="reason-filter">Reason:</label>
+        <select id="reason-filter"><option value="">All Reasons</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="supp-source-filter">Source:</label>
+        <select id="supp-source-filter"><option value="">All Sources</option></select>
+      </div>
+    </div>
+    <table id="supp-table" class="display" style="width:100%">
+      <thead>
+        <tr><th>Variable</th><th>Label</th><th>Source</th><th>N</th><th>Coverage</th><th>Reason</th></tr>
+      </thead>
+    </table>
+  </div>
+
 </div>
 
 <footer>
@@ -95,6 +116,7 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="js/codebook_data.js"></script>
 <script src="js/manifest_data.js"></script>
+<script src="js/supplementary_data.js"></script>
 <script src="js/codebook.js"></script>
 
 </body>

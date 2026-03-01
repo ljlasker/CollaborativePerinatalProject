@@ -183,6 +183,91 @@ $(document).ready(function () {
   });
 
   /* ============================================================
+     Supplementary Codebook Table (2,534 sparse variables)
+     ============================================================ */
+
+  function formatSuppChild(d) {
+    var html = '<dl class="child-row">';
+    html += '<dt>Variable Name</dt><dd><code>' + d.varname + '</code></dd>';
+    html += '<dt>Original Name</dt><dd>' + (d.original_name || '&mdash;') + '</dd>';
+    html += '<dt>Source Card</dt><dd>' + (d.source || '&mdash;') + '</dd>';
+    html += '<dt>Label</dt><dd>' + (d.label || '&mdash;') + '</dd>';
+    html += '<dt>N (non-missing)</dt><dd>' + d.n.toLocaleString() + '</dd>';
+    html += '<dt>Coverage</dt><dd>' + d.pct_coverage.toFixed(2) + '%</dd>';
+    html += '<dt>Reason Sparse</dt><dd>' + (d.reason || '&mdash;') + '</dd>';
+    if (d.related) {
+      html += '<dt>Related Main Column</dt><dd><code>' + d.related + '</code></dd>';
+    }
+    html += '</dl>';
+    return html;
+  }
+
+  /* Populate supplementary filter dropdowns */
+  var reasons = {}, suppSources = {};
+  SUPPLEMENTARY_DATA.forEach(function (row) {
+    if (row.reason) reasons[row.reason] = true;
+    if (row.source) suppSources[row.source] = true;
+  });
+  Object.keys(reasons).sort().forEach(function (r) {
+    $('#reason-filter').append('<option value="' + r + '">' + r + '</option>');
+  });
+  Object.keys(suppSources).sort().forEach(function (s) {
+    $('#supp-source-filter').append('<option value="' + s + '">' + s + '</option>');
+  });
+
+  var suppTable = $('#supp-table').DataTable({
+    data: SUPPLEMENTARY_DATA,
+    columns: [
+      { data: 'varname', className: 'font-mono', title: 'Variable' },
+      { data: 'label', title: 'Label', className: 'truncated',
+        render: function (data, type) {
+          if (type === 'display') return truncate(data, 60);
+          return data;
+        }
+      },
+      { data: 'source', title: 'Source' },
+      { data: 'n', title: 'N', render: function (data) { return data.toLocaleString(); } },
+      { data: 'pct_coverage', title: 'Coverage',
+        render: function (data, type) {
+          if (type === 'display') return data.toFixed(2) + '%';
+          return data;
+        }
+      },
+      { data: 'reason', title: 'Reason' }
+    ],
+    pageLength: 25,
+    lengthMenu: [10, 25, 50, 100],
+    order: [],
+    language: {
+      search: 'Search:',
+      info: 'Showing _START_&ndash;_END_ of _TOTAL_ variables',
+      lengthMenu: 'Show _MENU_ per page'
+    },
+    autoWidth: false,
+    deferRender: true
+  });
+
+  $('#reason-filter').on('change', function () {
+    var val = this.value;
+    suppTable.column(5).search(val ? '^' + val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$' : '', true, false).draw();
+  });
+  $('#supp-source-filter').on('change', function () {
+    var val = this.value;
+    suppTable.column(2).search(val ? '^' + val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$' : '', true, false).draw();
+  });
+
+  $('#supp-table tbody').on('click', 'tr', function () {
+    var row = suppTable.row(this);
+    if (row.child.isShown()) {
+      row.child.hide();
+      $(this).removeClass('shown');
+    } else {
+      row.child(formatSuppChild(row.data())).show();
+      $(this).addClass('shown');
+    }
+  });
+
+  /* ============================================================
      Tab Switching
      ============================================================ */
 
@@ -195,8 +280,10 @@ $(document).ready(function () {
     /* Adjust column widths after tab switch */
     if (tab === 'cppvar') {
       cppvarTable.columns.adjust();
-    } else {
+    } else if (tab === 'unified') {
       manifestTable.columns.adjust();
+    } else if (tab === 'supp') {
+      suppTable.columns.adjust();
     }
   });
 

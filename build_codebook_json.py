@@ -54,3 +54,26 @@ with open(os.path.join("js", "manifest_data.js"), "w", encoding="utf-8") as f:
     json.dump(manifest, f, ensure_ascii=False)
     f.write(";\n")
 print(f"Unified manifest: {len(manifest)} entries")
+
+# --- 3. Supplementary Codebook (2,534 sparse variables) ---
+SUPP_CSV = os.path.join(CLEAN, "cpp_unified_supplementary_codebook.csv")
+supp = []
+with open(SUPP_CSV, encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        supp.append({
+            "varname": row["variable_name"],
+            "source": row["source_card"],
+            "original_name": row["original_name"],
+            "label": row["item_name"],
+            "n": int(row["n_nonmissing"]),
+            "pct_coverage": float(row["pct_coverage_full"]),
+            "reason": row["reason_sparse"],
+            "related": row["related_main_column"],
+        })
+
+with open(os.path.join("js", "supplementary_data.js"), "w", encoding="utf-8") as f:
+    f.write("const SUPPLEMENTARY_DATA = ")
+    json.dump(supp, f, ensure_ascii=False)
+    f.write(";\n")
+print(f"Supplementary codebook: {len(supp)} entries")
