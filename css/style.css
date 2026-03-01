@@ -105,13 +105,11 @@ nav {
 .institution-list {
   list-style: none;
   padding: 0;
-  columns: 2;
-  column-gap: 24px;
 }
 .institution-list li {
   padding: 4px 0;
   font-size: 0.93em;
-  break-inside: avoid;
+  white-space: nowrap;
 }
 .institution-list .site-code {
   display: inline-block;

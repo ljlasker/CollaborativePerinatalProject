@@ -36,9 +36,10 @@
 
   <h2>Loading the Data</h2>
 
-  <h3>R</h3>
+  <p>Here is how to load the analysis-ready dataset in R, Python, and Stata. Note that <code>case_id</code> and <code>mother_id</code> must always be read as strings to preserve leading zeros.</p>
 
-  <span class="code-label">R</span>
+  <h3>R (data.table)</h3>
+
   <pre><code>library(data.table)
 
 # Load analysis-ready dataset
@@ -59,9 +60,8 @@ d[, .(mean_iq = mean(wisc_fsiq, na.rm=TRUE),
       sd_iq = sd(wisc_fsiq, na.rm=TRUE),
       n = sum(!is.na(wisc_fsiq))), by = race]</code></pre>
 
-  <h3>Python</h3>
+  <h3>Python (pandas)</h3>
 
-  <span class="code-label">Python</span>
   <pre><code>import pandas as pd
 
 d = pd.read_csv("cpp_clean_v1.csv",
@@ -71,7 +71,6 @@ links = pd.read_csv("cpp_kinship_links.csv",
 
   <h3>Stata</h3>
 
-  <span class="code-label">Stata</span>
   <pre><code>import delimited "cpp_clean_v1.csv", clear
 tostring case_id mother_id, replace</code></pre>
 
@@ -81,7 +80,8 @@ tostring case_id mother_id, replace</code></pre>
 
   <h2>Applying Survey Weights</h2>
 
-  <span class="code-label">R</span>
+  <p>The CPP was not a probability sample, so survey weights are provided to adjust for both attrition and population non-representativeness. Here is an example in R:</p>
+
   <pre><code>library(data.table)
 
 # Load data and weights
@@ -103,7 +103,8 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
     <li>For behavior genetic analyses, merge with <code>cpp_kinship_links.csv</code> to obtain relatedness-classified sibling pairs.</li>
   </ol>
 
-  <span class="code-label">R</span>
+  <p>Here is an example of a mother fixed-effects regression in R using the <code>fixest</code> package:</p>
+
   <pre><code>library(data.table)
 library(fixest)
 
@@ -149,6 +150,26 @@ summary(fe_model)</code></pre>
   <div class="faq-item">
     <h3>5. Sentinel values</h3>
     <p>The CPP uses all-9 sentinel values (9, 99, 999, 9999) for &ldquo;unknown.&rdquo; The analysis-ready files have most of these recoded to <code>NA</code>, but the raw CPPVAR extraction (<code>cppvar_all_columns.csv</code>) retains original values. Check the <code>missing_codes</code> column in the codebook.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>6. Race categories are historical</h3>
+    <p>The CPP race variable uses 1960s classifications: White, Black, Puerto Rican, Oriental, and Other. These do not map cleanly to modern OMB categories. The &ldquo;Oriental&rdquo; category combines East Asian, Southeast Asian, and Pacific Islander groups. &ldquo;Puerto Rican&rdquo; was coded as a separate racial category, not an ethnic overlay.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>7. Performance subtests have lower N</h3>
+    <p>Three WISC Performance subtests (Picture Arrangement, Block Design, Coding) plus WRAT Spelling, WRAT Arithmetic, and Goodenough Draw-a-Person have <em>N</em> &asymp; 31,400 rather than the ~40,000 of other WISC measures. These were extracted from CPPMASTER card 31300, which has lower coverage than the CPPVAR summary fields. Analyses using the broad 11-measure battery will have ~22% fewer cases than those using WISC Verbal subtests alone.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>8. No maternal cognitive measures</h3>
+    <p>The CPP did not administer IQ or cognitive tests to mothers. Maternal education (years of schooling) and the Duncan Socioeconomic Index (SEI) are the best available proxies for maternal ability, but they are imperfect. This limits the extent to which genetic confounding can be assessed in observational analyses.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>9. No data beyond age 7&ndash;8</h3>
+    <p>The public-use CPP files cover only the prenatal period through the 7-year assessment. Several site-specific follow-ups were conducted later (most notably the Johns Hopkins &ldquo;Pathways to Adulthood&rdquo; study, which tracked the Baltimore cohort through age 33), but these data are held separately by the individual sites and are not part of this release. See the <a href="faq.html">FAQ</a> for more details.</p>
   </div>
 
 </div>
