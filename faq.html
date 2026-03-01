@@ -34,7 +34,7 @@
 
   <div class="faq-item">
     <h3>Which file should I start with?</h3>
-    <p>For most analyses, start with <code>cpp_clean_v3.csv</code> (or <code>.rds</code> for R). This has 185 key variables already cleaned and labeled, including corrected WISC VIQ/PIQ and 51 additional variables from the 7-year psychological battery. See the <a href="getting-started.html">Getting Started</a> page for code examples.</p>
+    <p>For most analyses, start with <code>cpp_clean_v1.csv</code> (or <code>.rds</code> for R). This has 185 key variables already cleaned and labeled, including all WISC subtests and 7-year psychological battery variables. See the <a href="getting-started.html">Getting Started</a> page for code examples.</p>
     <p>For everything in one file, use <code>cpp_unified_wide.csv</code> (64,834 &times; 4,862). For the complete CPPVAR extraction with all 1,236 columns, use <code>cppvar_all_columns.csv</code>.</p>
   </div>
 
@@ -43,11 +43,6 @@
     <p>Please cite the companion data paper. A suggested format:</p>
     <pre>Collaborative Perinatal Project Data Release, Version 3.2 (February 2026).
 [CITATION DETAILS TO BE ADDED]</pre>
-  </div>
-
-  <div class="faq-item">
-    <h3>Why should I use v3 instead of v2?</h3>
-    <p>Version 3 corrects a WISC VIQ/PIQ mislabeling discovered in v2 (the labels were swapped) and adds 51 new variables: all WISC Performance subtests, WRAT Spelling/Arithmetic, Goodenough Draw-a-Person, 15 behavioral ratings, school variables, and handedness. v2 files are retained for backward compatibility but v3 is the recommended starting point.</p>
   </div>
 
   <div class="faq-item">
@@ -64,15 +59,15 @@
     <h3>Why do I need to read case_id as a string?</h3>
     <p><code>case_id</code> is a 9-digit identifier and <code>mother_id</code> is a 7-digit identifier. Some sites have leading zeros that will be lost if these are read as integers. Always read them as character/string types:</p>
     <ul>
-      <li><strong>R:</strong> <code>fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))</code></li>
-      <li><strong>Python:</strong> <code>pd.read_csv("cpp_clean_v3.csv", dtype={"case_id": str})</code></li>
+      <li><strong>R:</strong> <code>fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))</code></li>
+      <li><strong>Python:</strong> <code>pd.read_csv("cpp_clean_v1.csv", dtype={"case_id": str})</code></li>
       <li><strong>Stata:</strong> <code>tostring case_id mother_id, replace</code></li>
     </ul>
   </div>
 
   <div class="faq-item">
     <h3>What are the sentinel/missing codes?</h3>
-    <p>Following 1960s conventions, the CPP uses all-9 sentinel values (9, 99, 999, 9999) to denote &ldquo;unknown&rdquo; or &ldquo;not applicable&rdquo; responses. The <code>CPP_Codebook.csv</code> documents the specific missing codes for each variable in the <code>missing_codes</code> column. The analysis-ready files (<code>cpp_clean_v3</code>) have most sentinel values already recoded to <code>NA</code>.</p>
+    <p>Following 1960s conventions, the CPP uses all-9 sentinel values (9, 99, 999, 9999) to denote &ldquo;unknown&rdquo; or &ldquo;not applicable&rdquo; responses. The <code>CPP_Codebook.csv</code> documents the specific missing codes for each variable in the <code>missing_codes</code> column. The analysis-ready files (<code>cpp_clean_v1</code>) have most sentinel values already recoded to <code>NA</code>.</p>
   </div>
 
   <div class="faq-item">

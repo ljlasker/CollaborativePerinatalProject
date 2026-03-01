@@ -30,7 +30,7 @@
 
   <h2>Quick Start</h2>
 
-  <p>For most analyses, download <code>cpp_clean_v3.csv</code> (29 MB, 59,391 rows &times; 185 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, corrected WISC VIQ/PIQ, and 51 additional variables from the 7-year psychological battery.</p>
+  <p>For most analyses, download <code>cpp_clean_v1.csv</code> (29 MB, 59,391 rows &times; 185 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, all WISC subtests, and variables from the 7-year psychological battery.</p>
 
   <p>For sibling and twin analyses, also download <code>cpp_kinship_links.csv</code> (14,208 pairwise links with relatedness coefficients).</p>
 
@@ -42,7 +42,7 @@
   <pre><code>library(data.table)
 
 # Load analysis-ready dataset
-d &lt;- fread("cpp_clean_v3.csv")       # 59,391 x 185
+d &lt;- fread("cpp_clean_v1.csv")       # 59,391 x 185
 d[, case_id := as.character(case_id)]
 
 # Load kinship links for sibling/twin analyses
@@ -64,7 +64,7 @@ d[, .(mean_iq = mean(wisc_fsiq, na.rm=TRUE),
   <span class="code-label">Python</span>
   <pre><code>import pandas as pd
 
-d = pd.read_csv("cpp_clean_v3.csv",
+d = pd.read_csv("cpp_clean_v1.csv",
                  dtype={"case_id": str, "mother_id": str})
 links = pd.read_csv("cpp_kinship_links.csv",
                      dtype={"id_1": str, "id_2": str})</code></pre>
@@ -72,7 +72,7 @@ links = pd.read_csv("cpp_kinship_links.csv",
   <h3>Stata</h3>
 
   <span class="code-label">Stata</span>
-  <pre><code>import delimited "cpp_clean_v3.csv", clear
+  <pre><code>import delimited "cpp_clean_v1.csv", clear
 tostring case_id mother_id, replace</code></pre>
 
   <h2>Key Identifiers</h2>
@@ -85,7 +85,7 @@ tostring case_id mother_id, replace</code></pre>
   <pre><code>library(data.table)
 
 # Load data and weights
-d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
+d &lt;- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
 wt &lt;- fread("cpp_weights.csv", colClasses = c(case_id = "character"))
 d &lt;- merge(d, wt, by = "case_id")
 
@@ -97,7 +97,7 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
   <p>The CPP is well-suited for within-family designs because 8,772 mothers contributed two or more children. The recommended workflow:</p>
 
   <ol>
-    <li>Load <code>cpp_clean_v3.csv</code> and restrict to the outcome of interest (e.g., <code>!is.na(wisc_fsiq)</code>).</li>
+    <li>Load <code>cpp_clean_v1.csv</code> and restrict to the outcome of interest (e.g., <code>!is.na(wisc_fsiq)</code>).</li>
     <li>Identify families with 2+ children using <code>mother_id</code>.</li>
     <li>Use <code>fixest::feols()</code> in R or <code>xtreg, fe</code> in Stata with <code>mother_id</code> as the panel variable.</li>
     <li>For behavior genetic analyses, merge with <code>cpp_kinship_links.csv</code> to obtain relatedness-classified sibling pairs.</li>
@@ -107,7 +107,7 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
   <pre><code>library(data.table)
 library(fixest)
 
-d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
+d &lt;- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
 
 # Mother fixed effects: breastfeeding and IQ
 fe_model &lt;- feols(wisc_fsiq ~ bf_ever + birth_wt_g + gest_age + sex | mother_id,
