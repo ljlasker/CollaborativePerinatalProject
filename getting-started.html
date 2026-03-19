@@ -30,7 +30,7 @@
 
   <h2>Quick Start</h2>
 
-  <p>For most analyses, download <code>cpp_clean_v1.csv</code> (29 MB, 59,391 rows &times; 185 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, all WISC subtests, and variables from the 7-year psychological battery.</p>
+  <p>For most analyses, download <code>cpp_clean_v1.csv</code> (29 MB, 59,391 rows &times; 208 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, all WISC subtests, and variables from the 7-year psychological battery.</p>
 
   <p>For sibling and twin analyses, also download <code>cpp_kinship_links.csv</code> (14,208 sibling/twin pairs with relatedness coefficients). For extended-family analyses, add <code>cpp_extended_kinship_links.csv</code> (13,513 cousin and other cross-family pairs).</p>
 
@@ -43,7 +43,7 @@
   <pre><code>library(data.table)
 
 # Load analysis-ready dataset
-d &lt;- fread("cpp_clean_v1.csv")       # 59,391 x 185
+d &lt;- fread("cpp_clean_v1.csv")       # 59,391 x 208
 d[, case_id := as.character(case_id)]
 
 # Load kinship links for sibling/twin analyses
