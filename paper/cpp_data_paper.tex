@@ -1,0 +1,698 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{lscape}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\title{The Collaborative Perinatal Project:\\ A Modern Data Release}
+\author{Jordan Lasker\\[4pt]\small Texas Tech University\\[-1pt]\small \texttt{jlasker@ttu.edu}}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Collaborative Perinatal Project (CPP) ran from 1959 to 1974 at 12 U.S.\ medical centers, enrolling approximately 60,000 pregnancies and following children through age 7 with medical, psychological, and socioeconomic assessments. The data it produced---cognitive testing at ages 4 and 7, detailed obstetric records, sibling and twin family structure---has seen little modern use, mainly because the files are fixed-width ASCII documented by scanned microfiche codebooks from the 1960s. We describe the rescue of this dataset. We digitized all 19 volumes of original documentation (5,296 pages) via optical character recognition, wrote extraction pipelines, and produced researcher-ready CSV files with full documentation. We extracted all 1,233 documented variables from the variable file (covering 99.5\% of the 1,600-column record), all 309 card types from the 6.1-million-record master file, created per-card field-level codebooks for all 309 card types, and parsed every card type into named-column CSVs. We also parsed 31 standalone datasets (1,515,805 records) from the NARA/NBER Johns Hopkins collection, including serology cards, drug files, visit records, congenital malformations, and socioeconomic indices, and merged all sources into 11 domain-specific integrated analysis files spanning 4,814 documented variables. We document six errors in the original codebook discovered through empirical validation. The release includes an analysis-ready dataset (59,391 children $\times$ 315 key variables), a unified wide file merging all sources (60,016 canonical records $\times$ 4,862 variables), complete variable-level and card-level codebooks, all 309 parsed assessment card types with named columns, an NLSYLinks-style kinship table classifying 27,721 pairwise kinship links---14,208 sibling and twin pairs with multi-tiered zygosity classification incorporating Myrianthopoulos' authoritative blood group determinations recovered from the congenital malformations work file and Bayesian developmental trajectory analysis, plus 13,513 extended relative pairs (cousins, nieces/nephews, and more distant kin) constructed from the NARA W17C--M work files---survey weights enabling nationally representative estimation, and OCR transcriptions of the full documentation suite. All files and processing scripts are publicly available at \url{https://github.com/ljlasker/CollaborativePerinatalProject}.
+\end{abstract}
+
+\doublespacing
+
+\newpage
+\section{Introduction}
+
+The Collaborative Perinatal Project (CPP), also known as the National Collaborative Perinatal Project (NCPP), was one of the largest prospective birth cohort studies ever run in the United States \citep{niswander1972}. Twelve university-affiliated medical centers enrolled almost 60,000 pregnancies between 1959 and 1974, recording maternal health, prenatal care, labor and delivery, neonatal outcomes, and child development through age 7. The resulting publications on prenatal and early developmental correlates of cognitive ability \citep{broman1975, broman1987} remain widely cited, and the study has been called a ``national treasure'' for perinatal epidemiology \citep{hardy2003}.
+
+What makes the CPP valuable today is a combination of features that no modern cohort replicates. The design is prospective, so exposures and confounders were measured before outcomes. The cognitive battery is unusually thorough: Stanford-Binet IQ at age 4, the full WISC at age 7, plus the WRAT and Bender Gestalt. The family structure is rich---8,772 mothers enrolled two or more children (19,966 children in sibling families), and there are 640 twin pairs (1,254 twin/multiple-birth children). And the sample is both large and racially diverse, with substantial numbers of White and Black families from different U.S.\ regions.
+
+Given all this, the CPP has been dramatically underutilized. I would argue that the primary barrier is data accessibility. The raw data exists as two massive fixed-width ASCII files: a variable file (\texttt{CPPVAR.ASC}) containing 59,391 records of 1,600 characters each, and a master file (\texttt{CPPMASTER.ASC}) containing 6,107,562 records across 309 card types in 80-column punch card format. The documentation for these files---Volume III-A (the CPPVAR codebook, 207 pages) and Volume V (the CPPMASTER index, 290 pages)---has been available only as low-quality scanned microfiche images. Using the data has required manually reading the codebook images, identifying column positions for each variable of interest, and writing custom extraction code, a process so laborious that most researchers have extracted only the handful of variables needed for a single analysis.
+
+This paper describes the rescue of the CPP dataset from technical barrier-driven obscurity. Using optical character recognition (OCR), we digitized all 19 volumes of original documentation (5,296 pages), built automated extraction pipelines for both the variable and master files, and produced usable CSV files with full documentation at the variable and field level.
+
+\section{The Original Data}
+
+\subsection{CPPVAR: The Variable File}
+
+The primary analysis file, \texttt{CPPVAR.ASC}, contains one record per child/pregnancy. Each record is exactly 1,600 characters wide, with no delimiters or headers. The file contains 59,391 records representing all enrolled pregnancies across the 12 study sites. Variables are packed into specific column positions as documented in Volume III-A of the codebook, with item numbers ranging from 4954 to 6180.
+
+The first 9 columns encode a hierarchical case identifier: columns 1--2 represent the institution code, column 3 the selection code, columns 4--7 the gravida number (identifying the mother), column 8 the pregnancy order, and column 9 the plurality code. This structure allows linking of siblings (same mother, different pregnancies) and twins (same pregnancy, different plurality codes).
+
+\subsection{CPPMASTER: The Master File}
+
+The master file, \texttt{CPPMASTER.ASC}, contains the raw data from each individual assessment form used in the study. Each record is 80 characters wide (the standard punch card width), with columns 1--5 encoding a 5-digit card type number, columns 6--14 the case identifier, and columns 15--80 the data payload. The file contains 6,107,562 records across 309 distinct card types, organized by subject area: administrative (3 types), psychology (53), pathology (8), obstetrics (124), pediatrics (100), family/SES (20), and special (1).
+
+Key card types for cognitive assessment include cards 11200/21200/31200/41200 (the four-card Stanford-Binet examination at age 4, including item-level pass/fail data suitable for item response theory analysis) and cards 11300/21300/31300/41300 (the four-card WISC examination at age 7, including all IQ and subtest scores along with the WRAT, Bender Gestalt, and Goodenough Draw-a-Person).
+
+\subsection{Original Documentation}
+
+The CPP documentation comprises 7 main volumes, 10 form-reproduction sub-volumes, a bibliography, and an index---5,296 pages total. The two most critical volumes for data extraction are Volume III-A, which specifies for each of the $\sim$1,200 CPPVAR variables the item identification number, column positions, variable name, description, and value codes; and Volume V, which cross-references every item number to its source card type and column positions within the CPPMASTER file. Volume III-B (681 pages) documents how each CPPVAR field was derived from CPPMASTER source cards, including transformation rules and value recoding. Volumes VI and VII provide permuted glossaries and categorized item indexes spanning the entire data collection. Volumes II-a through II-j reproduce all original data collection forms across 10 thematic sub-volumes (prenatal, labor/delivery, pathology, family/SES, neonatal, pediatric, psychological, and speech/language assessments).
+
+All documentation was available only as low-quality scanned microfiche images hosted by NBER.
+
+\section{Data Rescue Process}
+
+\subsection{AI-Assisted OCR}
+
+We digitized the entire microfiche documentation suite using OCR.
+
+The two highest-priority volumes were processed first with AI-assisted OCR. The 207 pages of Vol.\ III-A (the CPPVAR codebook) were processed in 10 batches, with each batch producing a structured pipe-delimited text file. The OCR output required handling of multiple format variations across batches, including differences in field ordering, continuation entries spanning page breaks, and inconsistent notation for value codes. A dedicated Python parser (\texttt{parse\_vol3a\_to\_dictionary.py}) normalized these formats, merged continuation entries, and deduplicated overlapping records, producing a consolidated variable dictionary of 1,233 entries. Similarly, the 290 pages of Vol.\ V (the CPPMASTER index) were processed in 12 batches and consolidated into a master index of 7,590 item entries across 286 card types, then used to build per-card field-level codebooks.
+
+The remaining 17 volumes were OCR'd using Tesseract 5.4.0, processing each PDF page as a 200-DPI image with page segmentation mode 6 (uniform text block). Table~\ref{tab:ocr} summarizes the documentation volumes and their OCR output. All transcriptions are included in the data release as plain-text files.
+
+\begin{table}[H]
+\centering
+\caption{OCR'd Documentation Volumes}
+\label{tab:ocr}
+\small
+\begin{tabular}{llrl}
+\toprule
+Volume & Title & Pages & Output Format \\
+\midrule
+I & Introduction and User's Guide & 136 & Plain text \\
+II-a through II-j & Form Reproductions (10 sub-volumes) & 2,507 & Plain text \\
+III-a & Variable File Dictionary & 207 & Structured CSV \\
+III-b & Field Derivation Methods & 681 & Plain text \\
+IV & Selected Work Files & 336 & Plain text \\
+V & Master Index to Computerized Data Items & 290 & Structured CSV \\
+VI & Alphabetical Permuted Glossary & 312 & Plain text \\
+VII & Categorization by Person, Time, Subject & 685 & Plain text \\
+Bibliography & & 93 & Plain text \\
+Index & & 49 & Plain text \\
+\midrule
+& \textbf{Total} & \textbf{5,296} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Automated Extraction}
+
+Once the variable dictionary was in machine-readable form, the extraction itself was straightforward. \texttt{export\_clean\_data\_v2.R} walks through the codebook, pulls each documented column from the ASCII file, and produces a CSV with named variables plus a companion codebook CSV. The master file is handled by \texttt{extract\_all\_master\_cards.R}, which reads the 5-digit card number off each of 6.1 million records and routes it to the right card-type CSV.
+
+The harder part was building field-level codebooks for the 309 CPPMASTER card types, since no single source documented all of them. We started with the digitized Vol.\ V index: \texttt{build\_master\_codebook.py} matched its 7,590 item entries to their card types, which got us codebooks for 112 types (4,692 fields). Parsing the OCR'd Vol.\ III-B (681 pages documenting how each CPPVAR field is derived from source cards) added another 112 types (1,009 fields). Another 33 types were sequence variants of already-documented forms---same column layout, different card number---so their codebooks could be copied over with offset adjustments. The last gap was closed by the 35 SAS read-in programs shipped with the NBER Johns Hopkins collection, which spell out the column layout for every CPP form. That brought us to 309 of 309. \texttt{parse\_master\_cards.py} then converted every card type into a proper CSV with named columns, covering all 6.1 million records.
+
+\subsection{Empirical Validation}
+
+As a sanity check, we verified that the extracted data reproduce known empirical regularities. Males are heavier than females at birth (3,270g vs.\ 3,160g), which would fail if columns were misaligned. WISC Full Scale IQ matches published values from \citet{broman1975} (overall mean $\approx$ 95.6, with the expected race differences). Twins weigh about 800g less than singletons at birth (2,400g vs.\ 3,200g). Per-site record counts line up with the published enrollment figures.
+
+\subsection{Error Discovery and Correction}
+
+Along the way, we found six errors in the original 1960s documentation, plus four mislabeled cognitive variables (see Section~5):
+
+\begin{enumerate}
+    \item \textbf{Feeding variable label swap.} The codebook (Vol.\ III-A) says column 580 is ``bottle-feeding days'' and column 581 is ``breast-feeding days.'' But nursery breast-feeding was nearly universal among lower-SES mothers in the 1960s, and the column labeled ``bottle'' shows the highest values among lower-SES women---the opposite of what the label implies. Checking against the CPPMASTER nursery card (PED-3) confirmed that the two labels are simply reversed.
+
+    \item \textbf{Birth weight column offset.} Some secondary references put birth weight at columns 1094--1097; the correct position is 1095--1098. We confirmed this by checking which offset produces the expected male--female difference.
+
+    \item \textbf{Column 365 mislabeling.} Column 365 has been treated as ``marital status'' in some published analyses. The OCR'd codebook shows it is actually ``Occupation, grouped'' (Item 5233: 1=never worked, 2=white collar, 3=blue collar, 7=welfare). Marital status is at column 36 (Item 4977).
+
+    \item \textbf{Sex code 3.} The 804 records coded sex $= 3$ (``undetermined'') have mean birth weight 1,891g and gestational age 16.3 weeks. These are early fetal losses, not live births with ambiguous sex.
+
+    \item \textbf{Cross-source identifier aliases.} Case identifiers are normalized to a canonical nine-character linkage key before sources are merged. CPPVAR pregnancy-level records with a blank ninth character are right-completed with 0, and source-proven aliases in the congenital-malformations and seven-year socioeconomic files are crosswalked to the same key. Coalescing 2,421 alias groups removes 4,818 duplicate source rows with zero conflicting populated cells. The unified file contains 60,016 canonical records: 59,391 CPPVAR records and 625 records found only in CPPMASTER or standalone sources.
+
+    \item \textbf{WRAT Reading field boundary.} On card 31300, two adjacent two-column fields are easily conflated: columns 41--42 contain a grade-level rating ($r \approx 0$ with WISC FSIQ), while columns 43--44 contain the actual raw reading score ($r = 0.55$ with WISC FSIQ). The Vol.\ V OCR confirmed the distinction.
+\end{enumerate}
+
+\section{Dataset Description}
+
+\subsection{Study Sites}
+
+Table~\ref{tab:sites} shows the 12 participating institutions with their enrollment counts.
+
+\begin{table}[H]
+\centering
+\caption{CPP Study Sites and Enrollment}
+\label{tab:sites}
+\begin{tabular}{llr}
+\toprule
+Code & Institution & Children \\
+\midrule
+05 & Boston Lying-In Hospital & 13,737 \\
+10 & Children's Hospital, Buffalo & 2,985 \\
+15 & Charity Hospital, New Orleans & 2,634 \\
+31 & Columbia-Presbyterian, New York & 2,262 \\
+37 & Johns Hopkins, Baltimore & 4,438 \\
+45 & Medical College of Virginia, Richmond & 3,477 \\
+50 & University of Minnesota, Minneapolis & 3,321 \\
+55 & New York Medical College, Metropolitan Hospital & 4,753 \\
+60 & University of Oregon, Portland & 3,473 \\
+66 & Pennsylvania Hospital, Philadelphia & 10,458 \\
+71 & Providence Lying-In Hospital & 4,184 \\
+82 & University of Tennessee, Memphis & 3,669 \\
+\midrule
+& \textbf{Total} & \textbf{59,391} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Variable Domains}
+
+Table~\ref{tab:domains} summarizes the major variable domains in the CPPVAR file.
+
+\begin{table}[H]
+\singlespacing
+\centering
+\caption{Variable Domains in CPPVAR}
+\label{tab:domains}
+\small
+\begin{tabular}{lrrp{5.5cm}}
+\toprule
+Domain & Variables & Columns & Examples \\
+\midrule
+Identifiers \& Admin & 21 & 1--27 & Case ID, cohort flags, plurality \\
+Demographics \& SES & 33 & 31--285 & Age, race, education, income, SEI, occupation, religion \\
+Pregnancy History & 30 & 37--74 & Gravidity, parity, smoking, prenatal visits \\
+Pregnancy Conditions & 151 & 75--255 & OB-60 disease codes by trimester \\
+Family History & 88 & 286--445 & Sibling health, parental conditions \\
+Obstetric Measures & 40 & varies & Blood pressure, weight gain, blood type, Rh \\
+Birth Outcomes \& Apgar & 45 & 446--575 & Birth weight, gestational age, Apgar (1- and 5-min) \\
+Nursery \& Feeding & 15 & 576--600 & Breast/bottle days, gavage, antibiotics \\
+Congenital Conditions & 339 & 601--806 & PED-8/PED-12 diagnostic codes \\
+Pathology/Placenta & 51 & varies & Placental weight, cord, membranes \\
+Cognitive Assessment & 62 & varies & Stanford-Binet, WISC, WRAT, Bender \\
+Growth/Anthropometric & 30 & varies & Weight and length at birth through 7 years \\
+Delivery Procedures & 154 & varies & Method, anesthesia, complications \\
+Neonatal Neurological & 95 & varies & Brain, seizures, tone, reflexes \\
+Disease Summary Counts & 13 & varies & Trimester-specific totals \\
+Consanguinity & 7 & varies & Parental relatedness \\
+Other & 65 & varies & Miscellaneous, derived flags \\
+\midrule
+\textbf{Total (unique)} & \textbf{1,233}$^\dagger$ & \textbf{1--1,600} & \\
+\bottomrule
+\multicolumn{4}{l}{\small $^\dagger$Domain counts sum to 1,239 because 6 variables span multiple domains.}
+\end{tabular}
+\end{table}
+
+\subsection{Cognitive Assessment Battery}
+
+Table~\ref{tab:cognitive} provides descriptive statistics for the cognitive measures available in the dataset.
+
+\begin{table}[H]
+\centering
+\caption{Cognitive Assessment Descriptive Statistics}
+\label{tab:cognitive}
+\begin{tabular}{llrrrr}
+\toprule
+Test & Measure & $N$ & Mean & SD & Age \\
+\midrule
+Stanford-Binet & Full Scale IQ & 38,653 & 97.1 & 16.6 & 4 yr \\
+\addlinespace
+WISC & Full Scale IQ & 40,494 & 95.6 & 14.8 & 7 yr \\
+WISC & Verbal IQ & 40,260 & 98.4 & 15.3 & 7 yr \\
+WISC & Performance IQ & 40,173 & 94.4 & 19.8 & 7 yr \\
+\addlinespace
+WISC & Information (scaled) & 40,269 & 9.2 & 3.0 & 7 yr \\
+WISC & Comprehension (scaled) & 40,248 & 8.7 & 2.8 & 7 yr \\
+WISC & Vocabulary (scaled) & 40,218 & 8.7 & 3.1 & 7 yr \\
+WISC & Digit Span (scaled) & 40,231 & 9.6 & 3.0 & 7 yr \\
+WISC & Picture Arrangement (scaled)$^*$ & 31,465 & 9.1 & 3.2 & 7 yr \\
+WISC & Block Design (scaled)$^*$ & 31,462 & 9.4 & 2.9 & 7 yr \\
+WISC & Coding (scaled)$^*$ & 31,429 & 10.0 & 3.5 & 7 yr \\
+\addlinespace
+WRAT & Reading (raw)$^*$ & 31,430 & 33.8 & 11.7 & 7 yr \\
+WRAT & Spelling (raw)$^*$ & 31,444 & 23.7 & 6.1 & 7 yr \\
+WRAT & Arithmetic (raw)$^*$ & 31,456 & 20.0 & 4.6 & 7 yr \\
+Bender Gestalt & Total errors$^\dagger$ & 40,399 & 7.1 & 3.7 & 7 yr \\
+Goodenough & Draw-a-Person (raw)$^*$ & 31,551 & 19.7 & 6.3 & 7 yr \\
+Goodenough & Draw-a-Person (standard)$^*$ & 31,509 & 92.7 & 16.4 & 7 yr \\
+\bottomrule
+\multicolumn{6}{l}{\small $^*$Extracted from CPPMASTER card 31300 (lower $N$ reflects card-level coverage).} \\
+\multicolumn{6}{l}{\small $^\dagger$From CPPVAR (\texttt{v3\_bender\_total\_errors}, renamed to \texttt{bender\_gestalt\_errors} in the analysis-ready file). The original \texttt{bender\_raw} field is mislabeled PicArr (see Section~5).}
+\end{tabular}
+\end{table}
+
+\subsection{Family Structure}
+
+The CPP's enrollment of multiple pregnancies per mother creates a rich family structure suitable for within-family research designs (Table~\ref{tab:family}).
+
+\begin{table}[H]
+\centering
+\caption{Family Structure in the CPP}
+\label{tab:family}
+\begin{tabular}{lrr}
+\toprule
+Category & Families & Children \\
+\midrule
+All enrolled & 48,197 & 59,391 \\
+\addlinespace
+Singleton families (1 child) & 39,425 & 39,425 \\
+Sibling families (2+ children) & 8,772 & 19,966 \\
+\quad 2 children & 6,833 & 13,666 \\
+\quad 3 children & 1,546 & 4,638 \\
+\quad 4+ children & 393 & 1,662 \\
+\addlinespace
+Twin pregnancies$^\dagger$ & 640 & 1,254 \\
+Triplets & 6 & 18 \\
+Quadruplets & 1 & 4 \\
+\bottomrule
+\multicolumn{3}{l}{\small $^\dagger$26 co-twins appear only in CPPMASTER (early losses); all 640 pairs are complete} \\
+\multicolumn{3}{l}{\small \phantom{$^\dagger$}in the full data (see Section~4.5).}
+\end{tabular}
+\end{table}
+
+\subsection{Twin Zygosity and Kinship Classification}
+
+To facilitate behavior-genetic and sibling-comparison analyses, we constructed a pairwise kinship table following the methodology of the NLSYLinks R package \citep{beasley2016}. Both twin zygosity and sibling relatedness are classified using principled, multi-evidence schemas in which each variable provides weighted evidence toward the final classification.
+
+\paragraph{Twin zygosity classification.} Twin pairs were identified by the \texttt{birth\_switch} variable and classified using five tiers of evidence applied in sequence.
+
+\textit{Tier~0 (authoritative---Myrianthopoulos blood group determinations)}: \citet{myrianthopoulos1975} determined zygosity for CPP twin pairs using a 9-system blood group panel (ABO, Rh, MNSs, Kell, Duffy, Kidd, P, Lewis, Lutheran) tested on cord blood, combined with placental examination. These individual-level determinations---previously thought to be unavailable in the public-use data files---were discovered embedded in column 178 of the congenital malformations work file (\texttt{CONGMALF.ASC}), a standalone dataset in the NARA/NBER Johns Hopkins collection documented in Volume~IV of the original CPP documentation. This tier classified 189 pairs as definite MZ and 315 pairs as definite DZ, resolving 504 of 640 twin pairs (79\%) with the gold-standard serological method. The same work file also contains a father number field (column 179) recording each child's father number (1--5) as assigned during the study, providing direct evidence for half-sibling classification (see below).
+
+\textit{Tier~1 (definitive markers)}: of the remaining 136 pairs, 5 were opposite-sex (therefore DZ); 21 same-sex pairs had discordant blood types (ABO at CPPVAR column 1129, Rh at column 1130) and were classified DZ; and 9 pairs had monochorionic membranes on pathology card 12022 (column 30), making them very probably MZ. We apply the monochorionic criterion before blood types because blood chimerism in monochorionic twins can produce spurious type discordance. \textit{Tier~2 (strong probabilistic)}: 38 pairs with dichorionic membranes were classified DZ probable, since roughly 70--80\% of dichorionic same-sex pairs are DZ.
+
+\textit{Tier~3 (Bayesian classification)}: The 63 same-sex pairs still unclassified after Tiers 0--2 were run through a Bayesian model trained on the Myrianthopoulos-classified pairs (197 MZ, 341 DZ). The model uses four phenotypic features: (1)~Wilson developmental trajectory slope---how fast intrapair physical differences (weight, height, head circumference) grow or shrink with age, since MZ pairs converge and DZ pairs diverge (Cohen's $d = 0.56$); (2)~late concordance---mean intrapair difference at ages 4 and 7 ($d = 1.00$); (3)~absolute WISC FSIQ difference ($d = 0.43$); and (4)~cosine distance between WISC subtest profiles ($d = 0.32$). Priors came from race-specific Weinberg estimates. Ten pairs were classified MZ probable ($P(\text{MZ}) > 0.80$) and 4 DZ probable ($P(\text{MZ}) < 0.20$). The remaining 38 same-sex pairs plus 11 pairs with insufficient data are classified as ambiguous, with $R$ assigned from individual posterior probabilities where available or set to the population-level expectation under the Weinberg differential rule otherwise. As a robustness check, we also evaluated a machine-learning approach (elastic net and random forest with 10-fold cross-validation) using over 800 intrapair phenotypic features; the best model achieved AUC = 0.76, confirming that the Bayesian trajectory model captures most of the discriminative signal available from phenotypic data alone.
+
+Of 640 twin pairs, 189 (30\%) were classified as definite MZ (Myrianthopoulos blood groups, $R = 1.0$), 9 as very probable MZ (monochorionic membrane, $R = 1.0$), 10 as probable MZ (Bayesian, $R = 1.0$), 341 (53\%) as definite DZ (315 Myrianthopoulos $+$ 5 sex discordance $+$ 21 blood type discordant, $R = 0.5$), 42 as probable DZ (38 dichorionic membrane $+$ 4 Bayesian, $R = 0.5$), and 49 as ambiguous ($R$ varies by posterior). Internal validation using WISC FSIQ correlations confirms the classifications: MZ twin pairs yield $r = 0.81$ ($n = 132$), DZ pairs $r = 0.61$ ($n = 226$), full siblings $r = 0.56$ ($n = 7{,}330$), and half-siblings $r = 0.35$ ($n = 926$).
+
+\paragraph{Sibling classification.} For non-twin siblings, we classified full versus half-sibling relationships using a scoring system that integrates eleven evidence types across four tiers. \textit{Tier~0}: the CONGMALF father number variable (column 179), which records each child's father number (1--5) as assigned during the study, provides the most direct evidence of paternity changes ($+8$ points for different father number, $-3$ for same); of 13,264 sibling pairs with father number data for both members, 1,424 had different father numbers and 11,840 had the same. \textit{Tier~1}: the \textit{trajectory} of variable 417 (half-siblings with different father)---specifically, whether a later child gained half-siblings---provides a secondary half-sibling signal ($+3$ points). \textit{Tier~2}: substantial changes in father's race ($+5$), birthplace ($+4$), or an age anomaly inconsistent with the same father ($+3$). \textit{Tier~3}: education jump of 5+ years ($+2$), father's occupation change ($+2$), cumulative marital status changes count increasing between pregnancies ($+2$), marital status change ($+1$), or father's at-home status change ($+1$). Same-father evidence offsets the score: race match ($-2$), age consistent ($-1$), education similar ($-1$), both children's v417 equal to zero ($-1$), and same father number ($-3$). Pairs scoring $\geq 3$ are classified as half-siblings; pairs scoring $\leq -2$ are classified as full siblings; the remainder are ambiguous. As an additional check, we applied ABO Mendelian exclusion to 10,879 sibling pairs with complete blood type data (mother ABO plus both children's ABO). This identified 32 pairs where no single father genotype could produce both children. However, inspection of the actual blood types revealed that \textit{all} 32 exclusions involved impossible mother--child combinations---specifically, type~O mothers recorded with AB children, or AB mothers with type~O children---rather than the pattern expected from different paternity (both children individually compatible with the mother but requiring different fathers). These impossible combinations can only arise from ABO typing errors, not from non-paternity. The base rate of such impossible mother--child combinations in the full sample is 0.14\% (68 of 50,201 trios), consistent with the known $\sim$0.1\% per-test serological error rate in 1960s clinical laboratories. No Mendelian reclassifications were applied. The standalone ``serology'' cards (cards 8131--8133 and 08932) in the NARA/NBER collection were investigated as a potential source of additional blood group data for Mendelian exclusion, but they turn out to contain infectious disease antibody titers (rubella, toxoplasma, coxsackievirus, influenza, polio, herpes, CMV) from epidemiological substudies---not blood group antigen typing. The raw individual-antigen results from Myrianthopoulos' 9-system panel (MNSs, Kell, Duffy, Kidd, P, Lewis, Lutheran) were apparently never digitized; only the final zygosity determination (column~178 of CONGMALF) and simple ABO/Rh types (CPPVAR v1129, v1130) survive in the electronic data. Internal IQ validation shows full-sibling pairs yield $r = 0.56$ ($n = 7{,}330$), half-sibling pairs $r = 0.35$ ($n = 926$), and ambiguous pairs $r = 0.45$ ($n = 614$)---directionally consistent with expected $R$ values. The half-sibling $r$ is substantially higher than the theoretical expectation of $\sim$0.22, likely due to shared maternal environment and assortative mating.
+
+Table~\ref{tab:kinship} summarizes the pairwise kinship links.
+
+\begin{table}[H]
+\centering
+\caption{Pairwise Kinship Links}
+\label{tab:kinship}
+\small
+\begin{tabular}{lrrrl}
+\toprule
+Pair Type & $N$ Pairs & $R$ & Pairs with IQ & Classification Basis \\
+\midrule
+MZ definite (twin) & 189 & 1.00 & 128 & Myrianthopoulos blood groups \\
+MZ very probable (twin) & 9 & 1.00 & 2 & Monochorionic membrane \\
+MZ probable (twin) & 10 & 1.00 & 10 & Bayesian ($P > 0.80$) \\
+DZ definite (twin) & 341 & 0.50 & 255 & Myrianthopoulos/sex/blood \\
+DZ probable (twin) & 42 & 0.50 & 13 & Dichorionic/Bayesian \\
+Ambiguous twin & 49 & varies & 9 & Same-sex, unresolved \\
+\addlinespace
+Full sibling & 10,948 & 0.50 & 8,164 & Scoring $\leq -2$ \\
+Ambiguous sibling & 1,163 & 0.375 & 679 & Intermediate score \\
+Half-sibling & 1,457 & 0.25 & 1,047 & Scoring $\geq 3$ \\
+\midrule
+\textbf{Total} & \textbf{14,208} & & \textbf{10,307$^*$} & \\
+\bottomrule
+\multicolumn{5}{l}{\small $^*$Pairs where both members have any IQ measure; 9,244 with WISC FSIQ.}
+\end{tabular}
+\end{table}
+
+\noindent Both classification files include a \texttt{confidence} column (e.g., \textit{definite}, \textit{probable}, \textit{ambiguous}) and a \texttt{classification\_basis} column documenting which evidence tier determined the classification, so researchers can filter to higher-confidence subsets or include ambiguous pairs with appropriately assigned $R$ values as they see fit. Ambiguous pairs are explicitly labeled as \texttt{ambiguous\_sibling} or \texttt{ambiguous\_twin} in the \texttt{pair\_type} field and are never silently grouped with classified pairs.
+
+\subsection{Supplementary Analysis Files}
+
+To facilitate common analytical tasks, the release includes several pre-computed supplementary files. A \textbf{growth trajectory file} provides 755,739 longitudinal physical measurements (weight, height, head circumference) in long format across 7 age points (birth through 7 years) for 55,443 children, with appropriate unit harmonization (all weights in grams, all lengths in centimeters). \textbf{Birth weight z-scores} are provided for 54,223 children, computed using sex- and gestational-age-specific internal reference curves (LOESS-smoothed within-sample means and SDs for weeks 24--46), yielding standardized scores with mean~0.003 and SD~0.992 as expected. An \textbf{attrition analysis} documents follow-up rates by demographics, site, and SES: among 53,724 survivors, 71.9\% completed the 4-year Stanford-Binet and 75.4\% the 7-year WISC, with minimal SES-based differential attrition (Cohen's $d = 0.04$ for education, $d = -0.02$ for SEI) but substantial site-level variation (28--91\% WISC completion) and lower follow-up among the ``Oriental'' (37\%) and ``Puerto Rican'' (39\%) subsamples. A \textbf{detailed SES file} merges registration-era and 7-year socioeconomic data with father characteristics (age, education, race, occupation, employment, birthplace, at-home status) for 59,391 children. All supplementary files use \texttt{case\_id} as the primary key for merging.
+
+\subsection{CPPMASTER Card Types}
+
+Table~\ref{tab:master} summarizes the master file by subject area.
+
+\begin{table}[H]
+\centering
+\caption{CPPMASTER Card Types by Subject Area}
+\label{tab:master}
+\begin{tabular}{lrr}
+\toprule
+Subject Area & Card Types & Records \\
+\midrule
+Administrative & 3 & 58,760 \\
+Psychology & 53 & 689,656 \\
+Pathology & 8 & 180,831 \\
+Obstetrics & 124 & 3,425,197 \\
+Pediatrics & 100 & 1,307,932 \\
+Family/SES & 20 & 441,185 \\
+Special & 1 & 4,001 \\
+\midrule
+\textbf{Total} & \textbf{309} & \textbf{6,107,562} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Parsed CPPMASTER Cards}
+
+Using the per-card codebooks derived from Vol.\ V, Vol.\ III-B, sequence-variant recovery, and the SAS read-in programs, we parsed every card type into proper CSVs with individually named columns. All 309 card types (100\%) were parsed, covering over 6.1 million records. Table~\ref{tab:parsed} highlights some of the most research-valuable parsed cards.
+
+\begin{table}[H]
+\centering
+\caption{Selected Parsed CPPMASTER Cards}
+\label{tab:parsed}
+\small
+\begin{tabular}{llrr}
+\toprule
+Card & Description & Fields & Records \\
+\midrule
+\multicolumn{4}{l}{\textit{Cognitive assessments}} \\
+11200--41200 & Stanford-Binet, 4-year (4 cards) & 185 & 39,072--39,090 \\
+11300--41300 & WISC \& 7-year battery (4 cards) & 179 & 40,657--40,705 \\
+21100/21101 & 8-month development (2 revisions) & 37 & 4,336/21,175 \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Pediatric/neonatal}} \\
+14020--44021 & Neonatal examination (PED-2, 9 cards) & 133 & 6,188--46,752 \\
+14031 & Nursery feeding/history (PED-3) & 82 & 47,060 \\
+14013 & Delivery room observation (PED-1) & 12 & 42,616 \\
+14120 & First year summary (PED-12) & 437 & 49,503 \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Obstetric}} \\
+03331 & OB delivery (form 33) & 46 & 54,952 \\
+03440/03441 & OB pregnancy conditions (form 44) & 16 & 179,409/238,788 \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Family/SES}} \\
+15011/25010 & Family/SES (form 01, 2 cards) & 73 & 31,757/31,858 \\
+15050--35052 & Socioeconomic info (form 05, 9 cards) & 99--108 & 12,806--21,539 \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Pathology}} \\
+12012/22012 & Pathology (forms 1--2, 2 cards) & 42--46 & 47,177--47,290 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These parsed cards enable analyses directly on the item-level data---for example, detailed nursery feeding histories from PED-3, neonatal neurological assessments, or examination of delivery procedures and pathology findings that are collapsed into summary codes in the variable file.
+
+\subsection{Precomputed Derived Variables}
+
+Beyond the raw and analysis-ready extractions described above, the release includes two files of derived latent variable scores computed from the item-level data: $g$ factor scores (\texttt{cpp\_g\_factors.csv}) and developmental/behavioral factor scores (\texttt{cpp\_item\_scores.csv}). These are provided as a convenience for researchers who wish to use standardized cognitive and developmental measures without re-extracting them from the raw card data.
+
+\subsubsection{$g$ Factor Scores}
+
+We compute latent $g$ factor scores using three extraction methods and three variable sets of increasing breadth. The methods are: principal component analysis (PCA, extracting PC1), principal axis factoring (PAF, common variance only), and confirmatory factor analysis (CFA via \texttt{lavaan}, standardized latent variable). PCA and CFA are applied to all three variable sets; PAF is applied only to the 9- and 11-measure batteries (8 method-battery combinations total). The variable sets are: (1)~WISC-4 (four scaled subtests: Information, Comprehension, Vocabulary, Digit Span; $N = 40{,}165$); (2)~a 9-measure battery (WISC-4 plus WRAT Reading raw, WRAT Spelling raw, WRAT Arithmetic raw, reversed Bender-Gestalt errors, and Goodenough Draw-a-Person raw; $N = 31{,}063$); and (3)~a broad 11-measure battery (adding Conceptual Style Test and Embedded Figures Test; $N = 31{,}061$). PCA variance explained ranges from 58.6\% (WISC-4) to 44.7\% (broad), declining with battery heterogeneity. CFA fit is excellent for the WISC-4 model (CFI $= 0.990$, RMSEA $= 0.071$) but deteriorates with broader batteries, reflecting the mix of scaled, raw, and reversed scoring formats. All extraction methods produce proper solutions across all variable sets---no Heywood cases occur. The loadings file (\texttt{cpp\_g\_loadings.csv}) documents each extraction method's factor loadings, variance explained, and exclusion status.
+
+Note: The column labeled \texttt{wisc\_simil\_raw} in the CPPVAR file was originally included as ``Similarities raw score'' but is in fact Vocabulary raw ($r = 0.930$ with \texttt{wisc\_vocab} scaled; verbal sum = Info + Comp + Vocab + Digit with no Similarities component). It is excluded from all $g$ factor batteries to avoid double-counting Vocabulary. See Section~5 for additional mislabeled variables.
+
+Table~\ref{tab:g_cormat} presents the inter-correlations among the 9 released scores---8 method-battery $g$ factors plus the IRT-based Stanford-Binet score described below. The core finding is that $g$ scores are highly robust to extraction method within the same variable set: PCA-4 and CFA-4 correlate at $r = 0.99$, and PCA-11 and CFA-11 at $r = 0.95$. Battery composition matters more than method: PCA-4 and PCA-9 correlate at $r = 0.88$, reflecting the greater diversity of the 9-measure battery. The CFA-4/CFA-9 gap ($r = 0.70$) is wider than the PCA-4/PCA-9 gap ($r = 0.88$) because CFA imposes a strict unidimensional factor model that fits the 4-subtest WISC well (CFI $= 0.99$) but fits the 9-test battery poorly (CFI $= 0.85$); the resulting misspecification distorts factor score estimates, shifting CFA-9 away from CFA-4 more than PCA (which makes no distributional assumptions) shifts across the same batteries. For most analyses, we recommend PCA-9 (the default \texttt{g\_factor} column in the analysis-ready dataset) or CFA-4 as the primary age-7 $g$ score.
+
+\subsubsection{Stanford-Binet IRT Reconstruction}
+
+The Stanford-Binet at age 4 used adaptive testing with basal/ceiling rules. The examiner began at a level appropriate for the child's estimated ability: if the child passed all items at a given year level, the examiner moved upward; if the child failed all items, the examiner stopped. Items below the established basal year were not administered (assumed all passed), and items above the ceiling were not administered (assumed all failed), as with a Guttman scale. In the raw card data (card 11200), these non-administered items are coded as 8, identical to the code used for genuinely skipped items---making naive IRT analysis impossible.
+
+We reconstruct the full item response vector using the recorded basal year level (stored at position 44 of card 11200, coded 1 = Year~2 start, 2 = Year~3 start). For children with basal = 1 ($n = 20{,}838$), items at Year~2 and below are recoded: 8 $\to$ 1 (pass, below basal). For children with basal = 2 ($n = 16{,}982$), items at Year~3 and below are recoded similarly, while items at Year~2 with code 8 are recoded to 0 (fail, above starting point). Items coded 1 (pass) and 2 (fail) in the original data are recoded to 1 and 0 respectively; code 9 (missing) becomes \texttt{NA}. This procedure yields 12 binary items spanning Years 2--4, of which 8 have sufficient response variance for psychometric analysis.
+
+A 2PL IRT model fitted to the 8 informative items yields theta ($\hat{\theta}$) scores that correlate $r = 0.755$ with the published SB IQ and $r = 0.512$ with WISC FSIQ three years later ($N = 37{,}820$). The modest $r = 0.76$ reflects the narrow difficulty bandwidth of the available items (Years 2--4 only), which limits measurement precision at the tails relative to the full SB administration spanning many more year levels; with only 8 binary items, this is about as high as the correlation can be. Without reconstruction (treating all 8-codes as missing), theta correlates only $r = 0.06$ with SB IQ---demonstrating that the basal/ceiling reconstruction is essential for IRT analysis. Both the raw reconstructed item responses (\texttt{cpp\_sb\_items\_reconstructed.csv}) and the IRT theta scores (included in \texttt{cpp\_g\_factors.csv} as \texttt{g\_irt\_sb\_adaptive}) are provided. The IRT-SB score correlates $r = 0.43$--$0.51$ with the age-7 $g$ scores, consistent with the known test-retest stability of IQ from age 4 to 7.
+
+\subsubsection{Developmental and Behavioral Factor Scores}
+
+We extract factor scores from five major item batteries spanning the neonatal period through age 7, using both PCA (PC1) and IRT (graded response model). All scores are oriented so that higher values indicate better functioning (positive correlation with IQ where available). For items with two-digit categorical coding (category $\times$ subcategory), only the first digit (main category) is used; codes 8 and 9 (not tested/missing) are recoded to NA. The batteries are:
+
+\begin{enumerate}
+\item \textbf{8-month Bayley neural development} (card 11013): 25 items from the Bayley-type neural development examination, scored by PCA (50.7\% variance explained, $N = 39{,}780$) and GRM-IRT ($N = 31{,}037$). PCA criterion validity is $r = 0.14$--$0.16$ with age-4/7 IQ; IRT performs better at $r = 0.21$--$0.22$, matching the pre-computed Bayley Mental Total (v505, 103-item sum, $r = 0.22$ with SB IQ). The PCA score is lower because the card 11013 items are nearly all pass/fail developmental milestones with extreme pass rates (95--99.9\%), leaving little variance for PCA; IRT handles such sparse binary data more appropriately. The overall correlation of $r \approx 0.20$ at 8 months is consistent with the well-established modest predictive power of infant developmental assessments for later cognitive outcomes.
+
+\item \textbf{3-year SLR speech/language readiness} (card 21101): 37 items from the Speech, Language, and Readiness examination, scored by PCA only (14.1\% variance, $N = 7{,}037$). IRT estimation failed for this battery due to items with excessive response categories. The PCA-based criterion validity ($r = 0.16$ with SB IQ, $r = 0.11$ with WISC FSIQ) understates the battery's cognitive content: the Global Scoring item alone correlates $r = 0.42$ with SB IQ, and the Language Reception item $r = 0.42$, because the PCA runs over all 37 items including non-cognitive ones (articulation details, fluency, physical anomalies of the face and mouth). Researchers wanting to use the SLR as a cognitive predictor should extract the core language items (Global Scoring, Language Reception, Language Expression) rather than relying on the omnibus PCA score. The small $N$ (7,037 of 53,640 children with any card data) indicates this card was administered only at a subset of sites or time periods. Due to the low variance explained and poor criterion validity, the SLR PCA score is excluded from the released \texttt{cpp\_item\_scores.csv} file.
+
+\item \textbf{7-year examiner ratings} (card 41300, PSY25 items only): 14 items from the PSY-25 form, deduplicated by column position to remove overlapping entries from the P020 and P037 codebooks that share the same physical card. The PSY25 master index labels (``comprehension,'' ``reading,'' ``personality'') are misleading generic codes from the computerized indexing system; the actual item content, verified against the original PS-38 Test Summary form in Vol.\ II-I, consists of 5 clinical impression ratings (Intelligence, WRAT Spelling, WRAT Arithmetic, Abstract Language Thinking, and Behavioral---each coded Normal/Suspect/Abnormal or Superior/Average/Borderline/Defective), 8 binary physical/behavioral observations (deviant behaviors, physical defects), and 1 administrative item (repeat exam). The factor is dominated by the 5 clinical impression items (highest loadings: Intelligence 0.48, Abstract Language 0.44, WRAT Arithmetic 0.43, WRAT Spelling 0.39, Behavioral 0.36); only the ``Behavioral'' item is a personality-type rating, and even it is a clinical judgment, not a trait measure. PCA: 18.7\% variance, $N = 37{,}069$; GRM-IRT: $N = 40{,}688$. Criterion validity: $r = 0.71$--$0.80$ with WISC FSIQ. Note that the Intelligence clinical impression item is defined relative to WISC IQ (Superior $\geq 120$, Average 80--119, etc.), making the WISC correlation partially tautological. As a cleaner cross-validation, we correlated examiner ratings with a latent $g$ score computed exclusively from paper-and-pencil tests scored from written work (WRAT Reading, Spelling, Arithmetic; Bender Gestalt; Goodenough Draw-a-Person). The examiner IRT rating correlates $r = 0.75$ with this ``non-observed'' $g$ ($N = 30{,}523$), slightly exceeding the $r = 0.71$ correlation between non-observed $g$ and WISC FSIQ itself---demonstrating that the examiner's cognitive impression captures genuine latent ability beyond the specific tests administered.
+
+\item \textbf{7-year neurological/perceptual} (card 31300, deduplicated by column position): 29 items after removing overlapping PSY25/P025 entries. Card 31300 is a heterogeneous composite, not a single clinical instrument: it mixes IQ/achievement scores (intelligence total, WRAT raw scores, percentile rank), behavioral ratings (cooperativeness, self-confidence, fearfulness, goal orientation), neurological soft signs (attention, hyperkinesis, constructional apraxia), and motor scores (tactile finger recognition). Parallel analysis identifies 8 components above random, and a 3-factor varimax solution cleanly separates IQ/achievement ($\alpha = 0.75$, $r = 0.57$ with WISC FSIQ), behavioral ratings ($\alpha = 0.46$), and neurological signs ($\alpha = 0.57$, $r = 0.17$ with WISC FSIQ). PCA only: 14.3\% variance, $N = 10{,}587$. IRT scores are not provided because the unidimensional GRM shows poor fit (see below). The omnibus PCA criterion validity ($r = 0.39$--$0.52$ with IQ) is driven primarily by the IQ/achievement items.
+
+\item \textbf{Neonatal neurological exam} (card 24021, deduplicated by column position): 43 items from the neonatal neurological examination, reduced from 120 codebook entries mapping to 56 unique column positions (2.1$\times$ duplication from overlapping codebook revisions). PCA only: 10.2\% variance, $N = 21{,}875$. IRT scores are not provided due to poor unidimensional fit (see below). Criterion validity with later IQ is negligible ($r \approx 0$). This battery is essentially unfixable for psychometric use: nearly all neonates score ``normal'' on every item (94--100\% at modal value), producing extreme floor effects with mean inter-item $r = 0.04$. The exam was designed to screen for gross neurological abnormality (absent reflexes, severe hypotonia, seizures), not to measure individual differences, and newborns' immature nervous systems cannot produce signals predictive of later cognitive ability with this measure. The PCA score is best interpreted as a binary abnormality flag rather than a continuous scale.
+\end{enumerate}
+
+\noindent\textit{Note:} The card 11200 ``behavioral ratings'' from the P025 codebook (cooperativeness, activity level, etc.) are \textbf{not} included. Investigation revealed that the P025 column positions overlap with Stanford-Binet cognitive item data on the same card; the apparent $r = 0.75$ with SB IQ was entirely artifactual.
+
+\paragraph{IRT model fit.} We evaluated the unidimensional GRM fit for all four batteries with successful IRT estimation using the $M_2$ statistic \citep{maydeu2006}. The 8-month Bayley shows excellent unidimensional fit (RMSEA $= 0.026$, CFI $= 0.997$, SRMSR $= 0.116$; 8 of 25 items with $S$-$X^2$ $p < .001$), consistent with a coherent developmental milestone battery. The 7-year examiner ratings (PSY25) show acceptable fit (RMSEA $= 0.047$, CFI $= 0.901$, SRMSR $= 0.066$; 7 of 14 items misfitting), with CFI/TLI slightly below conventional thresholds reflecting the mix of clinical impression ratings and binary physical/behavioral observations. IRT theta scores are released for these two batteries.
+
+The 7-year neurological battery shows poor unidimensional fit (RMSEA $= 0.093$, CFI $= 0.611$), as expected for a heterogeneous clinical exam spanning perception, intelligence ratings, and neurological signs; several items have near-zero or negative discriminations, indicating substantial multidimensionality. The neonatal neurological battery, even after deduplication, fits poorly (RMSEA $= 0.073$, CFI $= 0.640$), reflecting the diverse clinical domains covered by the neonatal exam. These batteries are not inherently ``broken''---they are simply multidimensional. IRT theta scores are \textit{not} released for these two batteries because the unidimensional model is not supported; only PCA (PC1) scores are provided as broad summaries of overall exam performance. Researchers interested in specific neurological domains (e.g., perceptual skills, attention, soft neurological signs, neonatal reflexes) should extract item subsets from the raw parsed card data and construct domain-specific scales.
+
+All scores are saved in \texttt{cpp\_item\_scores.csv} (53,640 rows $\times$ 7 columns: \texttt{case\_id} plus 4 PCA scores and 2 IRT theta scores) with a companion codebook (\texttt{cpp\_item\_scores\_codebook.csv}) documenting the source card, number of items, sample size, variance explained, and extraction method for each score. IRT scores generally cover more children than PCA scores because the EAP scoring method handles missing item responses, while PCA requires complete cases.
+
+\begin{table}[H]
+\centering
+\caption{Inter-Correlations Among $g$ Factor Scores}
+\label{tab:g_cormat}
+\small
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+ & PCA-4 & PCA-9 & PCA-11 & PAF-9 & PAF-11 & CFA-4 & CFA-9 & CFA-11 & IRT-SB \\
+\midrule
+PCA-4 & \cellcolor{green!40} \textbf{1.00} & & & & & & & & \\
+PCA-9 & \cellcolor{green!30} .88 & \cellcolor{green!40} \textbf{1.00} & & & & & & & \\
+PCA-11 & \cellcolor{green!30} .88 & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!40} \textbf{1.00} & & & & & & \\
+PAF-9 & \cellcolor{green!20} .84 & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!40} \textbf{.98} & \cellcolor{green!40} \textbf{1.00} & & & & & \\
+PAF-11 & \cellcolor{green!30} .86 & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!40} \textbf{1.00} & & & & \\
+CFA-4 & \cellcolor{green!40} \textbf{.99} & \cellcolor{green!30} .86 & \cellcolor{green!30} .87 & \cellcolor{green!20} .82 & \cellcolor{green!20} .85 & \cellcolor{green!40} \textbf{1.00} & & & \\
+CFA-9 & \cellcolor{green!20} .71 & \cellcolor{green!30} .94 & \cellcolor{green!30} .93 & \cellcolor{green!40} \textbf{.97} & \cellcolor{green!40} \textbf{.95} & \cellcolor{yellow!30} .70 & \cellcolor{green!40} \textbf{1.00} & & \\
+CFA-11 & \cellcolor{green!20} .75 & \cellcolor{green!40} \textbf{.96} & \cellcolor{green!40} \textbf{.95} & \cellcolor{green!40} \textbf{.98} & \cellcolor{green!40} \textbf{.97} & \cellcolor{green!20} .73 & \cellcolor{green!40} \textbf{1.00} & \cellcolor{green!40} \textbf{1.00} & \\
+IRT-SB & \cellcolor{yellow!30} .51 & \cellcolor{yellow!30} .50 & \cellcolor{yellow!30} .51 & \cellcolor{yellow!15} .48 & \cellcolor{yellow!30} .50 & \cellcolor{yellow!30} .51 & \cellcolor{yellow!15} .43 & \cellcolor{yellow!15} .45 & \cellcolor{green!40} \textbf{1.00} \\
+\midrule
+$r$(WISC) & .89 & .86 & .90 & .83 & .87 & .88 & .74 & .78 & .51 \\
+$r$(SB) & .65 & .65 & .66 & .64 & .65 & .65 & .57 & .60 & .76 \\
+$N$ & \multicolumn{8}{c}{Age-7 measures: 31,061--40,165} & 37,818 \\
+\bottomrule
+\end{tabular}
+\par\vspace{4pt}
+{\footnotesize Note: Lower triangle shows pairwise correlations among the 9 released scores (8 method-battery $g$ factors plus IRT-SB). Bottom rows show criterion validity against WISC FSIQ (age 7) and SB IQ (age 4). PCA = principal component analysis; PAF = principal axis factoring; CFA = confirmatory factor analysis; IRT-SB = item response theory on reconstructed Stanford-Binet items (age 4). Numbers indicate the variable set: 4 = WISC subtests only; 9 = standard 9-measure battery; 11 = broad 11-measure battery. \colorbox{green!40}{Green} = $r \geq 0.95$; \colorbox{green!30}{green} = $0.85$--$0.95$; \colorbox{green!20}{green} = $0.70$--$0.85$; \colorbox{yellow!30}{yellow} = $0.50$--$0.70$; \colorbox{yellow!15}{yellow} = $0.30$--$0.50$; unshaded $< 0.30$.}
+\end{table}
+
+\subsection{Survey Weights}
+\label{sec:weights}
+
+The CPP was not a probability sample of U.S.\ births: it enrolled from 12 large urban teaching hospitals, overrepresenting Black mothers (45.9\% vs.\ 16.9\% nationally) and omitting rural births entirely. To enable approximately representative estimation, the release includes three classes of survey weights in \texttt{cpp\_weights.csv} (59,391 rows, 17 columns).
+
+\paragraph{Inverse probability weights (IPW).} For each of three follow-up waves (age 4, age 7, any follow-up), two logistic regression models predict follow-up participation from baseline covariates. The \textit{parsimonious} model uses 6 predictors (race, sex, site, maternal education, SEI, maternal age); the \textit{full} model adds marital status, smoking, birth weight, gestational age, parity, and income (with missing-indicator imputation for continuous variables and ``missing'' factor levels for categorical variables to avoid listwise deletion). IPW weights are $1/\hat{p}$ for followed children, trimmed at the 1st and 99th percentiles and normalized to mean~1. This yields 6 IPW columns (3 waves $\times$ 2 specifications).
+
+\paragraph{Population weights via raking.} Iterative proportional fitting (raking) adjusts marginal distributions to match 1960--65 U.S.\ Vital Statistics, NCHS natality data, and the 1960 Census. Three variants are provided: (1)~a 7-dimension national weight (\texttt{popwt\_national}) raking on race $\times$ education (8 cells), maternal age (5 categories), child sex, birth order (4 categories), marital status, and Census region (4 regions); (2)~a 6-dimension national weight without region (\texttt{popwt\_national\_noregion}), which yields better effective sample sizes because the CPP's extreme geographic concentration forces large adjustments when region is included; and (3)~a 6-dimension urban weight (\texttt{popwt\_urban}), using metropolitan-specific targets from Census SMSA reports and NCHS metro/nonmetro natality data. The urban weight is recommended for most analyses because all 12 CPP sites are urban teaching hospitals, making urban-specific targets more appropriate than national targets.
+
+\paragraph{Combined weights.} For analyses of follow-up outcomes (e.g., age-7 WISC IQ), combined weights multiply the full IPW attrition weight by the population weight, then re-trim and renormalize. Four combined columns are provided: \texttt{combined\_age7\_national}, \texttt{combined\_age7\_urban}, \texttt{combined\_age4\_national}, and \texttt{combined\_age4\_urban}. A companion codebook (\texttt{cpp\_weights\_codebook.csv}) documents all 17 columns.
+
+\section{Known Data Issues}
+
+The feeding variables are a trap for the unwary. ``Breast-feeding days'' and ``bottle-feeding days'' refer only to what happened in the hospital nursery---the first few days of life. They have nothing to do with how the child was fed after going home. Worse, the SES gradient ran the other way in the 1960s: poorer mothers breast-fed in the nursery, wealthier ones bottle-fed. Anyone who runs a regression of child IQ on breast-feeding without accounting for this will get a negative coefficient and draw exactly the wrong conclusion.
+
+There is no data past the 7-year assessment. Johns Hopkins followed its Baltimore cohort (site 37) to age 33 in the ``Pathways to Adulthood'' study, and a few other sites did smaller follow-ups, but those data sit with the individual institutions. Mothers were never tested for IQ; education and the Duncan SEI are the only proxies. There are no genotypes beyond blood groups---behavior genetic analyses must rely on kinship links.
+
+On the raw file: columns 571--575 have data but the codebook page covering them is missing from the OCR source (they look like delivery procedure flags); columns 28--30 and 1492--1600 are blank padding.
+
+\subsubsection*{Mislabeled Variables}
+
+Four cognitive variables in CPPVAR have wrong labels, which we caught by cross-validating against the raw card data. Table~\ref{tab:mislabeled} summarizes the problem. The analysis-ready dataset ships with the corrected versions; see \texttt{MISLABELED\_VARIABLES.md}.
+
+\begin{table}[H]
+\centering
+\caption{Mislabeled Variables in CPPVAR}
+\label{tab:mislabeled}
+\begin{tabular}{lll}
+\toprule
+CPPVAR Name & Codebook Label & Actually Contains \\
+\midrule
+\texttt{bender\_raw} & Bender-Gestalt raw & WISC Picture Arrangement raw \\
+\texttt{wrat\_read} & WRAT Reading & WISC Verbal Scaled Score \\
+\texttt{auditory\_vocal} & Auditory-Vocal Assoc. & WISC Performance subtest sum \\
+\texttt{wisc\_simil\_raw} & Similarities raw & Vocabulary raw \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Each mislabel was confirmed by perfect or near-perfect correlation ($r = 0.93$--$1.00$) with the variable it actually contains. The Bender-Gestalt total error score is the CPPVAR field \texttt{v3\_bender\_total\_errors} (available in the analysis-ready file as \texttt{bender\_gestalt\_errors}; $N = 40{,}399$, $M = 7.1$, $r = 0.55$ with WISC FSIQ). The field \texttt{ps30\_col71} (columns 71--72 of card 21300) is a weak proxy rather than the Bender total ($r = 0.21$ with the CPPVAR Bender; $r = 0.32$ with FSIQ). The WRAT Reading raw score is in \texttt{wrat\_read\_raw}. No genuine ITPA Auditory-Vocal Association score exists in the age-7 data. Similarities was not administered as a scored subtest in the CPP battery---the variable labeled as such is actually Vocabulary. The \texttt{picarr\_raw} field contains WISC Picture Arrangement raw scores, and \texttt{block\_design\_raw\_alt} contains the alternate WISC Block Design raw extraction.
+
+\section{Data Availability}
+
+\subsection{Hosting}
+
+Everything is on GitHub at \url{https://github.com/ljlasker/CollaborativePerinatalProject}, with a documentation site at \url{https://ljlasker.github.io/CollaborativePerinatalProject/}. Data files are attached as GitHub Release assets so they can be downloaded directly without registration. A single zip archive (\texttt{CPP\_Data\_Release.zip}, roughly 677 MB) bundles all tiers described below. The documentation site has a searchable codebook browser (7,396 variables), download links, code examples, and a getting-started guide.
+
+\subsection{Data Tiers}
+
+The release is organized into tiers of increasing granularity.
+
+\paragraph{Tier 1: Analysis-Ready Dataset.}
+Most users will only need \texttt{cpp\_clean\_expanded.csv}: 59,391 children $\times$ 315 variables, with missing values coded as \texttt{NA}, factor labels applied, and codebook errors corrected. The 315 variables span demographics, SES, all WISC scores (IQ composites plus the seven scaled subtests and their raw counterparts), Goodenough Draw-a-Person, expanded WRAT scores, Stanford-Binet IQ, 15 PSY-25 behavioral ratings, examiner impressions, the corrected Bender Gestalt (see Section~5), birth outcomes, Apgar scores (including five-minute component scores for heart rate, respiration, muscle tone, reflex irritability, and color), nursery feeding, pregnancy conditions, musculoskeletal exam items, school status, handedness, delivery method (including cesarean section flag), paternal characteristics (age, education, race, occupation, employment), prior fetal/neonatal death breakdowns, birth length, maternal anthropometrics (height and pre-pregnancy weight), neonatal head circumference, labor and delivery details (onset of labor, labor duration, delivery complications), developmental outcomes (Bayley MDI and PDI at 8 months, speech/language/hearing assessments at 3 years, 4-year clinical impressions), growth trajectories at intermediate ages (4 months, 1 year, 4 years), specific maternal medical conditions (diabetes, syphilis, anemia, seizure disorder, substance use), neonatal findings (bilirubin, brain abnormality, seizures), and motor dominance/laterality. Pregnancy-history counts use the documented sentinel semantics: a no-prior-pregnancy code is represented as zero, while an unknown count remains missing. WISC Verbal IQ and Performance IQ are extracted directly from card~21300 using column positions verified against the JHU SAS programs---they do not come from the CPPVAR summary fields, which we found to be less reliable. The corrected VIQ correlates $r = 0.995$ with the verbal subtest sum; PIQ correlates $r = 0.89$ with FSIQ, consistent with it being one of two major FSIQ components. Available in CSV and \texttt{.rds} formats.
+
+\paragraph{Tier 2: Complete CPPVAR Extraction.}
+\texttt{cppvar\_all\_columns.csv} is the ``everything'' version: 1,236 columns extracted from CPPVAR.ASC and kept as character strings (59,391 rows). \texttt{CPP\_Codebook.csv} contains 1,244 documentation entries covering the 1,600-character source record.
+
+\paragraph{Tier 2b: Unified Wide Dataset.}
+For users who want a single flat file, \texttt{cpp\_unified\_\allowbreak wide.rds} merges cleaned CPPVAR variables (prefixed \texttt{v3\_}), CPPMASTER card variables (prefixed \texttt{c[NNNN]\_}), and 20 standalone datasets (prefixed \texttt{sa\_}) into one table: 60,016 canonical records $\times$ 4,862 variables. The file contains all 59,391 CPPVAR records plus 625 records found only in CPPMASTER or standalone sources. Source-proven identifier aliases are coalesced before the sources are overlaid, with no conflicting populated cells. A manifest (\texttt{cpp\_unified\_manifest.csv}) documents every column. A CPPMASTER-only alternative (\texttt{cpp\_comprehensive.csv}, 60,010 rows $\times$ 7,077 columns) is also available; the 26 multi-record card types come as separate \texttt{cpp\_multirow\_XXXX.csv} files.
+
+\paragraph{Tier 3: Complete CPPMASTER Extraction.}
+One CSV per card type lives in \texttt{master/} (309 files), each with a field-level codebook. Parsed named-column versions are in \texttt{master/\allowbreak parsed/}---6.1 million records across all types. The file \texttt{vol3b\_crossref.csv} traces each CPPVAR field to its source card and columns.
+
+\paragraph{Tier 3b: Standalone Datasets.}
+Thirty-one additional fixed-width ASCII files from the NARA/NBER Johns Hopkins collection sit outside the CPPVAR/CPPMASTER structure. We parsed all of them using the SAS read-in programs shipped with the collection (1,515,805 records total). The largest: serology cards containing infectious disease antibody titers from epidemiological substudies ($\sim$332K records), drug files ($\sim$452K), and prenatal/postnatal visits ($\sim$267K). Congenital malformations, toxemia assessments, the 7-year abnormality summary, and socioeconomic index files are smaller. The serology and drug files were left out of the standard NICHD data subset on purpose and, as far as we know, have not been available in parsed form before.
+
+\paragraph{Tier 3c: Supplementary Analysis Files.}
+Pre-computed files for common analytical tasks:
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+    \item \texttt{cpp\_growth\_trajectories.csv} --- 755,739 longitudinal physical measurements for 55,443 children
+    \item \texttt{cpp\_birthweight\_zscores.csv} --- sex- and gestational-age-specific $z$-scores for 54,223 children
+    \item \texttt{cpp\_hc\_zscores.csv} --- head circumference $z$-scores at 6 ages (186,149 records)
+    \item \texttt{cpp\_growth\_velocity.csv} --- weight, height, and HC gains between key ages
+    \item \texttt{cpp\_ses\_detailed.csv} --- merged registration and 7-year SES with father characteristics
+    \item \texttt{cpp\_attrition\_analysis.csv} --- follow-up rates by demographics, site, and SES
+    \item \texttt{cpp\_birthweight\_reference.csv} --- internal reference curves
+    \item \texttt{cpp\_cognitive\_scores.csv} --- raw scores, $z$-scores, and $g$ factor scores for 11 cognitive measures
+    \item \texttt{cpp\_g\_factors.csv} --- 8 $g$ factor scores via PCA, PAF, and CFA across three variable sets, plus IRT-SB adaptive theta (see Section~4.9.1)
+    \item \texttt{cpp\_g\_loadings.csv} --- factor loadings for each extraction method
+    \item \texttt{cpp\_sb\_items.csv} --- Stanford-Binet raw item-level responses (39,090 children)
+    \item \texttt{cpp\_sb\_items\_\allowbreak reconstructed.csv} --- basal/ceiling-reconstructed binary item responses (37,820 children; see Section~4.9.2)
+    \item \texttt{cpp\_item\_scores.csv} --- PCA and IRT factor scores from 4 developmental/behavioral item batteries (see Section~4.9.3)
+    \item \texttt{cpp\_item\_scores\_codebook.csv} --- documentation for all item battery scores
+    \item \texttt{cpp\_discordant\_pairs.csv} --- 11,539 sibling/twin pairs flagged for discordance on smoking, breastfeeding, and birth weight
+    \item \texttt{cpp\_disability\_discordance.csv} --- 53,640 children classified on 10 disability criteria
+    \item \texttt{cpp\_weights.csv} --- survey weights for nationally representative estimation (see Section~\ref{sec:weights})
+\end{itemize}
+
+\paragraph{Tier 3d: Integrated Domain Files.}
+We merged all Stata \texttt{.dta} datasets and standalone CSVs from the NARA/NBER Johns Hopkins collection into 11 domain-specific analysis files (RDS format), each keyed by the standard 9-digit case identifier with multi-card records coalesced to one row per child/pregnancy:
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+    \item \texttt{nichd\_psychology.rds} --- 44,445 children $\times$ 894 variables (8-month Bayley, 3-year speech/language/hearing, 4-year Stanford-Binet, 7-year WISC, WRAT, Bender-Gestalt, audiology)
+    \item \texttt{nichd\_pediatric.rds} --- 50,099 children $\times$ 1,651 variables (neonatal exam, 4-month/1-year pediatric exams, growth, 7-year neurology and conditions)
+    \item \texttt{nichd\_mother\_path.rds} --- 29,388 pregnancies $\times$ 540 variables (placenta pathology, maternal obstetric data)
+    \item \texttt{nichd\_summary7.rds} --- 36,757 children $\times$ 216 variables (cumulative conditions through age 7)
+    \item \texttt{nichd\_serology\_dta.rds} --- 62,407 children $\times$ 395 variables (19 serology Stata files: ABO/Rh typing, clinical infection, antibody titers)
+    \item \texttt{nichd\_adm44.rds} --- 4,001 records $\times$ 19 variables (death certificates and non-liveborn outcomes, parsed from ASCII)
+    \item \texttt{standalone\_health.rds} --- 111,608 records $\times$ 201 variables (congenital malformations, 7-year abnormalities, toxemia, ruptured membranes)
+    \item \texttt{standalone\_ses.rds} --- 80,768 records $\times$ 108 variables (socioeconomic indices at registration and age 7)
+    \item \texttt{standalone\_serology.rds} --- 89,509 records $\times$ 307 variables (serology card CSVs)
+    \item \texttt{standalone\_drugs.rds} --- 49,214 records $\times$ 43 variables (generic and brand drug name files)
+    \item \texttt{standalone\_other.rds} --- 218,079 records $\times$ 246 variables (visit/\allowbreak schedule, speech/\allowbreak language/\allowbreak hearing, W17 relationship files)
+\end{itemize}
+A master codebook (\texttt{master\_codebook.csv}, 4,814 entries) documents all variables across the 11 domains, and a traceability matrix verifies that every NARA file unit maps to at least one integrated output.
+
+\paragraph{Tier 4: Family Structure and Kinship.}
+\texttt{cpp\_twin\_zygosity.csv} provides twin pair classifications (640 pairs) using a five-tier evidence schema: Myrianthopoulos' authoritative blood group determinations recovered from the CONGMALF work file (504 pairs, 79\%), definitive biological markers (sex discordance, monochorionic membrane, blood type discordance), dichorionic membrane evidence, Bayesian classification using Wilson developmental trajectory features trained on the Myrianthopoulos pairs, and population-level priors for unresolved pairs. Each pair receives a zygosity class and coefficient of relatedness. \texttt{cpp\_kinship\_links.csv} provides NLSYLinks-style pairwise kinship links (14,208 pairs) with pair type, coefficient of relatedness ($R$), and classification confidence for all within-family sibling and twin pairs. Sibling pairs are classified using a multi-indicator scoring system integrating eleven evidence types, anchored by the CONGMALF father number variable which provides direct evidence of paternity changes. \texttt{cpp\_extended\_kinship\_links.csv} provides 13,513 additional cross-family kinship pairs constructed from the NARA W17C--M work files, which record relationships between children in different families identified by CPP field staff: 9,060 first-cousin pairs, 1,702 second-cousin pairs, 1,266 first-cousins-once-removed, 720 half-first-cousins, 435 half-nieces/nephews, and 330 nieces/nephews. Each pair includes relationship type and genetic relatedness coefficient ($R$ from 0.25 to 0.03125). The total kinship dataset thus spans 27,721 classified pairs across seven levels of genetic relatedness.
+
+\paragraph{Tier 5: OCR'd Documentation.}
+Plain-text transcriptions of all 19 documentation volumes (5,296 pages), including the structured CSV versions of Vol.\ III-A and Vol.\ V.
+
+\medskip
+All processing scripts (Python and R) are included for reproducibility. The original raw data files (\texttt{CPPVAR.ASC} and \texttt{CPPMASTER.ASC}) and the 31 standalone datasets are available through the National Archives and NBER Johns Hopkins collection; the 35 SAS read-in programs that provide definitive column layouts for all CPP forms are included in the collection and in our release.
+
+\subsection{Getting Started}
+
+Most users should begin with the Tier~1 analysis-ready file (\texttt{cpp\_clean\_expanded.csv}), which provides 315 key variables per child with cleaned values and meaningful variable names. For sibling and twin analyses, merge with \texttt{cpp\_kinship\_links.csv}. For additional card-level detail, use the unified wide file (\texttt{cpp\_unified\_wide.rds}) or query individual parsed card files in \texttt{master/parsed/}.
+
+\paragraph{Loading the data in R (from local files).}
+\begin{verbatim}
+library(data.table)
+
+# Load analysis-ready dataset
+d <- fread("clean/cpp_clean_expanded.csv") # 59,391 x 315
+d[, case_id := as.character(case_id)]
+
+# Load kinship links for sibling/twin analyses
+links <- fread("clean/cpp_kinship_links.csv",
+               colClasses = c(id_1="character", id_2="character"))
+
+# Load precomputed g factor scores
+g <- fread("clean/cpp_g_factors.csv",
+           colClasses = c(case_id="character"))
+d <- merge(d, g, by = "case_id", all.x = TRUE)
+
+# Basic analysis: IQ by race
+d[, .(mean_iq = mean(wisc_fsiq, na.rm=TRUE),
+      sd_iq = sd(wisc_fsiq, na.rm=TRUE),
+      n = sum(!is.na(wisc_fsiq))), by = race]
+\end{verbatim}
+
+\paragraph{Loading directly from GitHub in R.}
+\begin{verbatim}
+library(data.table)
+base <- paste0("https://github.com/ljlasker/",
+               "CollaborativePerinatalProject/",
+               "releases/download/v2.0/")
+d <- fread(paste0(base, "cpp_clean_expanded.csv"))
+d[, case_id := as.character(case_id)]
+\end{verbatim}
+
+\paragraph{Loading in Python (from local files).}
+\begin{verbatim}
+import pandas as pd
+
+d = pd.read_csv("clean/cpp_clean_expanded.csv",
+                 dtype={"case_id": str, "mother_id": str})
+links = pd.read_csv("clean/cpp_kinship_links.csv",
+                     dtype={"id_1": str, "id_2": str})
+\end{verbatim}
+
+\paragraph{Loading directly from GitHub in Python.}
+\begin{verbatim}
+import pandas as pd
+base = ("https://github.com/ljlasker/"
+        "CollaborativePerinatalProject/"
+        "releases/download/v2.0/")
+d = pd.read_csv(base + "cpp_clean_expanded.csv",
+                dtype={"case_id": str, "mother_id": str})
+\end{verbatim}
+
+\paragraph{Loading in Stata.}
+\begin{verbatim}
+import delimited "clean/cpp_clean_expanded.csv", clear
+tostring case_id mother_id, replace
+\end{verbatim}
+
+\paragraph{Key identifiers.} The \texttt{case\_id} variable is a canonical nine-character key for each pregnancy/child. The seven-character \texttt{mother\_id} identifies the biological mother, enabling within-family designs: children sharing a \texttt{mother\_id} are siblings (full or half). Twin pairs, full siblings, and half-siblings are explicitly classified in \texttt{cpp\_kinship\_links.csv} with coefficients of relatedness. Both identifiers should always be read as strings, not integers, to preserve leading zeros at some sites.
+
+\paragraph{Recommended workflow for within-family analyses.}
+\begin{enumerate}
+    \item Load \texttt{cpp\_clean\_expanded.csv} and restrict to the outcome of interest (e.g., \texttt{!is.na(\allowbreak wisc\_fsiq)}).
+    \item Identify families with 2+ children using \texttt{mother\_id}.
+    \item Use \texttt{fixest::feols()} in R or \texttt{xtreg, fe} in Stata with \texttt{mother\_id} as the panel variable.
+    \item For behavior genetic analyses, merge with \texttt{cpp\_kinship\_links.csv} to obtain relatedness-classified pairs.
+\end{enumerate}
+
+\paragraph{Codebooks.} Every file in the release has a companion codebook. The primary codebook is \texttt{CPP\_Codebook.csv} (1,244 entries covering the CPPVAR source record). The unified wide file has \texttt{cpp\_unified\_manifest.csv} (4,862 entries). Individual parsed CPPMASTER cards have per-card field files in \texttt{master/parsed/}. The \texttt{cpp\_item\_scores\_codebook.csv} documents all derived factor scores.
+
+\paragraph{Survey weights.} For nationally representative estimation, merge \texttt{cpp\_weights.csv} (see Section~\ref{sec:weights}). For age-7 outcomes, use \texttt{combined\_age7\_national} (or \texttt{combined\_age7\_urban} for urban-only inference); for age-4 outcomes, use \texttt{combined\_age4\_national}. These combine inverse-probability attrition weights with population raking weights calibrated to 1960--65 Vital Statistics marginals.
+
+\section{Processing Notes}
+
+Documentation OCR and extraction were performed with reproducible Python and R scripts. Volumes III-A and V were converted to structured field-level codebooks; the remaining volumes were processed with Tesseract 5.4.0 and PyMuPDF for image extraction. All outputs were validated against source layouts, known empirical distributions, and published statistics from the original CPP publications.
+
+Processing was performed using Python 3.12, R 4.3.1, and the following R packages: \texttt{data.table} for data manipulation, \texttt{psych} for factor analysis, \texttt{fixest} for fixed-effects regression, and \texttt{lavaan} for structural equation modeling. A companion paper demonstrates the dataset's research value through analyses spanning behavior genetics, developmental psychology, and social epidemiology, including multi-level ACE decomposition using four relatedness levels, within-family birth order and breastfeeding analyses, measurement invariance testing of the WISC across demographic groups, and between-group decomposition of cognitive differences using a corrected cognitive battery.
+
+\section*{Acknowledgments}
+
+The Collaborative Perinatal Project was supported by the National Institute of Neurological Diseases and Stroke (NINDS). We gratefully acknowledge the foundational contributions of the principal investigators and key personnel who designed, managed, and analyzed the original study: Kenneth R.\ Niswander and Myron Gordon, who directed the project and authored the definitive monograph on the cohort; Sarah H.\ Broman, Paul L.\ Nichols, and Wallace A.\ Kennedy, whose analyses of the cognitive data remain essential references; Ntinos C.\ Myrianthopoulos, whose meticulous serological zygosity determinations of the twin sample made behavior-genetic work possible; and Janet B.\ Hardy, who maintained the Baltimore cohort and championed the study's scientific legacy for decades. We also thank the staff and investigators at all 12 participating institutions, the National Archives and Records Administration (NARA) for preserving the original records, the National Bureau of Economic Research (NBER) and Johns Hopkins University for digitizing and maintaining the data files, and above all the approximately 60,000 families whose participation created this irreplaceable scientific resource.
+
+\bibliographystyle{apalike}
+\begin{thebibliography}{9}
+
+\bibitem[Broman et~al., 1975]{broman1975}
+Broman, S.~H., Nichols, P.~L., \& Kennedy, W.~A. (1975).
+\newblock {\em Preschool IQ: Prenatal and Early Developmental Correlates}.
+\newblock Hillsdale, NJ: Lawrence Erlbaum Associates.
+
+\bibitem[Broman et~al., 1987]{broman1987}
+Broman, S.~H., Bien, E., \& Shaughnessy, P. (1987).
+\newblock {\em Low Achieving Children: The First Seven Years}.
+\newblock Hillsdale, NJ: Lawrence Erlbaum Associates.
+
+\bibitem[Hardy, 2003]{hardy2003}
+Hardy, J.~B. (2003).
+\newblock The {C}ollaborative {P}erinatal {P}roject: Lessons and legacy.
+\newblock {\em Annals of Epidemiology}, 13(5):303--311.
+
+\bibitem[Myrianthopoulos, 1975]{myrianthopoulos1975}
+Myrianthopoulos, N.~C. (1975).
+\newblock An epidemiologic survey of twins in a large, prospectively studied population.
+\newblock {\em American Journal of Human Genetics}, 27(2):158--165.
+
+\bibitem[Niswander \& Gordon, 1972]{niswander1972}
+Niswander, K.~R. \& Gordon, M. (1972).
+\newblock {\em The Women and Their Pregnancies: The Collaborative Perinatal Study of the National Institute of Neurological Diseases and Stroke}.
+\newblock Philadelphia: W.~B.\ Saunders.
+
+\bibitem[Maydeu-Olivares \& Joe, 2006]{maydeu2006}
+Maydeu-Olivares, A. \& Joe, H. (2006).
+\newblock Limited information goodness-of-fit testing in multidimensional contingency tables.
+\newblock {\em Psychometrika}, 71(4):713--732.
+
+\bibitem[Beasley et~al., 2016]{beasley2016}
+Beasley, W.~H., Rodgers, J.~L., \& Rowe, D.~C. (2016).
+\newblock {\em NLSYLinks: Utilities and kinship information for research with the NLSY}.
+\newblock R package version 2.0.6.
+
+\end{thebibliography}
+
+\end{document}

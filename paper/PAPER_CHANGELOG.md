@@ -1,5 +1,16 @@
 # Analysis paper changelog
 
+## Artifact integrity maintenance — 2026-08-24
+
+- Rebuilt the data paper directly from its LaTeX source to remove a
+  viewer-dependent font-encoding defect and retained that source with the
+  release materials.
+- Normalized the analysis paper's embedded figure PDFs for strict PDF-parser
+  compatibility. Page rendering, extracted text, numerical results, and
+  interpretation are unchanged.
+- Synchronized the dated analysis-script archive with the canonical production
+  archive and sanitized machine-local paths from release-audit metadata.
+
 ## Public release numbering — 2026-08-24
 
 - Updated the data paper's two direct-download examples to public release v2.0.
