@@ -34,8 +34,13 @@ the manuscript's family-based inference.
 ### Inference and sensitivity improvements
 
 - Clustered child-level sibling regressions by mother and verified unique child IDs.
-- Replaced pair-row resampling with mother-block resampling for family-pair sensitivity
-  analyses, because some mothers contribute more than one pair.
+- Replaced pair-row resampling with connected-pedigree block resampling and added
+  one-pair-per-documented-pedigree refits, because dyads can share mothers or belong to
+  the same extended family.
+- Verified the multi-level behavior-genetic result under pedigree dependence. The raw
+  kinship-correlation ordering is stable, the 12-measure IP remains strongly preferred
+  to the CP with one dyad per component, and 100 WISC refits plus 100 component
+  bootstraps preserve the model ordering and loading pattern.
 - Added sibling and first-cousin cohort-trend analyses. The within-mother WISC estimate
   is imprecise and near zero; cousin estimates vary with weighting and therefore do not
   establish a uniform null across every design.
@@ -68,4 +73,5 @@ the manuscript's family-based inference.
 - Added `cpp_analysis_scripts.zip` as the primary production-code bundle. It contains the
   declared analysis pipeline and an internal SHA-256 manifest; version-comparison and
   correction-audit materials remain outside the primary reproducibility package.
-- The analysis manuscript and data archive are unchanged from the verified v3.3.1 files.
+- Refreshed the analysis manuscript and primary code bundle with the pedigree-robust
+  inference. The data paper and data archive are unchanged.

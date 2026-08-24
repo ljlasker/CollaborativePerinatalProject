@@ -27,8 +27,8 @@
   smoking, resource-dilution, paternal-age, GDM, HC, and cohort/Flynn outputs
   were regenerated.
 - Corrected mother-FE inference to cluster by mother in the HC and GDM analyses.
-- Added a reproducible birth-cohort/Flynn script and a family-block-bootstrap,
-  one-pair-per-family sensitivity analysis for pair reuse.
+- Added a reproducible birth-cohort/Flynn script, connected-pedigree bootstrap
+  inference, and one-pair-per-component pathway-model tests.
 - Made the master analysis runner fail fast and write a per-script status log.
 
 ### Interpretation
@@ -39,8 +39,10 @@
   its causal sign is not identified after allowing for maternal age/calendar
   time. The birth-cohort sibling estimate with sex and live-birth rank is +0.074
   SD/decade (95% CI −0.136, +0.283), providing no clear NCPP Flynn effect.
-- Pair-reuse sensitivity leaves WISC correlations nearly unchanged, but legacy
-  pair-level model-fit tests and pair bootstraps are flagged as potentially
-  overprecise because pairs within extended families are not independent.
+- Connected-pedigree block bootstraps leave WISC correlations nearly unchanged.
+  A one-pair-per-documented-pedigree refit strongly favors the IP over the CP
+  for the full 12-measure battery, and 100 WISC refits plus 100 connected-family
+  bootstraps confirm that the model ordering and loading pattern do not depend
+  on dyad reuse.
 
 The v3.2 assets remain available for provenance and are not silently replaced.
