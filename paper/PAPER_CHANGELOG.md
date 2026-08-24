@@ -59,3 +59,13 @@ the manuscript's family-based inference.
 - Added a targeted correction suite covering 31 affected scripts and a final invariant
   validator. The suite and validator pass on the staged release inputs.
 - Added a dated analysis-code archive with an internal SHA-256 manifest.
+
+## Publication assets — 2026-08-24
+
+- Refreshed `cpp_data_paper.pdf` so its release dimensions, canonical-ID description,
+  pregnancy-history sentinel semantics, download examples, and codebook counts match the
+  public data files.
+- Added `cpp_analysis_scripts.zip` as the primary production-code bundle. It contains the
+  declared analysis pipeline and an internal SHA-256 manifest; version-comparison and
+  correction-audit materials remain outside the primary reproducibility package.
+- The analysis manuscript and data archive are unchanged from the verified v3.3.1 files.
