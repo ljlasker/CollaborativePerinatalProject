@@ -9,7 +9,9 @@
   compatibility. Page rendering, extracted text, numerical results, and
   interpretation are unchanged.
 - Synchronized the dated analysis-script archive with the canonical production
-  archive and sanitized machine-local paths from release-audit metadata.
+  archive, synchronized the direct-download sentinel guide and ID-alias list
+  with their archived copies, and sanitized machine-local paths from
+  release-audit metadata.
 
 ## Public release numbering — 2026-08-24
 

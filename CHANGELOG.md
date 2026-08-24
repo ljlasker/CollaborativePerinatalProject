@@ -39,8 +39,8 @@ release was v1.0 (Git tag/internal build v3.2).
 - Made the master analysis runner fail fast and write a per-script status log.
 - Rebuilt the data paper from source for cross-viewer font compatibility,
   normalized embedded figure PDFs without changing their rendered content,
-  synchronized the dated and canonical script bundles, and removed machine-
-  local paths from archive audit metadata.
+  synchronized the dated and canonical script bundles plus the direct-download
+  metadata files, and removed machine-local paths from archive audit metadata.
 
 ### Interpretation
 
