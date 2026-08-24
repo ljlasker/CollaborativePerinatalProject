@@ -78,6 +78,9 @@ the manuscript's family-based inference.
 - Corrected Figure 4's cross-platform rendering so the age-30-to-34 series and its
   legend key are visible. The underlying observations, estimates, confidence
   intervals, manuscript text, and substantive conclusions are unchanged.
+- Described mother-fixed-effect results as within-family sibling comparisons rather
+  than as effects occurring ``within mothers.'' This is a wording clarification only;
+  no estimates or conclusions changed.
 - Standardized analysis-ready filenames by contents rather than legacy schema labels:
   `cpp_clean_core` is the 185-column dataset and `cpp_clean_expanded` is the
   315-column dataset. Updated both papers, the production scripts, documentation,
