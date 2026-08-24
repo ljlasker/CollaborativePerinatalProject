@@ -1,9 +1,10 @@
-# August 2026 release correction summary
+# Public v2.0 release summary
 
 ## Primary data correction
 
-The v3.2 cleaning pipeline treated raw code 88 as missing in three prior-
-pregnancy count fields. The CPPVAR codebook defines 88 as "no prior
+The public v1.0 cleaning pipeline (internal build v3.2) treated raw code 88 as
+missing in three prior-pregnancy count fields. The CPPVAR codebook defines 88
+as "no prior
 pregnancy," which implies a structural count of zero. Code 99 remains unknown.
 
 | Variable | Missing cells restored to 0 | Corrected remaining missing |
@@ -14,9 +15,9 @@ pregnancy," which implies a structural count of zero. Code 99 remains unknown.
 
 The remaining missing counts equal source blanks plus raw code 99 exactly.
 
-## Corrected v3.3.1 release candidates
+## Public v2.0 release assets
 
-The v3.3.1 release contains:
+Public v2.0 (internal build 3.3.1) contains:
 
 - `cpp_clean_expanded.csv` and `.rds` (59,391 x 315; matching expanded schema)
 - `cpp_clean_core.csv` and `.rds` (59,391 x 185; matching core schema)
@@ -48,7 +49,8 @@ The v3.3.1 release contains:
 - Eight expanded obstetric/sibling-history fields had the same structural-zero
   coding class with variable-specific 8/9 or 88/99 schemes. Both expanded
   formats are now rebuilt from raw CPPVAR for these fields.
-- The v3.2 unified files had 2,397 three-row alias groups: the CPPVAR form with
+- The public v1.0 unified files (internal build v3.2) had 2,397 three-row alias
+  groups: the CPPVAR form with
   a blank ninth child digit, an erroneous left-padded form, and the right-
   completed identifier used in other raw sources. Nine additional CONGMALF
   aliases and fifteen SEI7YR aliases were independently crosswalked to existing
@@ -59,29 +61,33 @@ The v3.3.1 release contains:
   clusters mother-FE uncertainty by mother, and writes machine-readable output
   for the corrected death, GDM, head-circumference, Flynn, and pair-reuse checks.
 
-## Additional v3.2 release inconsistencies repaired in v3.3.1
+## Additional public v1.0 inconsistencies resolved in v2.0
 
-- In v3.2, the file then named `cpp_clean_v1.csv` was byte-identical to
+- In public v1.0 (Git tag/internal build v3.2), the file then named
+  `cpp_clean_v1.csv` was byte-identical to
   `cpp_clean_v3.csv` (185 columns), while the later `cpp_clean_v1.rds` had 315
   columns. The current semantic names remove that ambiguity:
   `cpp_clean_expanded` is the matching 315-column CSV/RDS pair and
   `cpp_clean_core` is the matching 185-column pair.
-- The v3.2 expanded v1 RDS left-padded 2,397 IDs with a blank ninth character,
-  shifting the institution/mother fields. v3.3.1 right-completes those linkage
+- The public v1.0 expanded RDS left-padded 2,397 IDs with a blank ninth
+  character, shifting the institution/mother fields. Public v2.0
+  right-completes those linkage
   IDs with 0, as independently observed in TOXEMIA and W17 source files, and
   standardizes `mother_id` to seven characters. The original blank plurality
   remains missing and must not be interpreted as observed singleton status.
 - The downloads page linked to the former `cpp_clean_v1_codebook.csv` name, but
-  that asset was absent from the GitHub v3.2 release. The current asset is
+  that asset was absent from the GitHub public v1.0 release (tag v3.2). The
+  current asset is
   `cpp_clean_expanded_codebook.csv`.
 - The public repository did not version the release-building scripts; the
   correction adds the relevant exporter, repair tools, tests, and errata.
 
-## Recommended publication action
+## Publication and provenance
 
-Publish v3.3.1 rather than silently replacing
-v3.2 assets. Attach the corrected Tier-1 assets, unified RDS/manifest,
-`ERRATA.md`, updated release documentation, and `SHA256SUMS.txt`; update the
-website links after the patch release exists. The local release candidate now
-contains the rebuilt unified CSV/RDS, standardized v1/v3 schemas, canonical
-IDs, a dedicated expanded codebook, checksums, and a dated changelog.
+Public v2.0 is published separately rather than silently replacing the public
+v1.0 assets under Git tag v3.2. The release includes the corrected Tier-1
+assets, unified RDS/manifest, `ERRATA.md`, updated documentation, and
+`SHA256SUMS.txt`. Internal build 3.3.1 remains recorded solely as technical
+provenance. The release contains the rebuilt unified CSV/RDS, standardized core
+and expanded schemas, canonical IDs, a dedicated expanded codebook, checksums,
+and a dated changelog.

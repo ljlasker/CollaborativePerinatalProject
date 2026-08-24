@@ -1,5 +1,11 @@
 # Analysis paper changelog
 
+## Public release numbering — 2026-08-24
+
+- Updated the data paper's two direct-download examples to public release v2.0.
+- Internal build 3.3.1 remains technical provenance and is no longer used as
+  the public release number.
+
 ## August 2026 update — 2026-08-23
 
 This update addresses two distinct data-engineering issues and strengthens

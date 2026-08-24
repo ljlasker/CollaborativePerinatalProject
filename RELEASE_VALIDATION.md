@@ -1,4 +1,6 @@
-# v3.3.1 release validation
+# Public v2.0 release validation
+
+Internal data build: 3.3.1
 
 Validation date: 2026-08-23
 

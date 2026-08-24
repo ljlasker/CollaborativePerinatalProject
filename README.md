@@ -68,7 +68,7 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)
 2. **Sex = 3 means fetal loss**: 804 records with `sex=3` are early fetal losses (mean birth weight 1,891g, gestational age 16.3 weeks), not live births with ambiguous sex. Exclude these from live-birth analyses.
 3. **Leading zeros in IDs**: `case_id` is 9 digits, `mother_id` is 7 digits. When reading CSV files, ensure these are read as character/string to preserve leading zeros (e.g., `fread("cpp_clean_expanded.csv", colClasses = c(case_id = "character"))`).
 4. **Two codebook files**: `CPP_Codebook.csv` (1,239 entries) is the curated, publication-quality codebook — use this one. `cppvar_codebook.csv` (1,140 entries) is the raw auto-parsed version, retained for reproducibility.
-5. **Prior-pregnancy structural zeros**: In the corrected exporter, raw code 88 ("no prior pregnancy") becomes 0—not `NA`—for `parity`, `prior_perinatal_loss`, and `prior_livebirths`; 99 remains unknown. See `ERRATA.md` when using v3.2 assets.
+5. **Prior-pregnancy structural zeros**: In the corrected exporter, raw code 88 ("no prior pregnancy") becomes 0—not `NA`—for `parity`, `prior_perinatal_loss`, and `prior_livebirths`; 99 remains unknown. See `ERRATA.md` when using public v1.0 assets (Git tag/internal build v3.2).
 
 ## Source Data & Provenance
 
@@ -132,7 +132,7 @@ A single wide file merging cleaned CPPVAR data with all CPPMASTER card variables
 | `cpp_unified_supplementary_codebook.csv` | Codebook for supplementary variables | 2,534 | — |
 | `cpp_columns_dropped.csv` | Log of 3,150 all-NA/duplicate columns removed | 3,150 | — |
 
-**Row composition**: 60,016 canonical rows = 59,391 CPPVAR pregnancy/child records + 625 records found only in CPPMASTER or standalone files. For 2,397 CPPVAR pregnancy-level rows the source child digit is blank (codebook: no child), while NCPP child cards and other raw files use the same eight-character pregnancy prefix plus terminal 0. A legacy R conversion also created a left-padded alias that shifted the ID fields. v3.3.1 coalesces those three source aliases plus 24 independently crosswalked CONGMALF/SEI7YR aliases (2,421 groups; 4,818 duplicate rows removed; zero conflicting nonmissing values). The original `plurality`/outcome fields remain missing for the CPPVAR no-child records, so terminal 0 in the canonical linkage key is not by itself evidence of a live singleton; child analyses should apply the documented outcome/sex/plurality filters.
+**Row composition**: 60,016 canonical rows = 59,391 CPPVAR pregnancy/child records + 625 records found only in CPPMASTER or standalone files. For 2,397 CPPVAR pregnancy-level rows the source child digit is blank (codebook: no child), while NCPP child cards and other raw files use the same eight-character pregnancy prefix plus terminal 0. A legacy R conversion also created a left-padded alias that shifted the ID fields. Public release v2.0 (internal build 3.3.1) coalesces those three source aliases plus 24 independently crosswalked CONGMALF/SEI7YR aliases (2,421 groups; 4,818 duplicate rows removed; zero conflicting nonmissing values). The original `plurality`/outcome fields remain missing for the CPPVAR no-child records, so terminal 0 in the canonical linkage key is not by itself evidence of a live singleton; child analyses should apply the documented outcome/sex/plurality filters.
 
 **Column naming conventions**:
 - `v3_` prefix: 202 cleaned CPPVAR variables (demographics, SES, cognitive scores, birth outcomes, etc.)

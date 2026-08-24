@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# Independent semantic validation for the v3.3.1 corrected release assets.
+# Independent semantic validation for public v2.0 (internal build 3.3.1).
 # Usage:
 #   Rscript validate_patch_release.R RAW_CPPVAR V1_RDS V3_RDS UNIFIED_RDS SUPPLEMENTARY_RDS
 

@@ -1,6 +1,10 @@
 # Changelog
 
-## v3.3.1 — 2026-08-23
+## v2.0 — 2026-08-24
+
+Public release v2.0 was produced from internal data build 3.3.1. Internal build
+numbers are retained only for technical provenance; the preceding public
+release was v1.0 (Git tag/internal build v3.2).
 
 ### Data corrections
 
@@ -48,4 +52,5 @@
   bootstraps confirm that the model ordering and loading pattern do not depend
   on dyad reuse.
 
-The v3.2 assets remain available for provenance and are not silently replaced.
+The public v1.0 assets (Git tag/internal build v3.2) remain available for
+provenance and are not silently replaced.

@@ -1,8 +1,9 @@
 # CPP Data Release Errata
 
-## August 23, 2026: structural zeros and canonical unified IDs (fixed in v3.3.1)
+## August 23, 2026: structural zeros and canonical unified IDs (fixed in public v2.0)
 
-The v3.2 analysis-ready release incorrectly converted source code `88` to
+The public v1.0 analysis-ready release (Git tag/internal build v3.2)
+incorrectly converted source code `88` to
 missing in three count variables. In the original CPPVAR documentation, `88`
 means **no prior pregnancy**. Because these are counts of events before the
 current pregnancy, the implied value is zero. Code `99` remains unknown and
@@ -20,7 +21,7 @@ files and the `v2_`/`v3_` copies of these fields in the unified wide files.
 Analyses that did not use these three variables are unaffected.
 
 The expanded 315-column v1 build had the same coding error in related history
-fields with variable-specific sentinels. The v3.3.1 expanded CSV and RDS now
+fields with variable-specific sentinels. The public v2.0 expanded CSV and RDS now
 decode these fields directly from CPPVAR:
 
 | Expanded variable | Structural-zero code | Structural zeros restored | Cells changed in authoritative rebuild |
@@ -40,8 +41,9 @@ restored structural zeros. These expanded fields are not present in the
 
 ### Unified-file ID aliases
 
-The initial v3.2 unified build contained 2,421 source-proven alias groups. The
-largest component was 2,397 CPPVAR records whose ninth fixed-width character
+The initial public v1.0 unified build (internal build v3.2) contained 2,421
+source-proven alias groups. The largest component was 2,397 CPPVAR records
+whose ninth fixed-width character
 was blank: the v1 R conversion incorrectly left-padded these IDs, while NCPP
 child cards 00011/00012/00013 and other raw sources use the same eight-character
 pregnancy prefix plus terminal 0. The wrong conversion shifted institution,
@@ -49,8 +51,9 @@ mother, and pregnancy fields (for example, `05100111 ` became `005100111`
 instead of the source-linked `051001110`). CONGMALF contributed nine additional
 left-padded aliases and SEI7YR contributed fifteen.
 
-v3.3.1 maps only source-verified aliases to their right-completed identifiers,
-coalesces 2,421 groups, preserves all populated source cells, and finds zero
+Public v2.0 (internal build 3.3.1) maps only source-verified aliases to their
+right-completed identifiers, coalesces 2,421 groups, preserves all populated
+source cells, and finds zero
 conflicting nonmissing values. Because the 2,397 main groups occurred in
 three forms (raw blank, left-padded artifact, and right-completed source ID),
 4,818 duplicate rows are removed. The unified row count changes from 64,834 to
@@ -64,18 +67,19 @@ appropriate observed child/outcome fields. All 2,397 prefixes are independently
 present in the NCPP child-card files, which is why right-completion is used for
 linkage rather than left-padding.
 
-Corrected release candidates have been generated for all Tier-1 CSV/RDS files
-and for both unified-wide formats, with a fully refreshed manifest. The
-v3.3.1 archive candidate bundles the corrected assets, repair utilities,
-audits, checksums, this erratum, and the changelog.
+The public v2.0 release provides corrected Tier-1 CSV/RDS files and both
+unified-wide formats, with a fully refreshed manifest. Its archive bundles the
+corrected assets, repair utilities, audits, checksums, this erratum, and the
+changelog.
 
-Older v3.2 Tier-1 files differed in whether 2,397 source IDs with a blank ninth
-character were preserved or incorrectly left-padded. The v3.3.1 CSV and RDS
+Older public v1.0 Tier-1 files (Git tag/internal build v3.2) differed in whether
+2,397 source IDs with a blank ninth character were preserved or incorrectly
+left-padded. The public v2.0 CSV and RDS
 assets use the same source-linked nine-digit representation, and `mother_id` is
 standardized to seven characters. The repair utilities accept each older alias
 and report fallback matches.
 
-### Tier-1 filename and schema policy in v3.3.1
+### Tier-1 filename and schema policy in public v2.0
 
 - `cpp_clean_core.csv` and `cpp_clean_core.rds` both have 59,391 rows and 185 columns.
 - `cpp_clean_expanded.csv` and `cpp_clean_expanded.rds` are the matching expanded
