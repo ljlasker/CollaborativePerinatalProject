@@ -36,7 +36,7 @@
     </p>
   </div>
 
-  <p><strong>Quick download:</strong> For most users, start with <code>cpp_clean_v3.csv</code> (34 MB, stable 185-column core). Use <code>cpp_clean_v1.csv</code> (53 MB) for the expanded 315-column schema. For everything in one archive, download <code>CPP_Data_Release.zip</code> (647 MB).</p>
+  <p><strong>Quick download:</strong> For most users, start with <code>cpp_clean_core.csv</code> (34 MB, stable 185-column core). Use <code>cpp_clean_expanded.csv</code> (53 MB) for the expanded 315-column schema. For everything in one archive, download <code>CPP_Data_Release.zip</code> (677 MB).</p>
 
   <!-- Tier 1 -->
   <div class="tier-section">
@@ -47,48 +47,49 @@
         <tr><th>File</th><th>Description</th><th>Rows</th><th>Cols</th><th>Size</th><th></th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>cpp_clean_v1.csv</code></td>
-          <td>Expanded analysis-ready dataset (315 variables, cleaned and labeled)</td>
-          <td>59,391</td>
-          <td>315</td>
-          <td>53 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1.csv" class="btn-download">Download</a></td>
-        </tr>
-        <tr>
-          <td><code>cpp_clean_v1.rds</code></td>
-          <td>R binary format with factor labels</td>
-          <td>59,391</td>
-          <td>315</td>
-          <td>8.7 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1.rds" class="btn-download">Download</a></td>
-        </tr>
-        <tr>
-          <td><code>cpp_clean_v1_codebook.csv</code></td>
-          <td>Variable-level codebook for cpp_clean_v1 (type, missingness, descriptives, descriptions)</td>
-          <td>315</td>
-          <td>12</td>
-          <td>37 KB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1_codebook.csv" class="btn-download">Download</a></td>
-        </tr>
         <tr class="recommended">
-          <td><code>cpp_clean_v3.csv</code></td>
+          <td><code>cpp_clean_core.csv</code></td>
           <td>Recommended stable core schema</td>
           <td>59,391</td>
           <td>185</td>
           <td>34 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v3.csv" class="btn-download">Download</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_core.csv" class="btn-download">Download</a></td>
         </tr>
         <tr>
-          <td><code>cpp_clean_v3.rds</code></td>
+          <td><code>cpp_clean_core.rds</code></td>
           <td>Matching stable-core R binary</td>
           <td>59,391</td>
           <td>185</td>
           <td>5.6 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v3.rds" class="btn-download">Download</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_core.rds" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_expanded.csv</code></td>
+          <td>Expanded analysis-ready dataset (315 variables, cleaned and labeled)</td>
+          <td>59,391</td>
+          <td>315</td>
+          <td>53 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_expanded.csv" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_expanded.rds</code></td>
+          <td>Matching expanded R binary with factor labels</td>
+          <td>59,391</td>
+          <td>315</td>
+          <td>8.7 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_expanded.rds" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_expanded_codebook.csv</code></td>
+          <td>Variable-level codebook for the expanded dataset</td>
+          <td>315</td>
+          <td>12</td>
+          <td>37 KB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_expanded_codebook.csv" class="btn-download">Download</a></td>
         </tr>
       </tbody>
     </table>
+    <p><small>Compatibility aliases <code>cpp_clean_v3.*</code> and <code>cpp_clean_v1.*</code> remain in the release for existing scripts. New work should use the semantic names above.</small></p>
   </div>
 
   <!-- Tier 2 -->
@@ -477,7 +478,7 @@
         <tr class="recommended">
           <td><code>CPP_Data_Release.zip</code></td>
           <td>Everything in one download</td>
-          <td>647 MB</td>
+          <td>677 MB</td>
           <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/CPP_Data_Release.zip" class="btn-download">Download</a></td>
         </tr>
       </tbody>

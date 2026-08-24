@@ -34,7 +34,7 @@
 
   <div class="faq-item">
     <h3>Which file should I start with?</h3>
-    <p>For most analyses, start with <code>cpp_clean_v3.csv</code> (or <code>.rds</code> for R). This is the stable 185-variable core. Use <code>cpp_clean_v1</code> for the expanded 315-variable schema. See the <a href="getting-started.html">Getting Started</a> page for code examples.</p>
+    <p>For most analyses, start with <code>cpp_clean_core.csv</code> (or <code>.rds</code> for R). This is the stable 185-variable core. Use <code>cpp_clean_expanded.csv</code> (or <code>.rds</code>) for the expanded 315-variable schema. The older <code>cpp_clean_v3</code> and <code>cpp_clean_v1</code> names remain compatibility aliases only. See the <a href="getting-started.html">Getting Started</a> page for code examples.</p>
     <p>For everything in one file, use <code>cpp_unified_wide.csv</code> (60,016 &times; 4,862). For the complete CPPVAR extraction with all 1,236 columns, use <code>cppvar_all_columns.csv</code>.</p>
   </div>
 
@@ -58,8 +58,8 @@
     <h3>Why do I need to read case_id as a string?</h3>
     <p><code>case_id</code> is a 9-digit identifier and <code>mother_id</code> is a 7-digit identifier. Some sites have leading zeros that will be lost if these are read as integers. Always read them as character/string types:</p>
     <ul>
-      <li><strong>R:</strong> <code>fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))</code></li>
-      <li><strong>Python:</strong> <code>pd.read_csv("cpp_clean_v3.csv", dtype={"case_id": str})</code></li>
+      <li><strong>R:</strong> <code>fread("cpp_clean_core.csv", colClasses = c(case_id = "character"))</code></li>
+      <li><strong>Python:</strong> <code>pd.read_csv("cpp_clean_core.csv", dtype={"case_id": str})</code></li>
       <li><strong>Stata:</strong> <code>tostring case_id mother_id, replace</code></li>
     </ul>
   </div>

@@ -54,11 +54,11 @@ The starting point for most analyses. Key demographics, IQ scores, breastfeeding
 
 | File | Description | Rows | Columns | Size |
 |------|-------------|------|---------|------|
-| `cpp_clean_v3.csv` | Analysis-ready dataset, v3 (corrected WISC + expanded) | 59,391 | 185 | 29 MB |
-| `cpp_clean_v3.rds` | R binary format with factor labels | 59,391 | 185 | 5.6 MB |
-| `cpp_clean_v1.csv` | Expanded analysis-ready CSV | 59,391 | 315 | 45 MB |
-| `cpp_clean_v1.rds` | Matching expanded R binary | 59,391 | 315 | 8.7 MB |
-| `cpp_clean_v1_codebook.csv` | Codebook for the expanded v1 schema | 315 entries | -- | 37 KB |
+| `cpp_clean_core.csv` | Recommended analysis-ready core | 59,391 | 185 | 34 MB |
+| `cpp_clean_core.rds` | Matching core R binary with factor labels | 59,391 | 185 | 5.6 MB |
+| `cpp_clean_expanded.csv` | Expanded analysis-ready CSV | 59,391 | 315 | 53 MB |
+| `cpp_clean_expanded.rds` | Matching expanded R binary | 59,391 | 315 | 8.7 MB |
+| `cpp_clean_expanded_codebook.csv` | Codebook for the expanded schema | 315 entries | -- | 37 KB |
 | `cpp_clean_v2.csv` | Legacy v2 (uncorrected WISC VIQ/PIQ) | 59,391 | 107 | 20 MB |
 | `cpp_clean_v2_full.csv` | Legacy v2, full version with raw values | 59,391 | 132 | 23 MB |
 | `cpp_clean_v2.rds` | Legacy v2, R binary with factor labels | 59,391 | 132 | 4.2 MB |
@@ -418,8 +418,10 @@ This release provides the following capabilities that the raw NARA/NBER files do
 | File | Size | Description |
 |------|------|-------------|
 | **Tier 1** | | |
-| `cpp_clean_v3.csv` | 29 MB | Analysis-ready dataset, v3 corrected (59,391 x 185) |
-| `cpp_clean_v3.rds` | 5.6 MB | R binary with factor labels, v3 (59,391 x 185) |
+| `cpp_clean_core.csv` | 34 MB | Recommended analysis-ready core (59,391 x 185) |
+| `cpp_clean_core.rds` | 5.6 MB | Matching R binary with factor labels (59,391 x 185) |
+| `cpp_clean_expanded.csv` | 53 MB | Expanded analysis-ready dataset (59,391 x 315) |
+| `cpp_clean_expanded.rds` | 8.7 MB | Matching expanded R binary (59,391 x 315) |
 | `cpp_clean_v2.csv` | 20 MB | Legacy v2 dataset (59,391 x 107) — VIQ/PIQ mislabeled |
 | `cpp_clean_v2_full.csv` | 23 MB | Legacy v2, full version with raw values (59,391 x 132) |
 | `cpp_clean_v2.rds` | 4.2 MB | Legacy v2, R binary with factor labels (59,391 x 132) |
@@ -618,7 +620,7 @@ Enrollment began in 1959 and continued through 1966. Follow-up assessments were 
 
 2. **Sex = 3 means fetal loss.** 804 records with `sex=3` are early fetal losses (mean birth weight 1,891g, gestational age 16.3 weeks), not live births with ambiguous sex. Exclude these from live-birth analyses.
 
-3. **Leading zeros in IDs.** `case_id` is 9 digits, `mother_id` is 7 digits. When reading CSV files, read these as character/string to preserve leading zeros: `fread("cpp_clean_v2.csv", colClasses = c(case_id = "character"))`.
+3. **Leading zeros in IDs.** `case_id` is 9 digits, `mother_id` is 7 digits. When reading CSV files, read these as character/string to preserve leading zeros: `fread("cpp_clean_core.csv", colClasses = c(case_id = "character"))`.
 
 4. **WRAT is on card 31300, not in CPPVAR.** The WRAT scores come from the master file. Use columns 43-44 of card 31300 for the cognitively-loaded Reading score, NOT columns 41-42 (which is a grade rating with r(FSIQ) approximately 0).
 
@@ -634,7 +636,7 @@ Enrollment began in 1959 and continued through 1966. Follow-up assessments were 
 
 10. **Site variation in follow-up.** WISC completion ranges from 28% to 91% across sites. Site-level analyses should account for differential attrition.
 
-11. **v2 WISC VIQ/PIQ are mislabeled — use v3.** In the v2 dataset, `wisc_viq` is actually Performance IQ and `wisc_piq` is actually the Full Scale Scaled Score (hence r = 0.999 with FSIQ). The v3 dataset corrects this: `wisc_viq` is true Verbal IQ (r = 0.995 with verbal subtest sum), `wisc_piq` is true Performance IQ (r = 0.888 with FSIQ), and `wisc_fs_scaled` is the Full Scale Scaled Score. Always use cpp_clean_v3 for analyses involving VIQ or PIQ.
+11. **Legacy v2 WISC VIQ/PIQ are mislabeled.** In the historical v2 dataset, `wisc_viq` is actually Performance IQ and `wisc_piq` is actually the Full Scale Scaled Score (hence r = 0.999 with FSIQ). The current `cpp_clean_core` and `cpp_clean_expanded` datasets correct this: `wisc_viq` is true Verbal IQ (r = 0.995 with verbal subtest sum), `wisc_piq` is true Performance IQ (r = 0.888 with FSIQ), and `wisc_fs_scaled` is the Full Scale Scaled Score. Use a current semantic-name asset for analyses involving VIQ or PIQ.
 
 12. **Parity ≠ birth order.** `parity` counts prior non-aborted pregnancies reaching at least 20 weeks. In corrected files, raw code 88 ("no prior pregnancy") is zero and 99 is missing. Use `prior_livebirths + 1` for observed live-birth order or `prior_preg + 1` for pregnancy order; these variables are not interchangeable.
 

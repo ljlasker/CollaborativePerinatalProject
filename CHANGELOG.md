@@ -17,8 +17,11 @@
   nonmissing values were found. Unified files now contain 60,016 canonical IDs
   (59,391 CPPVAR records plus 625 source-only records), and 120 historical
   `v3_` fields are re-overlaid for every CPPVAR record after ID correction.
-- Standardized `cpp_clean_v1.csv` and `.rds` as the matching 315-column expanded
-  build; `cpp_clean_v3.csv` and `.rds` remain the matching 185-column core build.
+- Standardized the public Tier-1 names by purpose: `cpp_clean_core.csv` and
+  `.rds` are the matching 185-column core build, while
+  `cpp_clean_expanded.csv` and `.rds` are the matching 315-column expanded
+  build. The older `cpp_clean_v3` and `cpp_clean_v1` names remain compatibility
+  aliases only.
 
 ### Analysis and reproducibility
 

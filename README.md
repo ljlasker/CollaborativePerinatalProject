@@ -12,7 +12,7 @@ This release provides the complete CPP dataset in modern, usable formats — inc
 
 ### Which file should I use?
 
-- **For most analyses**: Start with `cpp_clean_v3.csv` (or `.rds` for R). Both have 59,391 rows and the same 185-column schema. In v3.3.1, `cpp_clean_v1.csv` and `.rds` are the matching 315-column expanded build with canonical nine-digit IDs. Use `cpp_clean_v1_codebook.csv` for that expanded schema.
+- **For most analyses**: Start with `cpp_clean_core.csv` (or `.rds` for R). Both have 59,391 rows and the same 185-column schema. Use `cpp_clean_expanded.csv` (or `.rds`) for the matching 315-column build with canonical nine-digit IDs, and `cpp_clean_expanded_codebook.csv` for that expanded schema. The legacy names `cpp_clean_v3` and `cpp_clean_v1` remain downloadable as compatibility aliases only; the semantic names are canonical. See [`FILE_NAMES.md`](FILE_NAMES.md) for the complete mapping.
 - **For everything in one file**: Use `cpp_comprehensive.csv` (60,010 x 7,077). This merges ALL 309 parsed CPPMASTER card types into a single wide file. Column names use the `c[NNNNN]_` prefix to identify the source card. See `cpp_comprehensive_codebook.csv` for the full codebook. Sparse columns (<1% coverage) are in `cpp_comprehensive_supplementary.csv`.
 - **For a unified wide file**: Use `cpp_unified_wide.csv` (or `.rds` for R). This is a single 60,016 x 4,862 file combining cleaned CPPVAR variables (202 columns with `v3_` prefix), CPPMASTER card variables (`c[NNNN]_` prefix), and 20 single-row standalone datasets (`sa_` prefix). It includes 59,391 CPPVAR pregnancy/child records plus 625 records found only in CPPMASTER or standalone sources. Sparse columns (<1% coverage) are in `cpp_unified_supplementary.csv`. See `cpp_unified_manifest.csv` for documentation of all 4,862 columns.
 - **For repeated-measure data**: The 26 multi-row card types (prenatal visits, hospitalizations, lab results, etc.) are in `cpp_multirow_XXXX.csv` companion files.
@@ -30,8 +30,8 @@ This release provides the complete CPP dataset in modern, usable formats — inc
 library(data.table)
 
 # Load the analysis-ready dataset
-d <- readRDS("cpp_clean_v1.rds")
-# or: d <- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
+d <- readRDS("cpp_clean_expanded.rds")
+# or: d <- fread("cpp_clean_expanded.csv", colClasses = c(case_id = "character"))
 
 # Quick summary
 cat("Records:", nrow(d), "\n")
@@ -54,7 +54,7 @@ merged <- merge(d, card_ped3, by = "case_id", all.x = TRUE)
 library(data.table)
 
 # Load data and weights
-d <- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
+d <- fread("cpp_clean_expanded.csv", colClasses = c(case_id = "character"))
 wt <- fread("cpp_weights.csv", colClasses = c(case_id = "character"))
 d <- merge(d, wt, by = "case_id")
 
@@ -66,7 +66,7 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)
 
 1. **Nursery feeding ≠ long-term breastfeeding**: `bf_days` and `bf_ever` capture only in-hospital nursery feeding (first few days of life). In the 1960s US, nursery breastfeeding was more common among lower-SES women — the opposite of today's pattern.
 2. **Sex = 3 means fetal loss**: 804 records with `sex=3` are early fetal losses (mean birth weight 1,891g, gestational age 16.3 weeks), not live births with ambiguous sex. Exclude these from live-birth analyses.
-3. **Leading zeros in IDs**: `case_id` is 9 digits, `mother_id` is 7 digits. When reading CSV files, ensure these are read as character/string to preserve leading zeros (e.g., `fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))`).
+3. **Leading zeros in IDs**: `case_id` is 9 digits, `mother_id` is 7 digits. When reading CSV files, ensure these are read as character/string to preserve leading zeros (e.g., `fread("cpp_clean_expanded.csv", colClasses = c(case_id = "character"))`).
 4. **Two codebook files**: `CPP_Codebook.csv` (1,239 entries) is the curated, publication-quality codebook — use this one. `cppvar_codebook.csv` (1,140 entries) is the raw auto-parsed version, retained for reproducibility.
 5. **Prior-pregnancy structural zeros**: In the corrected exporter, raw code 88 ("no prior pregnancy") becomes 0—not `NA`—for `parity`, `prior_perinatal_loss`, and `prior_livebirths`; 99 remains unknown. See `ERRATA.md` when using v3.2 assets.
 
@@ -105,10 +105,10 @@ Despite being one of the largest and most detailed developmental cohort studies 
 
 | File | Description | Rows | Columns |
 |------|-------------|------|---------|
-| `cpp_clean_v3.csv` | Recommended analysis-ready CSV | 59,391 | 185 |
-| `cpp_clean_v3.rds` | Matching R binary with factor labels | 59,391 | 185 |
-| `cpp_clean_v1.csv` | Expanded analysis-ready CSV | 59,391 | 315 |
-| `cpp_clean_v1.rds` | Matching expanded R build | 59,391 | 315 |
+| `cpp_clean_core.csv` | Recommended analysis-ready CSV | 59,391 | 185 |
+| `cpp_clean_core.rds` | Matching R binary with factor labels | 59,391 | 185 |
+| `cpp_clean_expanded.csv` | Expanded analysis-ready CSV | 59,391 | 315 |
+| `cpp_clean_expanded.rds` | Matching expanded R build | 59,391 | 315 |
 
 ### Tier 2: Complete CPPVAR Extraction
 
@@ -346,7 +346,7 @@ The publication-quality codebook covers all 1,600 columns of CPPVAR with 1,239 e
 
 Sections: Congenital Conditions (339), Delivery Procedures (154), Pregnancy Conditions (151), Neonatal Neurological (95), Family History (88), Cognitive Assessment (62), Birth Outcomes (40), Obstetric Measures (35), Demographics (23), and others.
 
-## Key Variables (cpp_clean_v1.csv)
+## Key Variables (`cpp_clean_expanded.csv`)
 
 ### Identifiers
 | Variable | Description |
@@ -508,7 +508,7 @@ As a diagnostic check, **ABO Mendelian exclusion** was applied to 10,879 sibling
 links <- fread("cpp_kinship_links.csv", colClasses = c(id_1="character", id_2="character"))
 
 # Get full sibling pairs with IQ data
-d <- readRDS("cpp_clean_v1.rds")
+d <- readRDS("cpp_clean_expanded.rds")
 sib_pairs <- merge(links[pair_type == "full_sibling"],
                    d[, .(id_1 = case_id, iq_1 = wisc_fsiq)], by = "id_1")
 sib_pairs <- merge(sib_pairs,
@@ -609,7 +609,7 @@ Volume II sub-volumes cover:
 
 4. **Sex = 3 (Undetermined)**: 804 records with sex=3 are early fetal losses (mean birth weight 1,891g, gestational age 16.3 weeks), not live births with ambiguous sex.
 
-5. **WISC VIQ/PIQ column identification**: The original NARA/NBER documentation labels for VIQ and PIQ columns were reversed. The released dataset (`cpp_clean_v1`) corrects this using field positions verified against the JHU SAS programs.
+5. **WISC VIQ/PIQ column identification**: The original NARA/NBER documentation labels for VIQ and PIQ columns were reversed. The released analysis-ready datasets (`cpp_clean_core` and `cpp_clean_expanded`) correct this using field positions verified against the JHU SAS programs.
 
 6. **5 unlabeled delivery procedure columns**: Cols 571-575 contain binary/categorical data for delivery procedures but are not documented in Vol III-A. They appear between Apgar scores and "Procedures, other."
 

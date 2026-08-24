@@ -74,7 +74,12 @@ the manuscript's family-based inference.
   declared analysis pipeline and an internal SHA-256 manifest; version-comparison and
   correction-audit materials remain outside the primary reproducibility package.
 - Refreshed the analysis manuscript and primary code bundle with the pedigree-robust
-  inference. The data paper and data archive are unchanged.
+  inference.
 - Corrected Figure 4's cross-platform rendering so the age-30-to-34 series and its
   legend key are visible. The underlying observations, estimates, confidence
   intervals, manuscript text, and substantive conclusions are unchanged.
+- Standardized analysis-ready filenames by contents rather than legacy schema labels:
+  `cpp_clean_core` is the 185-column dataset and `cpp_clean_expanded` is the
+  315-column dataset. Updated both papers, the production scripts, documentation,
+  download links, and the complete release archive; legacy names remain byte-identical
+  compatibility aliases.

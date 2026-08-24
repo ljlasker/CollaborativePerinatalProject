@@ -75,15 +75,17 @@ assets use the same source-linked nine-digit representation, and `mother_id` is
 standardized to seven characters. The repair utilities accept each older alias
 and report fallback matches.
 
-### Tier-1 schema policy in v3.3.1
+### Tier-1 filename and schema policy in v3.3.1
 
-- `cpp_clean_v3.csv` and `cpp_clean_v3.rds` both have 59,391 rows and 185 columns.
-- `cpp_clean_v1.csv` and `cpp_clean_v1.rds` are the matching expanded
+- `cpp_clean_core.csv` and `cpp_clean_core.rds` both have 59,391 rows and 185 columns.
+- `cpp_clean_expanded.csv` and `cpp_clean_expanded.rds` are the matching expanded
   315-column build, with canonical nine-digit IDs.
-- `cpp_clean_v1_codebook.csv` is included for the expanded build.
+- `cpp_clean_expanded_codebook.csv` is included for the expanded build.
 
-Use `cpp_clean_v3` for the stable 185-column core schema and `cpp_clean_v1`
-when the additional 130 expanded variables are required.
+Use `cpp_clean_core` for the stable 185-column schema and `cpp_clean_expanded`
+when the additional 130 variables are required. The former names
+`cpp_clean_v3` and `cpp_clean_v1` are retained as byte-identical compatibility
+aliases; they are not release-version identifiers.
 
 The corrected cleaning rule is:
 
@@ -98,9 +100,9 @@ For already-downloaded CSV files, run:
 
 ```bash
 python scripts/recode_structural_zero_counts.py \
-  --clean cpp_clean_v1.csv \
+  --clean cpp_clean_expanded.csv \
   --raw cppvar_all_columns.csv \
-  --output cpp_clean_v1_corrected.csv \
+  --output cpp_clean_expanded_corrected.csv \
   --summary-json structural_zero_repair_summary.json
 ```
 

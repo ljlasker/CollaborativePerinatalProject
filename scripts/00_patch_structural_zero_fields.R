@@ -5,8 +5,8 @@
 library(data.table)
 BASE <- ".."
 raw_path <- file.path(BASE, "clean", "cppvar_all_columns.csv")
-csv_path <- file.path(BASE, "clean", "cpp_clean_v1.csv")
-rds_path <- file.path(BASE, "clean", "cpp_clean_v1.rds")
+csv_path <- file.path(BASE, "clean", "cpp_clean_expanded.csv")
+rds_path <- file.path(BASE, "clean", "cpp_clean_expanded.rds")
 
 rules <- list(
   parity = list(raw = "v46_parity_pregnancies_total_number", zero = "88", unknown = "99"),
@@ -88,8 +88,8 @@ patch_table <- function(x, asset) {
 
 csv_result <- patch_table(
   fread(csv_path, colClasses = list(character = "case_id"), showProgress = FALSE),
-  "cpp_clean_v1.csv")
-rds_result <- patch_table(readRDS(rds_path), "cpp_clean_v1.rds")
+  "cpp_clean_expanded.csv")
+rds_result <- patch_table(readRDS(rds_path), "cpp_clean_expanded.rds")
 if (!identical(names(csv_result$data), names(rds_result$data)) ||
     nrow(csv_result$data) != nrow(rds_result$data))
   stop("Expanded clean CSV and RDS schemas do not agree")

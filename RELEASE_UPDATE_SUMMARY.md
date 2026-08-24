@@ -18,8 +18,8 @@ The remaining missing counts equal source blanks plus raw code 99 exactly.
 
 The v3.3.1 release contains:
 
-- `cpp_clean_v1.csv` and `.rds` (59,391 x 315; matching expanded schema)
-- `cpp_clean_v3.csv` and `.rds` (59,391 x 185; matching core schema)
+- `cpp_clean_expanded.csv` and `.rds` (59,391 x 315; matching expanded schema)
+- `cpp_clean_core.csv` and `.rds` (59,391 x 185; matching core schema)
 - `cpp_unified_wide.csv` and `.rds` (60,016 x 4,862; corrected and ID-deduplicated)
 - `cpp_unified_supplementary.csv` and `.rds` (11,768 x 2,535,
   including `case_id`; 2,534 supplementary data fields)
@@ -61,17 +61,19 @@ The v3.3.1 release contains:
 
 ## Additional v3.2 release inconsistencies repaired in v3.3.1
 
-- In v3.2, `cpp_clean_v1.csv` was byte-identical to `cpp_clean_v3.csv` (185
-  columns), while the later `cpp_clean_v1.rds` had 315 columns. The v3.3.1 v1
-  CSV/RDS pair now has the same 315-column expanded schema; the v3 pair has the
-  same 185-column core schema.
+- In v3.2, the file then named `cpp_clean_v1.csv` was byte-identical to
+  `cpp_clean_v3.csv` (185 columns), while the later `cpp_clean_v1.rds` had 315
+  columns. The current semantic names remove that ambiguity:
+  `cpp_clean_expanded` is the matching 315-column CSV/RDS pair and
+  `cpp_clean_core` is the matching 185-column pair.
 - The v3.2 expanded v1 RDS left-padded 2,397 IDs with a blank ninth character,
   shifting the institution/mother fields. v3.3.1 right-completes those linkage
   IDs with 0, as independently observed in TOXEMIA and W17 source files, and
   standardizes `mother_id` to seven characters. The original blank plurality
   remains missing and must not be interpreted as observed singleton status.
-- The downloads page linked to `cpp_clean_v1_codebook.csv`, but that asset is
-  absent from the GitHub v3.2 release.
+- The downloads page linked to the former `cpp_clean_v1_codebook.csv` name, but
+  that asset was absent from the GitHub v3.2 release. The current asset is
+  `cpp_clean_expanded_codebook.csv`.
 - The public repository did not version the release-building scripts; the
   correction adds the relevant exporter, repair tools, tests, and errata.
 
