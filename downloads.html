@@ -28,7 +28,15 @@
     <p class="subtitle">All files are hosted as GitHub Release assets. CSV files can be opened in R, Python, Stata, or any spreadsheet application. RDS files are R binary format.</p>
   </div>
 
-  <p><strong>Quick download:</strong> For most users, start with <code>cpp_clean_v1.csv</code> (29 MB). For everything in one archive, download <code>CPP_Data_Release.zip</code> (694 MB).</p>
+  <div class="release-notice">
+    <strong>v3.3.1 correction release.</strong>
+    <p>Corrected Tier-1 and unified assets are linked below. Unaffected domain-specific assets remain linked to v3.2. Details are in the
+      <a href="https://github.com/ljlasker/CollaborativePerinatalProject/blob/main/ERRATA.md">errata</a> and
+      <a href="https://github.com/ljlasker/CollaborativePerinatalProject/blob/main/RELEASE_VALIDATION.md">validation report</a>.
+    </p>
+  </div>
+
+  <p><strong>Quick download:</strong> For most users, start with <code>cpp_clean_v3.csv</code> (34 MB, stable 185-column core). Use <code>cpp_clean_v1.csv</code> (53 MB) for the expanded 315-column schema. For everything in one archive, download <code>CPP_Data_Release.zip</code> (647 MB).</p>
 
   <!-- Tier 1 -->
   <div class="tier-section">
@@ -39,29 +47,45 @@
         <tr><th>File</th><th>Description</th><th>Rows</th><th>Cols</th><th>Size</th><th></th></tr>
       </thead>
       <tbody>
-        <tr class="recommended">
+        <tr>
           <td><code>cpp_clean_v1.csv</code></td>
-          <td>Analysis-ready dataset (314 key variables, cleaned and labeled)</td>
+          <td>Expanded analysis-ready dataset (315 variables, cleaned and labeled)</td>
           <td>59,391</td>
-          <td>314</td>
-          <td>29 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/cpp_clean_v1.csv" class="btn-download">Download</a></td>
+          <td>315</td>
+          <td>53 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1.csv" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>cpp_clean_v1.rds</code></td>
           <td>R binary format with factor labels</td>
           <td>59,391</td>
-          <td>314</td>
-          <td>5.6 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/cpp_clean_v1.rds" class="btn-download">Download</a></td>
+          <td>315</td>
+          <td>8.7 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1.rds" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>cpp_clean_v1_codebook.csv</code></td>
           <td>Variable-level codebook for cpp_clean_v1 (type, missingness, descriptives, descriptions)</td>
-          <td>314</td>
+          <td>315</td>
           <td>12</td>
-          <td>28 KB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/cpp_clean_v1_codebook.csv" class="btn-download">Download</a></td>
+          <td>37 KB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v1_codebook.csv" class="btn-download">Download</a></td>
+        </tr>
+        <tr class="recommended">
+          <td><code>cpp_clean_v3.csv</code></td>
+          <td>Recommended stable core schema</td>
+          <td>59,391</td>
+          <td>185</td>
+          <td>34 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v3.csv" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>cpp_clean_v3.rds</code></td>
+          <td>Matching stable-core R binary</td>
+          <td>59,391</td>
+          <td>185</td>
+          <td>5.6 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_clean_v3.rds" class="btn-download">Download</a></td>
         </tr>
       </tbody>
     </table>
@@ -86,8 +110,8 @@
         </tr>
         <tr>
           <td><code>CPP_Codebook.csv</code></td>
-          <td>Publication-quality codebook (1,239 entries)</td>
-          <td>1,239</td>
+          <td>Publication-quality codebook (1,244 entries)</td>
+          <td>1,244</td>
           <td>&mdash;</td>
           <td>278 KB</td>
           <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/CPP_Codebook.csv" class="btn-download">Download</a></td>
@@ -262,34 +286,34 @@
         <tr>
           <td><code>cpp_unified_wide.rds</code></td>
           <td>All card + standalone data merged per child (R binary)</td>
-          <td>64,834</td>
+          <td>60,016</td>
           <td>4,862</td>
-          <td>133 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/cpp_unified_wide.rds" class="btn-download">Download</a></td>
+          <td>114 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_unified_wide.rds" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>cpp_unified_wide.csv</code></td>
           <td>Same, CSV format (in full release archive)</td>
-          <td>64,834</td>
+          <td>60,016</td>
           <td>4,862</td>
-          <td>674 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/CPP_Data_Release.zip" class="btn-download">In Archive</a></td>
+          <td>620 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/CPP_Data_Release.zip" class="btn-download">In Archive</a></td>
         </tr>
         <tr>
           <td><code>cpp_unified_manifest.csv</code></td>
           <td>Variable manifest with missingness and summary statistics</td>
           <td>4,862</td>
           <td>&mdash;</td>
-          <td>288 KB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/cpp_unified_manifest.csv" class="btn-download">Download</a></td>
+          <td>555 KB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/cpp_unified_manifest.csv" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>cpp_unified_supplementary.csv</code></td>
           <td>2,534 sparse variables (&lt;1% coverage), mergeable by case_id</td>
-          <td>64,834</td>
+          <td>11,768</td>
           <td>2,534</td>
           <td>&mdash;</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/CPP_Data_Release.zip" class="btn-download">In Archive</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/CPP_Data_Release.zip" class="btn-download">In Archive</a></td>
         </tr>
         <tr>
           <td><code>cpp_unified_supplementary_codebook.csv</code></td>
@@ -453,8 +477,8 @@
         <tr class="recommended">
           <td><code>CPP_Data_Release.zip</code></td>
           <td>Everything in one download</td>
-          <td>694 MB</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/CPP_Data_Release.zip" class="btn-download">Download</a></td>
+          <td>647 MB</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/CPP_Data_Release.zip" class="btn-download">Download</a></td>
         </tr>
       </tbody>
     </table>
@@ -471,17 +495,27 @@
         <tr>
           <td><code>README.md</code></td>
           <td>Getting started guide, file selection, common pitfalls</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/README.md" class="btn-download">Download</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/README.md" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>RELEASE_NOTES.md</code></td>
           <td>Dataset overview, tier inventory, data quality notes</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/RELEASE_NOTES.md" class="btn-download">Download</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/RELEASE_NOTES.md" class="btn-download">Download</a></td>
         </tr>
         <tr>
           <td><code>METHODOLOGY.md</code></td>
           <td>Technical pipeline, OCR process, validation methodology</td>
-          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.2/METHODOLOGY.md" class="btn-download">Download</a></td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/METHODOLOGY.md" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>ERRATA.md</code></td>
+          <td>Corrections to structural-zero handling and unified identifiers</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/ERRATA.md" class="btn-download">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>SHA256SUMS.txt</code></td>
+          <td>SHA-256 checksums for corrected release files</td>
+          <td><a href="https://github.com/ljlasker/CollaborativePerinatalProject/releases/download/v3.3.1/SHA256SUMS.txt" class="btn-download">Download</a></td>
         </tr>
       </tbody>
     </table>

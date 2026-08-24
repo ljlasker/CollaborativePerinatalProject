@@ -5,7 +5,8 @@ import csv
 import json
 import os
 
-CLEAN = os.path.join("..", "..", "clean")
+HERE = os.path.dirname(os.path.abspath(__file__))
+CLEAN = os.path.normpath(os.path.join(HERE, "..", "..", "clean"))
 
 # --- 1. CPPVAR Codebook (1,239 variables) ---
 CODEBOOK_CSV = os.path.join(CLEAN, "CPP_Codebook.csv")
@@ -25,14 +26,14 @@ with open(CODEBOOK_CSV, encoding="utf-8") as f:
             "col_to": row["col_to"],
         })
 
-with open(os.path.join("js", "codebook_data.js"), "w", encoding="utf-8") as f:
+with open(os.path.join(HERE, "js", "codebook_data.js"), "w", encoding="utf-8") as f:
     f.write("const CODEBOOK_DATA = ")
     json.dump(rows, f, ensure_ascii=False)
     f.write(";\n")
 print(f"CPPVAR codebook: {len(rows)} entries")
 
 # --- 2. Unified Manifest (4,862 variables) ---
-MANIFEST_CSV = os.path.join(CLEAN, "cpp_unified_manifest.csv")
+MANIFEST_CSV = os.path.join(HERE, "cpp_unified_manifest.csv")
 manifest = []
 with open(MANIFEST_CSV, encoding="utf-8") as f:
     reader = csv.DictReader(f)
@@ -49,7 +50,7 @@ with open(MANIFEST_CSV, encoding="utf-8") as f:
             "sd": row["sd"],
         })
 
-with open(os.path.join("js", "manifest_data.js"), "w", encoding="utf-8") as f:
+with open(os.path.join(HERE, "js", "manifest_data.js"), "w", encoding="utf-8") as f:
     f.write("const MANIFEST_DATA = ")
     json.dump(manifest, f, ensure_ascii=False)
     f.write(";\n")
@@ -72,7 +73,7 @@ with open(SUPP_CSV, encoding="utf-8") as f:
             "related": row["related_main_column"],
         })
 
-with open(os.path.join("js", "supplementary_data.js"), "w", encoding="utf-8") as f:
+with open(os.path.join(HERE, "js", "supplementary_data.js"), "w", encoding="utf-8") as f:
     f.write("const SUPPLEMENTARY_DATA = ")
     json.dump(supp, f, ensure_ascii=False)
     f.write(";\n")

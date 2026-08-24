@@ -1,0 +1,623 @@
+varname,item_id,field_width,section,sentinel_codes,sentinel_meanings,sentinel_n,sentinel_pct,max_sentinel_pct,n_total
+motor_activity_neonate_rev_2,6017,1,Neonatal Neurological,8,8=not ascertained,54282,99.1,99.0619753266662,54796
+coombs_test,5225,1,Obstetric Measures,9,9=unknown/not ascertained,55756,96.6,96.5689246064049,57737
+apgar_heart_rate_20_min,6007,1,Apgar Scores,9,9=unknown/not ascertained,50982,95.3,95.3344428445874,53477
+apgar_respiratory_effort_20_min,6008,1,Apgar Scores,9,9=unknown/not ascertained,50981,95.3,95.3325728817997,53477
+apgar_muscle_tone_20_min,6009,1,Apgar Scores,9,9=unknown/not ascertained,50979,95.3,95.3288329562242,53477
+apgar_reflex_irritability_20_min,6010,1,Apgar Scores,9,9=unknown/not ascertained,50979,95.3,95.3288329562242,53477
+apgar_color_20_min,6011,1,Apgar Scores,9,9=unknown/not ascertained,50979,95.3,95.3288329562242,53477
+apgar_total_20_min_score,6012,2,Apgar Scores,99,99=unknown,50978,95.3,95.3269629934364,53477
+apgar_total_20_min_code,6013,1,Apgar Scores,9,9=unknown/not ascertained,50978,95.3,95.3269629934364,53477
+cesarean_section_delivery_of_head,6107,1,Delivery Procedures,8,8=not ascertained,54347,94.6,94.6086623494186,57444
+cesarean_section_uterine_incision_type,6108,1,Delivery Procedures,8,8=not ascertained,54347,94.6,94.6086623494186,57444
+apgar_heart_rate_15_min,6000,1,Apgar Scores,9,9=unknown/not ascertained,50306,94.1,94.0703480000748,53477
+apgar_reflex_irritability_15_min,6003,1,Apgar Scores,9,9=unknown/not ascertained,50298,94.1,94.0553882977729,53477
+apgar_color_15_min,6004,1,Apgar Scores,9,9=unknown/not ascertained,50298,94.1,94.0553882977729,53477
+apgar_respiratory_effort_15_min,6001,1,Apgar Scores,9,9=unknown/not ascertained,50297,94.1,94.0535183349851,53477
+apgar_muscle_tone_15_min,6002,1,Apgar Scores,9,9=unknown/not ascertained,50297,94.1,94.0535183349851,53477
+apgar_total_15_min_score,6005,2,Apgar Scores,99,99=unknown,50296,94.1,94.0516483721974,53477
+apgar_total_15_min_code,6006,1,Apgar Scores,9,9=unknown/not ascertained,50296,94.1,94.0516483721974,53477
+cesarean_section_previous_internal_versi,6111,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,51742; 2580,90.1; 4.5,90.1051825020897,57424
+apgar_heart_rate_10_min,5993,1,Apgar Scores,9,9=unknown/not ascertained,47025,87.9,87.9350000934981,53477
+apgar_color_10_min,5997,1,Apgar Scores,9,9=unknown/not ascertained,47025,87.9,87.9350000934981,53477
+apgar_reflex_irritability_10_min,5996,1,Apgar Scores,9,9=unknown/not ascertained,47024,87.9,87.9331301307104,53477
+apgar_muscle_tone_10_min,5995,1,Apgar Scores,9,9=unknown/not ascertained,47023,87.9,87.9312601679227,53477
+apgar_respiratory_effort_10_min,5994,1,Apgar Scores,9,9=unknown/not ascertained,47022,87.9,87.9293902051349,53477
+apgar_total_10_min,5998,2,Apgar Scores,99,99=unknown,47016,87.9,87.9181704284085,53477
+apgar_total_10_min_code,5999,1,Apgar Scores,9,9=unknown/not ascertained,47016,87.9,87.9181704284085,53477
+consanguinity_of_gravida_and_fath_col287,5185,1,Consanguinity,8,8=not ascertained,42498,76.6,76.6489313734331,55445
+consanguinity_of_gravidas_parents_revisi,5186,1,Consanguinity,8,8=not ascertained,42486,76.6,76.6272883037244,55445
+rupture_of_membranes_interval_ina_col1457,6162,4,Delivery Procedures,9999,9999=unknown,41244,76.1,76.0510399763977,54232
+rupture_of_membranes_interval_ina_col1461,6163,2,Delivery Procedures,99,99=unknown,41244,76.1,76.0510399763977,54232
+acetonuria,5222,1,Obstetric Measures,9,9=unknown/not ascertained,36267,63.0,63.0062021160161,57561
+labor_onset_type,6041,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,35455; 715,61.7; 1.2,61.729577268612,57436
+toxemia_hypertension_chronic,6060,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,35455; 719,61.7; 1.3,61.729577268612,57436
+occupation_of_gravidas_father_or_head_of,5235,2,Delivery Procedures,88; 99,88=not applicable/no prior; 99=unknown,32218; 1673,56.9; 3.0,56.8830664383199,56639
+occupation_of_gravidas_father_categorize,5236,1,Socioeconomic,8; 9,8=not ascertained; 9=unknown/not ascertained,32218; 1673,56.9; 3.0,56.8830664383199,56639
+religion_for=religion,5347,1,Socioeconomic,8; 9,8=not ascertained; 9=unknown/not ascertained,32218; 800,56.9; 1.4,56.8830664383199,56639
+difficulty_of_forceps_presentation,6078,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,32363; 1918,56.3; 3.3,56.3373661763426,57445
+head_circumference_8_mo,5965,2,Growth/Anthropometric,99,99=unknown,24222,55.9,55.9283289847376,43309
+length_body_8_mo,5979,2,Growth/Anthropometric,99,99=unknown,24206,55.9,55.8913851624374,43309
+weight_8_mo,5971,4,Growth/Anthropometric,9999,9999=unknown,24152,55.8,55.7666997621741,43309
+weight_8_mo_gms_weight_8_mo_=_grams_as_g,6179,5,Growth/Anthropometric,99999,99999=unknown,24152,55.8,55.7666997621741,43309
+difficulty_forceps_aftercoming,6079,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31686; 1914,55.2; 3.3,55.1588475933502,57445
+breech_delivery_total_difficulty,6080,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31686; 1918,55.2; 3.3,55.1588475933502,57445
+breech_delivery_forceps_delivery__col1355,6081,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31686; 1928,55.2; 3.4,55.1588475933502,57445
+breech_delivery_forceps_delivery__col1356,6082,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31686; 1915,55.2; 3.3,55.1588475933502,57445
+head_circumference_1_yr,5966,2,Growth/Anthropometric,99,99=unknown,23875,55.1,55.1271098386017,43309
+length_body_3_yr,5982,3,Growth/Anthropometric,999,999=unknown,23870,55.1,55.1155648941329,43309
+cesarean_section_indication_previ_col1406,6130,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_myomectomy_p,6131,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_cepha_col1408,6132,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_following_fa,6133,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_trans_col1410,6134,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_malpresentat,6135,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_uteri_col1412,6136,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_fetal_col1413,6137,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_prola_col1414,6138,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_place_col1415,6139,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_abrup_col1416,6140,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_elder_col1417,6141,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_prior_ob_his,6142,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_tumor_obstru,6143,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_toxemia_ob_5,6144,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_indication_diabe_col1421,6145,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31523; 1900,54.9; 3.3,54.8760531996379,57444
+cesarean_section_delivery_of_body,6106,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31520; 1918,54.9; 3.3,54.8698755331186,57445
+cesarean_section_difficulty_of_hand_deli,6112,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31520; 1927,54.9; 3.4,54.8698755331186,57445
+cesarean_section_difficulty_of_body_deli,6113,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,31520; 1927,54.9; 3.4,54.8698755331186,57445
+weight_3_yr,5973,3,Growth/Anthropometric,999,999=unknown,23746,54.8,54.8292502713062,43309
+hemoglobin_lowest,5943,3,Obstetric Measures,999,999=unknown,29013,54.5,54.5326391368908,53203
+hemoglobin_48_hrs,5991,2,Obstetric Measures,99,99=unknown,28716,54.0,53.974399939853,53203
+hemoglobin_lowest_max_hemoglobin=child_l,5419,2,Obstetric Measures,99,99=unknown,28715,54.0,53.972520346597,53203
+rupture_of_membranes_interval_from_rom_t,6155,4,Delivery Procedures,9999,9999=unknown,4742,51.2,51.1929180611033,9263
+weight_gain_gravida,4997,3,Obstetric Measures,999,999=unknown,4524,45.6,45.6140350877193,9918
+developmental_retardation_physical_sibli,5320,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 24050,27.9; 43.4,43.3575510645586,55469
+locomotor_postural_development_reported,5938,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,373; 18128,0.8; 39.7,39.747412734608,45608
+blood_transfusion,6069,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2115,38.3; 3.7,38.337745576146,57416
+polyhydramnios,6091,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2128,38.3; 3.7,38.337745576146,57416
+uterine_rupture,6092,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2128,38.3; 3.7,38.337745576146,57416
+bleeding_after_cord_clamped,6070,4,Delivery Procedures,8888; 9999,8888=not applicable/no prior; 9999=unknown,22012; 2398,38.3; 4.2,38.3364101849594,57418
+bleeding_before_cord_clamped,6071,4,Delivery Procedures,8888; 9999,8888=not applicable/no prior; 9999=unknown,22012; 2685,38.3; 4.7,38.3364101849594,57418
+lacerations_maternal_degree,6088,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2052,38.3; 3.6,38.3364101849594,57418
+lacerations_site,6089,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2046,38.3; 3.6,38.3364101849594,57418
+vertex_delivery_vacuum_extraction,6062,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 1915,38.3; 3.3,38.3183915049178,57445
+labor_arrested_prolonged_cause_malpresen,6064,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2063,38.3; 3.6,38.3137227598691,57452
+labor_arrested_prolonged_cause_mortality,6065,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2062,38.3; 3.6,38.3137227598691,57452
+labor_arrested_prolonged_cause_retroperi,6066,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2063,38.3; 3.6,38.3137227598691,57452
+labor_arrested_prolonged_cause_other_cau,6067,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2079,38.3; 3.6,38.3137227598691,57452
+labor_arrested_progress_oh_16_present,6068,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2010,38.3; 3.5,38.3137227598691,57452
+cord_pathology_velamentous_insertion,6043,1,Pathology/Placenta,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2325,38.3; 4.0,38.3037221361825,57467
+cord_pathology_previa_varices,6044,1,Pathology/Placenta,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2325,38.3; 4.0,38.3037221361825,57467
+cord_pathology_other_abnormality,6046,1,Pathology/Placenta,8; 9,8=not ascertained; 9=unknown/not ascertained,22012; 2325,38.3; 4.0,38.3037221361825,57467
+cesarean_section_indication_previ_col1390,6114,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_fetal_col1391,6115,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_cepha_col1392,6116,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_breech_primi,6117,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_elder_col1394,6118,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_trans_col1395,6119,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_prola_col1396,6120,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_myomata_uter,6121,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_surgery_prev,6122,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_diabe_col1399,6123,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_toxemia_ob_3,6124,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_abrup_col1401,6125,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_place_col1402,6126,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_forceps_deli,6127,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_uteri_col1404,6128,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 677,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_other_ob_34,6129,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,20262; 678,35.3; 1.2,35.2584961804166,57467
+cesarean_section_indication_category,6109,2,Delivery Procedures,88; 99,88=not applicable/no prior; 99=unknown,20221; 701,35.2; 1.2,35.1994011871812,57447
+pregnancy_last_prior_outcome_wks,5253,2,Birth Outcomes,99,99=unknown,16358,28.5,28.5464984381272,57303
+continued_seizures_convulsions_siblings,5337,1,Socioeconomic,9,9=unknown/not ascertained,15509,28.0,27.9718640093787,55445
+seizures_convulsions_epilepsy_sib_col484,5338,1,Socioeconomic,9,9=unknown/not ascertained,15509,28.0,27.9718640093787,55445
+prior_perinatal_loss,4983,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,16163; 1043,27.9; 1.8,27.940947672308,57847
+livebirths_prior_viable,4984,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,16157; 476,27.9; 0.8,27.9281615155915,57852
+deaths_neonatal_and_stillbirths_total_nu,5252,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,16155; 25,27.9; 0.0,27.9247044181705,57852
+fetal_deaths_abortion_at_less_than_20_we,5249,1,Birth Outcomes,8,8=no prior pregnancy (structural zero),16153,27.9,27.9212473207495,57852
+pregnancies_multiple_total_number_prior,5250,1,Registration/Pregnancy History,8,8=no prior pregnancy (structural zero),16153,27.9,27.9212473207495,57852
+stillbirths_deaths_at_20_weeks_gestation,5251,1,Birth Outcomes,8,8=no prior pregnancy (structural zero),16153,27.9,27.9212473207495,57852
+siblings_full_total_number_of_prior_preg,5254,2,Family History/Siblings,88,88=not applicable/no prior,15481,27.9,27.9112954115208,55465
+siblings_half_total_number_prior_pregnan,5270,2,Family History/Siblings,88,88=not applicable/no prior,15481,27.9,27.9112954115208,55465
+siblings_full_total_fetal_death_prior_to,5255,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_stillborn_fetal_death_at_2,5256,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_liveborn_male_total_number,5257,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_liveborn_female_total_numb,5258,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_prematures_total_number,5259,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_living_less_than_five_year,5260,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_living_five_years_of_age_a,5261,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_death_neonatal_27_or_less,5262,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_death_at_28_or_more_days_t,5263,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_rh_incompatibility_blood_g,5264,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_malformation_congenital_to,5265,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_seizures_convulsions_epile,5266,1,Socioeconomic,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_motor_defect_total_number,5267,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_sensory_defect_hearing_spe,5268,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_full_developmental_retardation,5269,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_fetal_death_prior_to_20_wk,5271,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_stillborn_death_at_20_wks,5272,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_different_father,5273,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_unknown_paternity,5274,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_liveborn_male_total_number,5275,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_liveborn_female_total_numb,5276,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_prematures_total_number,5277,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_living_less_than_five_year,5278,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_living_five_years_of_age_a,5279,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_death_neonatal_27_or_less,5280,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_death_at_28_or_more_days_t,5281,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_rh_incompatibility_blood_g,5282,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_malformation_congenital_to,5283,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_seizures_convulsions_epile,5284,1,Socioeconomic,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_motor_defect_total_number,5285,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_sensory_defect_hearing_spe,5286,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_half_developmental_retardation,5287,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_fetal_death_prior_to_20_w,5288,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_fetal_death_after_20_week,5289,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_liveborn_male_total_numbe,5290,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_liveborn_female_total_num,5291,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_prematures_total_number,5292,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_living_less_than_five_years_of,5293,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_living_five_years_of_age_and_ol,5294,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_death_neonatal_27_or_less,5295,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_death_at_28_or_more_days,5296,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_rh_incompatibility_blood,5297,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_malformation_congenital_t,5298,1,Family History/Siblings,8,8=no prior pregnancy (structural zero),15480,27.9,27.9094924727306,55465
+siblings_total_motor_defect_total_number,5299,1,Family History/Siblings,8; 9,8=no prior pregnancy (structural zero); 9=unknown/not ascertained,15480; 361,27.9; 0.7,27.9094924727306,55465
+siblings_total_sensory_defect_hearing_sp,5300,1,Family History/Siblings,8; 9,8=no prior pregnancy (structural zero); 9=unknown/not ascertained,15480; 363,27.9; 0.7,27.9094924727306,55465
+siblings_total_developmental_retardation,5301,1,Family History/Siblings,8; 9,8=no prior pregnancy (structural zero); 9=unknown/not ascertained,15480; 365,27.9; 0.7,27.9094924727306,55465
+siblings_full_liveborn_total_number_full,5302,2,Family History/Siblings,88,88=not applicable/no prior,15480,27.9,27.9094924727306,55465
+siblings_liveborn_total_number_all_sibs=,5303,2,Family History/Siblings,88; 99,88=not applicable/no prior; 99=unknown,15480; 13,27.9; 0.0,27.9094924727306,55465
+seizures_convulsions_epilepsy_siblings_t,5184,1,Socioeconomic,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 399,27.9; 0.7,27.9090318857308,55448
+siblings_unable_to_attend_regular_school,5304,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+siblings_total_death_blood_incompatibili,5305,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+siblings_liveborn_blood_incompati_col452,5306,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+siblings_liveborn_blood_incompati_col453,5307,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+cleft_lip_palate_siblings_congenital_mal,5308,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+club_foot_siblings_congenital_malformati,5309,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+fingers_or_toes_siblings_congenital_malf,5310,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+heart_siblings_congenital_malformation_h,5311,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+head_or_spine_siblings_congenital_malfor,5312,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+malformation_other_siblings_congenital_m,5313,1,Family History/Siblings,8,8=not ascertained,15475,27.9,27.8984658097316,55469
+motor_defect_due_to_injury_siblings_all,5314,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 418,27.9; 0.8,27.8984658097316,55469
+continued_motor_defect_due_to_infection,5315,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 419,27.9; 0.8,27.8984658097316,55469
+motor_defect_other_siblings_all_sibs=pri,5316,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 418,27.9; 0.8,27.8984658097316,55469
+sensory_defect_visual_blind_siblings_all,5317,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 423,27.9; 0.8,27.8984658097316,55469
+sensory_defect_hearing_deaf_siblings_all,5318,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 421,27.9; 0.8,27.8984658097316,55469
+sensory_defect_speech_defect_siblings_al,5319,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 428,27.9; 0.8,27.8984658097316,55469
+developmental_retardation_mental_sibling,5321,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 423,27.9; 0.8,27.8984658097316,55469
+developmental_retardation_behavioralemot,5322,1,Family History/Siblings,8; 9,8=not ascertained; 9=unknown/not ascertained,15475; 411,27.9; 0.7,27.8984658097316,55469
+premature_births_total_number_prior_to_c,5248,1,Registration/Pregnancy History,8,8=no prior pregnancy (structural zero),16243,27.9,27.8935980217063,58232
+parity_pr,4982,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,16054; 70,27.5; 0.1,27.5165829662513,58343
+motor_defects_siblings_fob_motor_defects,5339,1,Family History/Siblings,9,9=unknown/not ascertained,14666,26.5,26.4514383623411,55445
+motor_defects_siblings_yes_no_unk_col486,5340,1,Family History/Siblings,9,9=unknown/not ascertained,14666,26.5,26.4514383623411,55445
+cord_clamping_interval_time_sec_clamping,5382,3,Pathology/Placenta,999,999=unknown,4023,25.0,24.9503845199702,16124
+cord_length_of_cord_cms_cordlength_of_cm,5383,2,Pathology/Placenta,88; 99,88=not applicable/no prior; 99=unknown,130; 13213,0.2; 24.1,24.1130739470034,54796
+cord_length_categorized_groupinterval_co,5384,2,Pathology/Placenta,99,99=unknown,13213,24.1,24.1130739470034,54796
+age_of_father_of_baby_or_husband_yrs,5238,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,13246; 184,23.4; 0.3,23.4032403399353,56599
+age_of_father_of_baby_or_husband_coded,5239,1,Registration/Pregnancy History,8,8=not ascertained,13246,23.4,23.4032403399353,56599
+education_of_father_of_baby_or_husband_c,5242,1,Socioeconomic,9,9=unknown/not ascertained,12791,22.6,22.5993392109401,56599
+molding_birth,5988,1,Neonatal Neurological,8; 9,8=not ascertained; 9=unknown/not ascertained,12153; 471,22.2; 0.9,22.1786261770932,54796
+cord_stained_unstained,5990,1,Pathology/Placenta,8; 9,8=not ascertained; 9=unknown/not ascertained,12153; 471,22.2; 0.9,22.1786261770932,54796
+motor_activity_neonate_rev_1,6014,1,Neonatal Neurological,8; 9,8=not ascertained; 9=unknown/not ascertained,12152; 419,22.2; 0.8,22.1768012263669,54796
+head_circumference_4_yr,5967,2,Growth/Anthropometric,99,99=unknown,9260,21.4,21.3812371562493,43309
+weight_4_yr,5974,3,Growth/Anthropometric,999,999=unknown,9164,21.2,21.159574222448,43309
+length_body_4_yr,5983,3,Growth/Anthropometric,999,999=unknown,9100,21.0,21.0117989332471,43309
+oxytocic_use,6052,1,Delivery Procedures,9,9=unknown/not ascertained,11712,20.4,20.3967189704115,57421
+education_of_father_of_baby_or_husband_y,5241,2,Socioeconomic,99,99=unknown,11124,19.7,19.6540574921818,56599
+hearing_pure_tone_left_ear,5925,1,Cognitive Assessment,9,9=unknown/not ascertained,3825,15.0,14.9952955935393,25508
+hearing_pure_tone_right_ear,5924,1,Cognitive Assessment,9,9=unknown/not ascertained,3762,14.7,14.7483142543516,25508
+labor_duration_of_second_stage_coded_gro,6149,2,Delivery Procedures,99,99=unknown,7899,13.8,13.7534170250553,57433
+albuminuria_proteinuria_col104,5009,1,Obstetric Measures,8; 9,8=not ascertained; 9=unknown/not ascertained,7790; 715,13.6; 1.2,13.57237438149,57396
+spondaic_word_test,5923,1,Cognitive Assessment,9,9=unknown/not ascertained,3272,12.8,12.8273482828916,25508
+neurological_abnormalities_4_month,5937,1,Neonatal Neurological,9,9=unknown/not ascertained,5972,12.8,12.7544155650001,46823
+occupation_of_father_of_baby_or_h_col385,5246,2,Delivery Procedures,88; 99,88=not applicable/no prior; 99=unknown,6878; 2391,12.1; 4.2,12.1446480912526,56634
+occupation_of_father_of_baby_or_h_col387,5247,1,Socioeconomic,8; 9,8=not ascertained; 9=unknown/not ascertained,6878; 2391,12.1; 4.2,12.1446480912526,56634
+speech_mechanism,5930,1,Cognitive Assessment,9,9=unknown/not ascertained,3096,12.1,12.1316614420063,25520
+employment_status_of_father_of_baby_or_h,5240,1,Socioeconomic,8; 9,8=not ascertained; 9=unknown/not ascertained,6775; 882,12.0; 1.6,11.9701761515221,56599
+hematocrit_lowest,5944,3,Obstetric Measures,999,999=unknown,6241,11.7,11.7305415108171,53203
+fetal_heart_sound,5214,1,Obstetric Measures,9,9=unknown/not ascertained,6169,11.5,11.5377422009426,53468
+labor_duration_of_first_stage_hrsmins_du,6146,4,Delivery Procedures,9999,9999=unknown,6616,11.5,11.5195096895513,57433
+labor_duration_of_first_stage_coded_grou,6147,1,Delivery Procedures,9,9=unknown/not ascertained,6616,11.5,11.5195096895513,57433
+hematocrit_48_hrs,5992,2,Obstetric Measures,99,99=unknown,6057,11.4,11.3846963517095,53203
+hematocrit_lowest_max_hematocrit_child_l,5418,2,Obstetric Measures,99,99=unknown,6054,11.4,11.3790575719414,53203
+labor_duration_of_second_stage_hrsmins_d,6148,4,Delivery Procedures,9999,9999=unknown,6493,11.3,11.3053471000992,57433
+feeding_method_nursery_bottle_days_feedi,5410,1,Nursery/Feeding,8; 9,8=not ascertained; 9=unknown/not ascertained,692; 5903,1.3; 11.1,11.149305883464,52945
+continued_feeding_method_nursery_breast,5411,1,Nursery/Feeding,9,9=unknown/not ascertained,5899,11.1,11.141750873548,52945
+feeding_method_nursery_gavage_days_feedi,5412,1,Nursery/Feeding,9,9=unknown/not ascertained,5899,11.1,11.141750873548,52945
+feeding_method_nursery_tube_days_feeding,5413,1,Nursery/Feeding,9,9=unknown/not ascertained,5899,11.1,11.141750873548,52945
+feeding_method_nursery_other_days_feedin,5414,1,Nursery/Feeding,9,9=unknown/not ascertained,5899,11.1,11.141750873548,52945
+locomotor_postural_development_observed,5939,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,696; 5048,1.5; 11.1,11.0682336432205,45608
+last_prior_outcome_birthweight,4980,4,Registration/Pregnancy History,9999,9999=unknown,6249,10.9,10.9063301743547,57297
+articulation_summary_score,5934,1,Cognitive Assessment,9,9=unknown/not ascertained,2780,10.9,10.8972600054878,25511
+albuminuria_proteinuria_col106,5011,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,6149; 3282,10.7; 5.7,10.7132901247474,57396
+vertex_delivery_forceps_application,6061,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,5822; 2622,10.1; 4.6,10.1303265995024,57471
+motor_test_gross_hopping_left_foot,6024,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,3962; 432,10.1; 1.1,10.1270352478082,39123
+motor_test_gross_hopping_right_foot,6023,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,3849; 432,9.8; 1.1,9.83820259182578,39123
+hearing_summary_final,5929,1,Cognitive Assessment,9,9=unknown/not ascertained,2356,9.2,9.23197492163009,25520
+labor_duration_of_first_and_secon_col1437,6151,4,Delivery Procedures,9999,9999=unknown,4965,8.6,8.64485574495499,57433
+labor_duration_of_first_and_secon_col1441,6152,1,Delivery Procedures,9,9=unknown/not ascertained,4965,8.6,8.64485574495499,57433
+global_scoring,5932,1,Cognitive Assessment,9,9=unknown/not ascertained,2178,8.5,8.53448275862069,25520
+pathology_microscopic_membranes_n_col540,5376,1,Pathology/Placenta,9,9=unknown/not ascertained,3986,8.0,8.00835794507062,49773
+pathology_microscopic_membranes_n_col541,5377,1,Pathology/Placenta,9,9=unknown/not ascertained,3986,8.0,8.00835794507062,49773
+chest_circumference_at_birth,5960,2,Growth/Anthropometric,99,99=unknown,4236,8.0,8.00196459942951,52937
+labor_total_duration_first_second_col1442,6153,4,Delivery Procedures,9999,9999=unknown,4187,7.3,7.29023383768913,57433
+labor_total_duration_first_second_col1446,6154,1,Delivery Procedures,9,9=unknown/not ascertained,4187,7.3,7.29023383768913,57433
+malformations_congenital_siblings_fob_ma,5334,1,Family History/Siblings,9,9=unknown/not ascertained,4005,7.2,7.22337451528542,55445
+hematocrit_date_of_lowest_value_modayyr,5227,6,Obstetric Measures,999999,999999=unknown,3977,7.2,7.18908170643529,55320
+height_of_mother,4995,2,Obstetric Measures,99,99=unknown,3931,6.8,6.84330553766342,57443
+presentation_at_delivery_grouped,6056,1,Delivery Procedures,9,9=unknown/not ascertained,3874,6.7,6.74525098810788,57433
+apgar_heart_rate_1_minute_one_minute_apg,5387,1,Apgar Scores,9,9=unknown/not ascertained,3607,6.7,6.74495577538007,53477
+presentation_of_fetus_at_delivery,6055,3,Delivery Procedures,999,999=unknown,3872,6.7,6.74176866958021,57433
+weight_prior_to_delivery_final_lbs,5223,3,Delivery Procedures,999,999=unknown,3842,6.7,6.67477414871439,57560
+vertex_delivery_forceps_difficulty_of_tr,6083,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,3808; 2464,6.6; 4.3,6.62894942988946,57445
+vertex_delivery_forceps_difficulty_of_ro,6084,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,3808; 2212,6.6; 3.9,6.62894942988946,57445
+vertex_delivery_forceps_difficulty_of_co,6085,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,3808; 2051,6.6; 3.6,6.62894942988946,57445
+vertex_delivery_forceps_difficulty_overa,6086,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,3808; 2000,6.6; 3.5,6.62894942988946,57445
+speech_production,5931,1,Cognitive Assessment,9,9=unknown/not ascertained,1645,6.4,6.44592476489028,25520
+albuminuria_proteinuria_col105,5010,1,Obstetric Measures,8; 9,8=not ascertained; 9=unknown/not ascertained,3714; 2041,6.4; 3.5,6.40897325280414,57950
+income_per_capita,5234,4,Socioeconomic,9999,9999=unknown,3619,6.4,6.39410590293115,56599
+menstrual_period_pmp,4990,6,Registration/Pregnancy History,999999,999999=unknown,3666,6.4,6.38420145237971,57423
+patient_status_clinic_or_private,5196,1,Socioeconomic,9,9=unknown/not ascertained,3669,6.2,6.17770369247866,59391
+birthweight_coded,5919,2,Birth Outcomes,99,99=unknown,3631,6.1,6.11392682146525,59389
+birthweight_grams,5918,4,Birth Outcomes,9999,9999=unknown,3629,6.1,6.11055919446362,59389
+family_income,5177,2,Socioeconomic,99,99=unknown,3448,6.1,6.0919804236824,56599
+income_group,5178,1,Socioeconomic,9,9=unknown/not ascertained,3448,6.1,6.0919804236824,56599
+marginal_sinus_rupture_marginal_sinus_ru,6167,1,Delivery Procedures,9,9=unknown/not ascertained,3556,6.1,6.06484402981256,58633
+hemorrhage_vaginal_bleeding_by_trimester,5197,1,Pregnancy Conditions by Trimester,8,8=not ascertained,3479,6.0,6.00251902206732,57959
+convulsions_by_trimester_of_report,5202,1,Pregnancy Conditions by Trimester,8,8=not ascertained,3477,6.0,5.99906830690661,57959
+birthplace_of_father_of_baby_or_husband,5245,2,Cognitive Assessment,99,99=unknown,1457,6.0,5.96568808090734,24423
+jaundice_by_trimester_of_report,5200,1,Pregnancy Conditions by Trimester,8,8=not ascertained,3441,5.9,5.9369554340137,57959
+placenta_previa_degree,6053,1,Pathology/Placenta,9,9=unknown/not ascertained,3436,5.9,5.8604809824322,58630
+placenta_previa_code,6054,1,Pathology/Placenta,9,9=unknown/not ascertained,3436,5.9,5.8604809824322,58630
+labor_duration_of_third_stage_hrsmins_du,6150,4,Delivery Procedures,9999,9999=unknown,3356,5.8,5.84333048943987,57433
+hemoglobin_date_of_lowest_value_modayyr,5228,6,Obstetric Measures,999999,999999=unknown,2577,5.8,5.81649926644848,44305
+cry_first,5935,1,Delivery Procedures,9,9=unknown/not ascertained,3096,5.7,5.65004744871889,54796
+language_expression,5928,1,Cognitive Assessment,9,9=unknown/not ascertained,1435,5.6,5.6230407523511,25520
+cord_pathology_true_knot,6042,1,Pathology/Placenta,9,9=unknown/not ascertained,3121,5.4,5.43094297596882,57467
+cord_pathology_ruptured_cord_vessel,6045,1,Pathology/Placenta,9,9=unknown/not ascertained,3118,5.4,5.42572258861608,57467
+apgar_heart_rate_5_minute_five_minute_ap,5394,1,Apgar Scores,9,9=unknown/not ascertained,2873,5.4,5.37240308917853,53477
+apgar_color_5_minute_five_minute_apgar_c,5398,1,Apgar Scores,9,9=unknown/not ascertained,2851,5.3,5.33126390784823,53477
+apgar_muscle_tone_5_minute_five_minute_a,5396,1,Apgar Scores,9,9=unknown/not ascertained,2849,5.3,5.32752398227275,53477
+apgar_reflex_irritability_5_minute_five,5397,1,Apgar Scores,9,9=unknown/not ascertained,2847,5.3,5.32378405669727,53477
+skin_color,6015,1,Neonatal Neurological,8; 9,8=not ascertained; 9=unknown/not ascertained,2917; 2026,5.3; 3.7,5.32338126870575,54796
+apgar_respiratory_effort_5_minute_five_m,5395,1,Apgar Scores,9,9=unknown/not ascertained,2846,5.3,5.32191409390953,53477
+cord_pathology_cord_around_neck_tight_nu,6049,1,Pathology/Placenta,9,9=unknown/not ascertained,3050,5.3,5.3147925488351,57387
+apgar_total_5_minute_score_five_minute_a,5399,2,Apgar Scores,99,99=unknown,2842,5.3,5.31443424275857,53477
+apgar_total_5_minute_classified_groupint,5400,1,Apgar Scores,9,9=unknown/not ascertained,2842,5.3,5.31443424275857,53477
+apgar_reflex_irritability_1_minute_one_m,5390,1,Apgar Scores,9,9=unknown/not ascertained,2841,5.3,5.31256427997083,53477
+cord_pathology_cord_around_neck_loose_nu,6048,1,Pathology/Placenta,9,9=unknown/not ascertained,3047,5.3,5.30956488403297,57387
+cord_pathology_cord_around_body,6047,1,Pathology/Placenta,9,9=unknown/not ascertained,3041,5.3,5.2991095544287,57387
+apgar_muscle_tone_1_minute_one_minute_ap,5389,1,Apgar Scores,9,9=unknown/not ascertained,2823,5.3,5.2789049497915,53477
+abruptio_placentae_degree,6039,1,Pathology/Placenta,9,9=unknown/not ascertained,3087,5.3,5.26513277958759,58631
+abruptio_placentae_code,6040,1,Pathology/Placenta,9,9=unknown/not ascertained,3087,5.3,5.26513277958759,58631
+apgar_color_1_minute_one_minute_apgar_co,5391,1,Apgar Scores,9,9=unknown/not ascertained,2812,5.3,5.25833535912635,53477
+apgar_respiratory_effort_1_minute_one_mi,5388,1,Apgar Scores,9,9=unknown/not ascertained,2799,5.2,5.23402584288573,53477
+apgar_total_1_minute_score_one_minute_ap,5392,2,Apgar Scores,99,99=unknown,2795,5.2,5.22654599173476,53477
+apgar_total_1_minute_classified_groupint,5393,1,Apgar Scores,9,9=unknown/not ascertained,2795,5.2,5.22654599173476,53477
+fever_by_trimester_of_report,5198,1,Pregnancy Conditions by Trimester,8,8=not ascertained,3017,5.2,5.20540381994168,57959
+pathology_microscopic_membranes_r_col538,5374,1,Pathology/Placenta,9,9=unknown/not ascertained,2530,5.1,5.08307717035341,49773
+pathology_microscopic_membranes_r_col539,5375,1,Pathology/Placenta,9,9=unknown/not ascertained,2530,5.1,5.08307717035341,49773
+rupture_of_membranes_and_reason,6059,1,Delivery Procedures,9,9=unknown/not ascertained,2845,5.0,4.95446075614301,57423
+bilirubin_serum_first_total_max_bilirubi,5417,2,Nursery/Feeding,99,99=unknown,2624,4.9,4.9320527037949,53203
+bilirubin_serum_maximum_mgs_maximum_seru,5420,2,Nursery/Feeding,99,99=unknown,2621,4.9,4.92641392402684,53203
+bilirubin_serum_maximum_coded_groupinter,5421,1,Nursery/Feeding,9,9=unknown/not ascertained,2621,4.9,4.92641392402684,53203
+dystocia_shoulder,6050,1,Other,9,9=unknown/not ascertained,2827,4.9,4.92637448810665,57385
+cord_prolapsed_degree,6057,1,Pathology/Placenta,9,9=unknown/not ascertained,2792,4.9,4.86521337585167,57387
+cord_prolapsed_code,6058,1,Pathology/Placenta,9,9=unknown/not ascertained,2792,4.9,4.86521337585167,57387
+mental_illness_psychiatric_treatm_col489,5343,1,Family History/Siblings,9,9=unknown/not ascertained,2685,4.8,4.84263684732618,55445
+mental_illness_psychiatric_treatm_col490,5344,1,Family History/Siblings,9,9=unknown/not ascertained,2685,4.8,4.84263684732618,55445
+language_reception,5927,1,Cognitive Assessment,9,9=unknown/not ascertained,1233,4.8,4.83150470219436,25520
+uterine_dysfunction_uterine_dysfunction,6165,1,Delivery Procedures,9,9=unknown/not ascertained,2765,4.8,4.81154073713152,57466
+labor_onset_spontaneous_or_induced,6051,1,Delivery Procedures,9,9=unknown/not ascertained,2759,4.8,4.80636900510426,57403
+breech_delivery_complete_incomplete,6076,1,Delivery Procedures,9,9=unknown/not ascertained,2642,4.6,4.60086375034829,57424
+breech_delivery_presentation,6075,1,Delivery Procedures,9,9=unknown/not ascertained,2638,4.6,4.59213870417436,57446
+breech_delivery_presentation_attempts,6077,1,Delivery Procedures,9,9=unknown/not ascertained,2615,4.6,4.5538450821956,57424
+sensory_defects_siblings_fob_sensory_def,5335,1,Family History/Siblings,9,9=unknown/not ascertained,2477,4.5,4.46749030570836,55445
+sensory_defects_siblings_epilepsy_yes_no,5336,1,Family History/Siblings,9,9=unknown/not ascertained,2477,4.5,4.46749030570836,55445
+edema_hands_or_face_by_trimester_of_repo,5201,1,Pregnancy Conditions by Trimester,8,8=not ascertained,2475,4.3,4.27026001138736,57959
+diabetes_siblings_fob_diabetes,5345,1,Family History/Siblings,9,9=unknown/not ascertained,2296,4.1,4.14104067093516,55445
+diabetes_siblings_yes_no_unknown_groupin,5346,1,Family History/Siblings,9,9=unknown/not ascertained,2296,4.1,4.14104067093516,55445
+weight_gain_maximum_during_pregnancy,5211,2,Obstetric Measures,99,99=unknown,2278,4.0,3.96567031666173,57443
+age_7_yr_neuro_exam,5958,3,Cognitive Assessment,999,999=unknown,1577,3.9,3.85470900246877,40911
+puerperal_complications_col267,5172,1,Disease Summary Counts,9,9=unknown/not ascertained,2073,3.8,3.83888888888889,54000
+toxemia_score,6063,1,Delivery Procedures,9,9=unknown/not ascertained,2179,3.8,3.79497718485492,57418
+continued_mental_retardation_siblings_fo,5341,1,Family History/Siblings,9,9=unknown/not ascertained,2095,3.8,3.7785192533141,55445
+mental_retardation_siblings_yes_n_col488,5342,1,Family History/Siblings,9,9=unknown/not ascertained,2095,3.8,3.7785192533141,55445
+cesarean_section_elective,6072,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,1563; 2164,2.7; 3.8,3.76885297293532,57418
+pelvic_summation_inlet,5210,1,Obstetric Measures,9,9=unknown/not ascertained,2153,3.7,3.74923813670004,57425
+pathology_gross_cord_type_of_inse_col528,5366,1,Pathology/Placenta,9,9=unknown/not ascertained,1794,3.7,3.6796980760553,48754
+pathology_gross_cord_type_of_inse_col529,5367,1,Pathology/Placenta,9,9=unknown/not ascertained,1794,3.7,3.6796980760553,48754
+hypertension_blood_pressure_col101,5006,1,Obstetric Measures,9,9=unknown/not ascertained,2134,3.6,3.64680349300203,58517
+hemorrhage_col241,5146,1,Delivery Procedures,9,9=unknown/not ascertained,2073,3.6,3.5557461406518,58300
+hemorrhage_col242,5147,1,Delivery Procedures,9,9=unknown/not ascertained,2073,3.6,3.5557461406518,58300
+puerperal_infection,5148,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,2073,3.6,3.5557461406518,58300
+puerperal_complications_col244,5149,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,2073,3.6,3.5557461406518,58300
+uterine_stimulant_induction_indic_col1473,6169,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_r,6170,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_t,6171,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_a,6172,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_d,6173,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indic_col1478,6174,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_p,6175,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_i,6176,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulant_induction_indication_o,6177,1,Delivery Procedures,9,9=unknown/not ascertained,2029,3.5,3.53072197957088,57467
+uterine_stimulation_reaction,6093,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_no_response_reaction_t,6156,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_sustained_contraction,6157,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_persistent_increased_u,6158,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_significant_variation,6159,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_tumultuous_labor_andor,6160,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+uterine_stimulant_other_unusual_reaction,6161,1,Delivery Procedures,9,9=unknown/not ascertained,2028,3.5,3.52990322356054,57452
+mechanical_stimulation_use,6090,1,Delivery Procedures,9,9=unknown/not ascertained,2005,3.5,3.48986980435842,57452
+coombs_test_direct_direct_coombs_test_ch,5416,1,Nursery/Feeding,9,9=unknown/not ascertained,1795,3.4,3.37386989455482,53203
+vertex_delivery_procedures_vertex_at_for,6087,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,1936; 918,3.4; 1.6,3.37012150541378,57446
+breech_delivery_internal_anomalies_diffi,6074,1,Delivery Procedures,9,9=unknown/not ascertained,1905,3.3,3.31621551048829,57445
+cesarean_section_indication_primary,6110,2,Delivery Procedures,99,99=unknown,1905,3.3,3.31621551048829,57445
+breech_delivery_method_difficulty_code,6073,1,Delivery Procedures,9,9=unknown/not ascertained,1904,3.3,3.31447471494473,57445
+blood_type_child,5941,1,Obstetric Measures,9,9=unknown/not ascertained,1739,3.3,3.26861267221773,53203
+rh_factor_child,5942,1,Obstetric Measures,9,9=unknown/not ascertained,1719,3.2,3.23102080709734,53203
+delivery_method_type,6037,1,Delivery Procedures,9,9=unknown/not ascertained,1830,3.2,3.17141223159974,57703
+length_body_birth_code,5977,1,Growth/Anthropometric,8; 9,8=not ascertained; 9=unknown/not ascertained,1633; 441,3.1; 0.8,3.08479891191416,52937
+rh_factor,5226,1,Obstetric Measures,9,9=unknown/not ascertained,1768,3.1,3.06216117913989,57737
+hypertension_blood_pressure_col98,5003,1,Obstetric Measures,9,9=unknown/not ascertained,1720,3.0,2.95051033536324,58295
+albuminuria_proteinuria_col103,5008,1,Obstetric Measures,9,9=unknown/not ascertained,1718,2.9,2.94707950939189,58295
+pathology_cord_arteries_number_umbilical,5368,1,Pathology/Placenta,9,9=unknown/not ascertained,1508,2.9,2.92883778744562,51488
+albuminuria_proteinuria_col102,5007,1,Obstetric Measures,9,9=unknown/not ascertained,1695,2.9,2.90762501072133,58295
+vomiting_by_trimester_of_report,5199,1,Pregnancy Conditions by Trimester,8,8=not ascertained,1640,2.8,2.82958643178799,57959
+weight_pre_pregnancy,4996,3,Obstetric Measures,999,999=unknown,1617,2.8,2.81496439949167,57443
+menstrual_cycle_unusual_interval,5205,1,Registration/Pregnancy History,8; 9,8=not ascertained; 9=unknown/not ascertained,926; 1562,1.6; 2.7,2.72016439405813,57423
+pathology_gross_membranes_and_fet_col519,5361,1,Pathology/Placenta,9,9=unknown/not ascertained,1233,2.5,2.52902325962998,48754
+pathology_gross_membranes_and_fet_col520,5362,1,Pathology/Placenta,9,9=unknown/not ascertained,1233,2.5,2.52902325962998,48754
+heart_rate_fetal_less_than_110_andor_gre,5349,1,Obstetric Measures,9,9=unknown/not ascertained,1344,2.5,2.51365302610907,53468
+motor_dominance_leg,5955,1,Cognitive Assessment,9,9=unknown/not ascertained,979,2.5,2.50236433811313,39123
+motor_test_gross_line_walk,6022,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,957; 432,2.4; 1.1,2.44613143163868,39123
+time_of_first_breath,5987,4,Delivery Procedures,8888; 9999,8888=not applicable/no prior; 9999=unknown,1327; 309,2.4; 0.6,2.42170961384043,54796
+forceps_marks,5989,1,Delivery Procedures,8; 9,8=not ascertained; 9=unknown/not ascertained,1327; 771,2.4; 1.4,2.42170961384043,54796
+cry_present_absent,6016,1,Neonatal Neurological,8; 9,8=not ascertained; 9=unknown/not ascertained,1327; 622,2.4; 1.1,2.42170961384043,54796
+time_of_birth,5986,4,Birth Outcomes,8888; 9999,8888=not applicable/no prior; 9999=unknown,1327; 34,2.4; 0.1,2.42166541963976,54797
+length_body_code,5985,1,Growth/Anthropometric,8; 9,8=not ascertained; 9=unknown/not ascertained,971; 275,2.4; 0.7,2.37385096812048,40904
+motor_dominance_eye,5956,1,Cognitive Assessment,9,9=unknown/not ascertained,923,2.4,2.35922603072362,39123
+blood_type_gravida,5224,1,Obstetric Measures,9,9=unknown/not ascertained,1355,2.3,2.34684864125258,57737
+motor_dominance_overall,5957,1,Cognitive Assessment,9,9=unknown/not ascertained,895,2.3,2.28765687702886,39123
+infectious_diseases,5173,1,Disease Summary Counts,9,9=unknown/not ascertained,1157,2.1,2.14259259259259,54000
+obstetrical_complications,5171,1,Disease Summary Counts,9,9=unknown/not ascertained,1118,2.1,2.07037037037037,54000
+neurological_abnormalities_neonatal,5936,1,Neonatal Neurological,9,9=unknown/not ascertained,1058,2.0,2.02763563885854,52179
+motor_test_fine_copy_forms_square,6032,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,783; 428,2.0; 1.1,2.00138026224983,39123
+concept_formation,5948,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,285; 778,0.7; 2.0,1.98819350387161,39131
+infectious_disease_viral,5150,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+infectious_disease_bacterial,5151,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+infectious_disease_parasitic,5152,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+infectious_disease_fungal,5153,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+infectious_disease_unknown,5154,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+vaccination,5155,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1157,2.0,1.98456260720412,58300
+motor_test_gross_ball_catch_trial_3,6027,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,771; 432,2.0; 1.1,1.97070776780922,39123
+hyperemesis_gravidarum_col227,5132,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+hyperemesis_gravidarum_col228,5133,1,Delivery Procedures,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+hyperemesis_gravidarum_col229,5134,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+hydramnios,5135,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+uterine_bleeding_col231,5136,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+uterine_bleeding_col232,5137,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+uterine_bleeding_col233,5138,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+anesthetic_shock,5139,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+hemorrhagic_shock,5140,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+septic_shock,5141,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+positional_shock,5142,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+other_shock,5143,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+anesthetic_accident,5144,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+maternal_death,5145,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,1117,1.9,1.91595197255575,58300
+graham_ernhart_block_sort,5953,2,Cognitive Assessment,88; 99,88=not applicable/no prior; 99=unknown,356; 723,0.9; 1.8,1.84801779004678,39123
+motor_test_gross_ball_catch_trial_2,6026,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,696; 432,1.8; 1.1,1.7790046775554,39123
+motor_test_gross_ball_catch_trial_1,6025,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,684; 432,1.7; 1.1,1.74833218311479,39123
+fertility,4991,2,Registration/Pregnancy History,99,99=unknown,1001,1.7,1.74320394267106,57423
+persons_supported_number,5230,2,Socioeconomic,99,99=unknown,976,1.7,1.72441209208643,56599
+persons_supported_classified,5231,1,Socioeconomic,9,9=unknown/not ascertained,976,1.7,1.72441209208643,56599
+motor_test_fine_porteus_maze_s,6034,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,670; 429,1.7; 1.1,1.71254760626741,39123
+hypertension_blood_pressure_col99,5004,1,Delivery Procedures,9,9=unknown/not ascertained,955,1.6,1.62805366610409,58659
+development_gross_motor,5947,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,512; 621,1.3; 1.6,1.58697707699778,39131
+length_body_1_yr,5980,2,Growth/Anthropometric,88; 99,88=not applicable/no prior; 99=unknown,47; 700,0.1; 1.5,1.53532340490865,45593
+length_body_1_yr_code,5981,2,Growth/Anthropometric,99,99=unknown,700,1.5,1.53532340490865,45593
+consanguinity_of_gravidas_parents_col289,5187,1,Consanguinity,9,9=unknown/not ascertained,848,1.5,1.52944359274957,55445
+consanguinity_of_gravidas_parents_col290,5188,1,Consanguinity,9,9=unknown/not ascertained,848,1.5,1.52944359274957,55445
+integument_and_appendages_col265,5170,1,Disease Summary Counts,9,9=unknown/not ascertained,795,1.5,1.47222222222222,54000
+motor_dominance_hand,5954,1,Cognitive Assessment,9,9=unknown/not ascertained,535,1.4,1.36748204381055,39123
+herpes,5129,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,795,1.4,1.36363636363636,58300
+breast_disorder,5130,1,Nursery/Feeding,9,9=unknown/not ascertained,795,1.4,1.36363636363636,58300
+integument_and_appendages_col226,5131,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,795,1.4,1.36363636363636,58300
+glucosuria_2+_or_more_number_of_urine_sp,5216,2,Obstetric Measures,99,99=unknown,761,1.3,1.32587636769113,57396
+iq_iq,5358,3,Cognitive Assessment,999,999=unknown,475,1.2,1.21387135519154,39131
+iq_group_code_groupinterval_code,5359,1,Cognitive Assessment,9,9=unknown/not ascertained,475,1.2,1.21387135519154,39131
+development_fine_motor,5946,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,240; 470,0.6; 1.2,1.20109376197899,39131
+albuminuria_proteinuria_2+_or_more_numbe,5213,2,Obstetric Measures,99,99=unknown,685,1.2,1.19346295909123,57396
+continued_sensory_defects_siblings,5324,1,Family History/Siblings,9,9=unknown/not ascertained,623,1.1,1.12363603571107,55445
+sensory_defects_siblings_yes_no_unknown,5325,1,Family History/Siblings,9,9=unknown/not ascertained,623,1.1,1.12363603571107,55445
+motor_test_fine_copy_forms_cross,6031,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,437; 427,1.1; 1.1,1.11699000587889,39123
+continued_motor_defects_siblings,5328,1,Family History/Siblings,9,9=unknown/not ascertained,612,1.1,1.10379655514474,55445
+motor_defects_siblings_yes_no_unk_col475,5329,1,Family History/Siblings,9,9=unknown/not ascertained,612,1.1,1.10379655514474,55445
+urinary_tract,5166,1,Disease Summary Counts,9,9=unknown/not ascertained,587,1.1,1.08703703703704,54000
+motor_test_fine_wallin_pegboard_right_ha,6028,1,Cognitive Assessment,9,9=unknown/not ascertained,423,1.1,1.08120542903152,39123
+motor_test_fine_wallin_pegboard_left_han,6029,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,243; 423,0.6; 1.1,1.08120542903152,39123
+motor_test_fine_copy_forms_circle,6030,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,217; 422,0.6; 1.1,1.07864938782813,39123
+motor_test_fine_stringing_beads,6033,1,Cognitive Assessment,8; 9,8=not ascertained; 9=unknown/not ascertained,210; 416,0.5; 1.1,1.06331314060783,39123
+neurologic_psychiatric,5168,1,Disease Summary Counts,9,9=unknown/not ascertained,573,1.1,1.06111111111111,54000
+glomerulonephritis,5092,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_infection_col188,5093,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_infection_col189,5094,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_infection_col190,5095,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_infection_col191,5096,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_infection_col192,5097,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+hematuria,5098,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+tumor_kub,5099,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+kub_surgery,5100,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+urinary_tract_disease,5101,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,587,1.0,1.00686106346484,58300
+gastrointestinal,5169,1,Disease Summary Counts,9,9=unknown/not ascertained,532,1.0,0.985185185185185,54000
+convulsive_disorder,5110,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+convulsions_during_pregnancy,5111,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+mental_retardation,5112,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+organic_brain_disease,5113,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+psychosis_and_neurosis,5114,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+neurologic_or_neuromuscular_disease,5115,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+alcoholism,5116,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+drug_habituation_and_addiction,5117,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+neurologic_and_psychiatric,5118,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,573,1.0,0.982847341337907,58300
+mental_illness_psychiatric_treatm_col478,5332,1,Family History/Siblings,9,9=unknown/not ascertained,544,1.0,0.981152493461989,55445
+mental_illness_psychiatric_treatm_col479,5333,1,Family History/Siblings,9,9=unknown/not ascertained,544,1.0,0.981152493461989,55445
+venereal,5165,1,Disease Summary Counts,9,9=unknown/not ascertained,520,1.0,0.962962962962963,54000
+weight_1_yr,5972,3,Growth/Anthropometric,999,999=unknown,437,1.0,0.95848046849297,45593
+procedures_other_procedures_other,5406,1,Other,9,9=unknown/not ascertained,511,1.0,0.956498951781971,53424
+diseases_and_conditions,5156,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,551,0.9,0.945111492281304,58300
+years_smoked_at_registration,4988,2,Registration/Pregnancy History,88; 99,88=not applicable/no prior; 99=unknown,323; 541,0.6; 0.9,0.942574395428253,57396
+cardiovascular,5161,1,Disease Summary Counts,9,9=unknown/not ascertained,507,0.9,0.938888888888889,54000
+socioeconomic_index_at_registration,5192,2,Socioeconomic,99,99=unknown,517,0.9,0.915838514818161,56451
+socioeconomic_index_categorized,5193,1,Socioeconomic,9,9=unknown/not ascertained,517,0.9,0.915838514818161,56451
+cholecystitis,5119,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+cholelithiasis,5120,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+hepatitis,5121,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+appendicitis,5122,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+colitis_ileitis,5123,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+hiatus_hernia,5124,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+peptic_ulcer,5125,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+gastrointestinal_surgery,5126,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+gastrointestinal_tumor,5127,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+gastrointestinal_disease,5128,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,532,0.9,0.912521440823328,58300
+syphilis_col178,5083,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+syphilis_col179,5084,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+syphilis_col180,5085,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+syphilis_col181,5086,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+syphilis_col182,5087,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+gonorrhea_col183,5088,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+gonorrhea_col184,5089,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+gonorrhea_col185,5090,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+venereal_disease,5091,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,520,0.9,0.891938250428817,58300
+cardiovascular_disease_col108,5013,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col109,5014,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col110,5015,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col111,5016,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col112,5017,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col113,5018,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_andor_phlebitis,5019,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col115,5020,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col116,5021,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col117,5022,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col118,5023,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col119,5024,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+thrombosis_phlebitis_col120,5025,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+cardiovascular_disease_col121,5026,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,507,0.9,0.869639794168096,58300
+housing_density,5179,2,Socioeconomic,88; 99,88=not applicable/no prior; 99=unknown,100; 490,0.2; 0.9,0.865739677379459,56599
+metabolic_endocrine,5164,1,Disease Summary Counts,9,9=unknown/not ascertained,466,0.9,0.862962962962963,54000
+hematologic_blood,5163,1,Disease Summary Counts,9,9=unknown/not ascertained,456,0.8,0.844444444444445,54000
+length_body_birth,5976,2,Growth/Anthropometric,99,99=unknown,441,0.8,0.833065719628993,52937
+weight_4_mo,5970,4,Growth/Anthropometric,9999,9999=unknown,389,0.8,0.831445304150814,46786
+weight_4_mo_gms_weight_4_mo_=_grams_as_g,6178,5,Growth/Anthropometric,99999,99999=unknown,389,0.8,0.831445304150814,46786
+pulmonary,5162,1,Disease Summary Counts,9,9=unknown/not ascertained,441,0.8,0.816666666666667,54000
+diabetes_mellitus_col156,5061,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col157,5062,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col158,5063,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col159,5064,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col160,5065,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col161,5066,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+diabetes_mellitus_col162,5067,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+glucose_tolerance_test,5068,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col164,5069,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col165,5070,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col166,5071,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col167,5072,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col168,5073,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col169,5074,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hyperthyroidism_col170,5075,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hyperthyroidism_col171,5076,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hyperthyroidism_col172,5077,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hyperthyroidism_col173,5078,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hyperthyroidism_col174,5079,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+hypothyroidism_col175,5080,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+thyroid_surgery,5081,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+metabolic_disorders,5082,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,466,0.8,0.799313893653516,58300
+gynecological,5167,1,Disease Summary Counts,9,9=unknown/not ascertained,428,0.8,0.792592592592593,54000
+anemia_col138,5043,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col139,5044,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col140,5045,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col141,5046,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col142,5047,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col143,5048,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col144,5049,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col145,5050,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col146,5051,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+anemia_col147,5052,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col148,5053,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col149,5054,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col150,5055,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col151,5056,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col152,5057,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col153,5058,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+coagulation_defect_col154,5059,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+blood_hematologic_disease,5060,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,455,0.8,0.780445969125214,58300
+last_prior_outcome_survival,4979,2,Registration/Pregnancy History,99,99=unknown,445,0.8,0.776573652339319,57303
+intelligence_clinical_impression,5945,1,Cognitive Assessment,9,9=unknown/not ascertained,303,0.8,0.774322148680075,39131
+tuberculosis_col122,5027,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col123,5028,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col124,5029,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col125,5030,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col126,5031,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col127,5032,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+tuberculosis_col128,5033,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+pneumonia_col129,5034,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+pneumonia_col130,5035,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+pneumonia_col131,5036,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+pneumonia_col132,5037,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+asthma_bronchial_col133,5038,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+asthma_bronchial_col134,5039,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+asthma_bronchial_col135,5040,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+thoracic_surgery,5041,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+pulmonary_disease,5042,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,441,0.8,0.756432246998285,58300
+length_body_4_mo,5978,2,Growth/Anthropometric,99,99=unknown,347,0.7,0.741674860000855,46786
+infertility,5102,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+cervical_incompetence_col198,5103,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+cervical_incompetence_col199,5104,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+vaginitis,5105,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+leiomyoma,5106,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+gynecologic_tumor,5107,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+gynecologic_surgery,5108,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+gynecologic_disease,5109,1,Pregnancy Conditions by Trimester,9,9=unknown/not ascertained,427,0.7,0.732418524871355,58300
+labor_date_of_onset_modayyr_onset_of_lab,6168,6,Delivery Procedures,999999,999999=unknown,400,0.7,0.729141982172479,54859
+cigarettes_per_day_now,4985,2,Registration/Pregnancy History,99,99=unknown,400,0.7,0.690143032143412,57959
+smoking_history_interval_code,4986,1,Registration/Pregnancy History,9,9=unknown/not ascertained,400,0.7,0.690143032143412,57959
+consanguinity_of_gravida_and_fath_col291,5189,1,Consanguinity,9,9=unknown/not ascertained,382,0.7,0.688971052394265,55445
+consanguinity_of_gravida_and_fath_col292,5190,1,Consanguinity,9,9=unknown/not ascertained,382,0.7,0.688971052394265,55445
+length_body_7_yr,5984,3,Growth/Anthropometric,999,999=unknown,275,0.7,0.672305886954821,40904
+neurologic_abnormality_number_of_ped_8_s,5613,1,Congenital Conditions,8; 9,8=not ascertained; 9=unknown/not ascertained,327; 358,0.6; 0.7,0.653093987157035,54816
+blood_pressure_systolic_first_recorded_c,5218,2,Pathology/Placenta,99,99=unknown,376,0.6,0.64972093103627,57871
+race_of_father_of_baby_or_husband,5244,1,Registration/Pregnancy History,8,8=not ascertained,154,0.6,0.630604807337947,24421
+pathology_gross_membranes_and_fet_col518,5360,1,Pathology/Placenta,8,8=not ascertained,296,0.6,0.607129671411577,48754
+illness_confining_preceding_12_months_to,5206,1,Registration/Pregnancy History,9,9=unknown/not ascertained,331,0.6,0.584991693471422,56582
+twinning_gravida,5191,1,Consanguinity,9,9=unknown/not ascertained,323,0.6,0.582559292993056,55445
+gestation_at_delivery,5920,2,Delivery Procedures,99,99=unknown,345,0.6,0.580915657781744,59389
+anesthesia_during_delivery_anesthesia_du,6166,1,Delivery Procedures,9,9=unknown/not ascertained,313,0.6,0.572253912534738,54696
+sra_nonverbal_quotient,6020,3,Cognitive Assessment,888,888=not applicable/no prior,126,0.6,0.569877883310719,22110
+sra_nonverbal_raw_score,6019,2,Cognitive Assessment,88,88=not applicable/no prior,125,0.6,0.565355042966983,22110
+blood_pressure_systolic_140_or_greater_a,5212,1,Obstetric Measures,8,8=not ascertained,324,0.6,0.564499268241689,57396
+transfusions,5207,1,Registration/Pregnancy History,9,9=unknown/not ascertained,318,0.6,0.562473468232631,56536
+sterility_investigation,4992,1,Registration/Pregnancy History,9,9=unknown/not ascertained,322,0.6,0.560750918621458,57423
+employed_last_worked_gravida,5181,4,Socioeconomic,9999,9999=unknown,301,0.5,0.531501624523238,56632
+race,5195,1,Other,8,8=not ascertained,310,0.5,0.521964607432103,59391
+overall_impression_4_yr,5951,1,Cognitive Assessment,9,9=unknown/not ascertained,196,0.5,0.500881653931665,39131
+pathology_gross_membranes_and_fet_col522,5364,4,Pathology/Placenta,9999,9999=unknown,213,0.5,0.450450450450451,47286
+pathology_gross_membranes_and_fet_col526,5365,2,Pathology/Placenta,99,99=unknown,213,0.5,0.450450450450451,47286
+head_circumference_neonatal,5961,2,Growth/Anthropometric,99,99=unknown,220,0.4,0.415588340858001,52937
+head_circumference_7_yr,5968,2,Growth/Anthropometric,99,99=unknown,163,0.4,0.398494034813221,40904
+menarche_age_at_onset_of_menstruation_yr,5204,2,Registration/Pregnancy History,99,99=unknown,212,0.4,0.369190045800463,57423
+blood_pressure_diastolic_first_re_col337,5220,2,Pathology/Placenta,99,99=unknown,213,0.4,0.368059995507249,57871
+blood_pressure_diastolic_first_re_col334,5219,3,Pathology/Placenta,999,999=unknown,200,0.3,0.34559623991291,57871
+blood_pressure_systolic_first_recorded,5217,3,Pathology/Placenta,999,999=unknown,196,0.3,0.338684315114652,57871
+head_circumference_1_yr_cms,5636,2,Growth/Anthropometric,99,99=unknown,150,0.3,0.328997872480425,45593
+weight_nursery_lowest,5969,4,Growth/Anthropometric,9999,9999=unknown,164,0.3,0.309755406553971,52945
+weight_7_yr,5975,3,Growth/Anthropometric,999,999=unknown,119,0.3,0.29092509290045,40904
+education,5175,2,Socioeconomic,99,99=unknown,137,0.2,0.242062300121915,56597
+head_circumference_4_mo,5963,2,Growth/Anthropometric,99,99=unknown,95,0.2,0.203052195101099,46786
+age_chronological_4_yr,5952,3,Cognitive Assessment,999,999=unknown,78,0.2,0.199330454115663,39131
+occupation,5232,2,Delivery Procedures,99,99=unknown,101,0.2,0.178344398926402,56632
+pathology_microscopic_membranes_m_col535,5372,2,Pathology/Placenta,99,99=unknown,86,0.2,0.172784441363792,49773
+bayley_scales_mental_development_score_b,5352,3,Cognitive Assessment,999,999=unknown,56,0.1,0.126342387871131,44324
+continued_pathology_microscopic_membrane,5370,2,Pathology/Placenta,99,99=unknown,58,0.1,0.116529041849999,49773
+gestation_at_registration,4976,2,Demographics,99,99=unknown,68,0.1,0.114495462275429,59391
+bayley_scales_motor_development_score_8,5354,2,Cognitive Assessment,99,99=unknown,46,0.1,0.103781247179857,44324
+fetal_ekg_studies,5159,2,Pregnancy Conditions by Trimester,99,99=unknown,50,0.1,0.0857632933104631,58300
+hematocrit_lowest_gravida,4998,3,Obstetric Measures,999,999=unknown,36,0.1,0.0650759219088937,55320
+hemoglobin_lowest_gravida,5000,3,Obstetric Measures,999,999=unknown,16,0.0,0.0361133054959937,44305
+age_1_yr_wks,5635,2,Cognitive Assessment,88,88=not applicable/no prior,16,0.0,0.0350677245430237,45626

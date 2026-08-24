@@ -30,7 +30,7 @@
 
   <h2>Quick Start</h2>
 
-  <p>For most analyses, download <code>cpp_clean_v1.csv</code> (29 MB, 59,391 rows &times; 314 columns). This is the recommended analysis-ready dataset with cleaned values, meaningful variable names, all WISC subtests, and variables from the 7-year psychological battery.</p>
+  <p>For most analyses, download <code>cpp_clean_v3.csv</code> (34 MB, 59,391 rows &times; 185 columns). This is the stable analysis-ready core. Use <code>cpp_clean_v1.csv</code> (53 MB, 59,391 rows &times; 315 columns) when the expanded variables are required.</p>
 
   <p>For sibling and twin analyses, also download <code>cpp_kinship_links.csv</code> (14,208 sibling/twin pairs with relatedness coefficients). For extended-family analyses, add <code>cpp_extended_kinship_links.csv</code> (13,513 cousin and other cross-family pairs).</p>
 
@@ -43,7 +43,7 @@
   <pre><code>library(data.table)
 
 # Load analysis-ready dataset
-d &lt;- fread("cpp_clean_v1.csv")       # 59,391 x 314
+d &lt;- fread("cpp_clean_v3.csv")       # 59,391 x 185
 d[, case_id := as.character(case_id)]
 
 # Load kinship links for sibling/twin analyses
@@ -64,19 +64,19 @@ d[, .(mean_iq = mean(wisc_fsiq, na.rm=TRUE),
 
   <pre><code>import pandas as pd
 
-d = pd.read_csv("cpp_clean_v1.csv",
+d = pd.read_csv("cpp_clean_v3.csv",
                  dtype={"case_id": str, "mother_id": str})
 links = pd.read_csv("cpp_kinship_links.csv",
                      dtype={"id_1": str, "id_2": str})</code></pre>
 
   <h3>Stata</h3>
 
-  <pre><code>import delimited "cpp_clean_v1.csv", clear
+  <pre><code>import delimited "cpp_clean_v3.csv", clear
 tostring case_id mother_id, replace</code></pre>
 
   <h2>Key Identifiers</h2>
 
-  <p><code>case_id</code> uniquely identifies each pregnancy/child (a 7&ndash;8 digit number combining institution code, family number, and pregnancy sequence). <code>mother_id</code> identifies the biological mother&mdash;children sharing a <code>mother_id</code> are siblings. Both should always be read as strings, not integers, to preserve leading zeros.</p>
+  <p><code>case_id</code> is the canonical 9-character cross-source identifier and <code>mother_id</code> is the canonical 7-character maternal identifier. Children sharing a <code>mother_id</code> are linked to the same mother. Both must be read as strings, not integers, to preserve leading zeros. A terminal 0 used to complete an eight-character source ID is a linkage key and should not, by itself, be interpreted as observed singleton status.</p>
 
   <h2>Applying Survey Weights</h2>
 
@@ -85,7 +85,7 @@ tostring case_id mother_id, replace</code></pre>
   <pre><code>library(data.table)
 
 # Load data and weights
-d &lt;- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
+d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
 wt &lt;- fread("cpp_weights.csv", colClasses = c(case_id = "character"))
 d &lt;- merge(d, wt, by = "case_id")
 
@@ -97,7 +97,7 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
   <p>The CPP is well-suited for within-family designs because 8,772 mothers contributed two or more children. The recommended workflow:</p>
 
   <ol>
-    <li>Load <code>cpp_clean_v1.csv</code> and restrict to the outcome of interest (e.g., <code>!is.na(wisc_fsiq)</code>).</li>
+    <li>Load <code>cpp_clean_v3.csv</code> and restrict to the outcome of interest (e.g., <code>!is.na(wisc_fsiq)</code>).</li>
     <li>Identify families with 2+ children using <code>mother_id</code>.</li>
     <li>Use <code>fixest::feols()</code> in R or <code>xtreg, fe</code> in Stata with <code>mother_id</code> as the panel variable.</li>
     <li>For behavior genetic analyses, merge with <code>cpp_kinship_links.csv</code> to obtain relatedness-classified sibling pairs.</li>
@@ -108,18 +108,18 @@ weighted.mean(d$wisc_fsiq, d$wt_recommended, na.rm = TRUE)</code></pre>
   <pre><code>library(data.table)
 library(fixest)
 
-d &lt;- fread("cpp_clean_v1.csv", colClasses = c(case_id = "character"))
+d &lt;- fread("cpp_clean_v3.csv", colClasses = c(case_id = "character"))
 
 # Mother fixed effects: breastfeeding and IQ
 fe_model &lt;- feols(wisc_fsiq ~ bf_ever + birth_wt_g + gest_age + sex | mother_id,
-                   data = d)
+                   data = d, vcov = ~mother_id)
 summary(fe_model)</code></pre>
 
   <h2>Codebooks</h2>
 
   <p>Every file in the release has a companion codebook:</p>
   <ul>
-    <li><code>CPP_Codebook.csv</code> (1,239 entries) &mdash; primary codebook covering every CPPVAR column. Also browseable on the <a href="codebook.html">Codebook</a> page.</li>
+    <li><code>CPP_Codebook.csv</code> (1,244 entries) &mdash; primary codebook covering every CPPVAR column. Also browseable on the <a href="codebook.html">Codebook</a> page.</li>
     <li><code>cpp_unified_manifest.csv</code> (4,862 entries) &mdash; documentation for the unified wide file.</li>
     <li><code>master/parsed/card_XXXXX_fields.csv</code> &mdash; per-card field documentation for CPPMASTER cards.</li>
     <li><code>cpp_item_scores_codebook.csv</code> &mdash; documentation for all derived factor scores.</li>
