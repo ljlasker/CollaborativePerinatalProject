@@ -75,3 +75,6 @@ the manuscript's family-based inference.
   correction-audit materials remain outside the primary reproducibility package.
 - Refreshed the analysis manuscript and primary code bundle with the pedigree-robust
   inference. The data paper and data archive are unchanged.
+- Corrected Figure 4's cross-platform rendering so the age-30-to-34 series and its
+  legend key are visible. The underlying observations, estimates, confidence
+  intervals, manuscript text, and substantive conclusions are unchanged.
